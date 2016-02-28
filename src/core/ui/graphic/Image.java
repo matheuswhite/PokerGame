@@ -6,14 +6,14 @@ import org.eclipse.swt.widgets.Label;
 
 public abstract class Image extends Graphic {
 
-	private Label _label;
 	private org.eclipse.swt.graphics.Image _image;
 	private String _currentFilePath;
 	
-	public Image(long id, short layer, Rectangle bounds) {
+	public Image(long id, short layer, Rectangle bounds, String filePath) {
 		super(id, layer, bounds);
 		
 		_label = null;
+		_currentFilePath = filePath;
 	}
 
 	private void load(String filePath, Renderer renderer) {
@@ -27,6 +27,7 @@ public abstract class Image extends Graphic {
 			_label = new Label(renderer.getShell(), SWT.None );
 		
 		_label.setImage(_image);
+		_label.setBounds(_bounds);
 	}
 
 	public void changeCurrentFilePath(String filePath) {

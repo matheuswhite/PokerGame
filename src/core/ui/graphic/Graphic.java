@@ -2,11 +2,13 @@ package core.ui.graphic;
 
 import java.util.Comparator;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Label;
 
 public abstract class Graphic {
 	private long _id;
-	private short _layer;
-	private Rectangle _bounds;
+	protected short _layer;
+	protected Rectangle _bounds;
+	protected Label _label;
 	
 	public Graphic(long id, short layer, Rectangle bounds) {
 		_id = id;

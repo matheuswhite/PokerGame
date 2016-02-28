@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
-public abstract class Renderer {
+public class Renderer {
 	private List<Graphic> _listOfGraphics;
 	private Shell _shell;
 	private Display _display;
