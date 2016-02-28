@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Observable;
 
-public class ConnectionSocket extends Observable implements Runnable {
+public class ClientSocket extends Observable implements Runnable {
 	private Socket _socket;
 	private boolean _isConnected;
 	private BufferedReader _inputFromServer;
@@ -15,10 +15,6 @@ public class ConnectionSocket extends Observable implements Runnable {
 	
 	public final static int SERVER_PORT = 95;
 	public final static String SERVER_IP = "";
-	
-	public ConnectionSocket() {
-		
-	}
 	
 	public void connect() {
 		try {
