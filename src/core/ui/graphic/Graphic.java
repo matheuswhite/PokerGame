@@ -26,7 +26,7 @@ public abstract class Graphic {
 		return _bounds;
 	}
 
-	public abstract void draw();
+	public abstract void draw(Renderer renderer);
 	
 	public static Comparator<Graphic> GraphicLayerComparator = 
 			new Comparator<Graphic>() {

@@ -3,18 +3,25 @@ package core.ui.graphic;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
 public abstract class Renderer {
 	private List<Graphic> _listOfGraphics;
+	private Shell _shell;
+	private Display _display;
 	
 	public Renderer() {
 		_listOfGraphics = new LinkedList<Graphic>();
+		_display = new Display();
+		_shell = new Shell(_display);
 	}
 	
 	private void update(Graphic graphic) {
 		
 		for (Graphic graphic2 : _listOfGraphics) {
 			if (graphic2.getLayer() >= graphic.getLayer())
-				graphic2.draw();
+				graphic2.draw(this);
 		}
 	}
 	
@@ -27,6 +34,14 @@ public abstract class Renderer {
 		}
 		
 		update(updateParam);
+	}
+	
+	public Shell getShell() {
+		return _shell;
+	}
+	
+	public Display getDisplay() {
+		return _display;
 	}
 	
 	public void createGraphic(Graphic graphic) {
