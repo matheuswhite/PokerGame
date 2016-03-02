@@ -10,10 +10,6 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		Renderer renderer = new Renderer();
-		renderer.getShell().setMaximized(false);
-		renderer.getShell().setSize(600, 480);
-		renderer.getShell().setLocation(100, 100);
-		renderer.getShell().setText("PokerGame");
 		
 		Color black = new Color(renderer.getDisplay(), new RGB(0, 0, 0));
 		TextStyle style = new TextStyle(black, "Arial", 12, false, false);

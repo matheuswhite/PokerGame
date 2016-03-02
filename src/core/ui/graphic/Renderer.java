@@ -1,5 +1,7 @@
 package core.ui.graphic;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +17,12 @@ public class Renderer{
 		_listOfGraphics = new LinkedList<Graphic>();
 		_display = new Display();
 		_shell = new Shell(_display);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		_shell.setMaximized(false);
+		_shell.setSize((int)(screenSize.getWidth() / 1.7075), (int)(screenSize.getHeight() / 1.536));
+		_shell.setLocation((int)(screenSize.getWidth()/2 - _shell.getSize().x/2), (int)(screenSize.getHeight()/2 - _shell.getSize().y/2));
+		_shell.setText("PokerGame");
 	}
 	
 	private void update(Graphic graphic) {
