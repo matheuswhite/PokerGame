@@ -9,7 +9,7 @@ public abstract class Image extends Graphic {
 	private org.eclipse.swt.graphics.Image _image;
 	private String _currentFilePath;
 	
-	public Image(long id, short layer, Rectangle bounds, String filePath) {
+	public Image(long id, int layer, Rectangle bounds, String filePath) {
 		super(id, layer, bounds);
 		
 		_label = null;

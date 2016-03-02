@@ -8,7 +8,7 @@ public class Label extends Graphic {
 	private String _text;
 	private TextStyle _style;
 	
-	public Label(long id, short layer, Rectangle bounds, String text, TextStyle style) {
+	public Label(long id, int layer, Rectangle bounds, String text, TextStyle style) {
 		super(id, layer, bounds);
 		
 		_text = text;

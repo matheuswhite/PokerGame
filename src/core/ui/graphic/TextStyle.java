@@ -13,11 +13,11 @@ public class TextStyle {
 	
 	private Color _textColor;
 	private String _fontName;
-	private short _fontSize;
+	private int _fontSize;
 	private boolean _boldFlag;
 	private boolean _italicFlag;
 	
-	public TextStyle(Color textColor, String fontName, short fontSize, boolean isBold, boolean isItalic) {
+	public TextStyle(Color textColor, String fontName, int fontSize, boolean isBold, boolean isItalic) {
 		_textColor = textColor;
 		_fontName = fontName;
 		_fontSize = fontSize;
@@ -54,11 +54,11 @@ public class TextStyle {
 		_fontChange = true;
 	}
 	
-	public short getFontSize() {
+	public int getFontSize() {
 		return _fontSize;
 	}
 
-	public void setFontSize(short fontSize) {
+	public void setFontSize(int fontSize) {
 		_fontSize = fontSize;
 		_fontChange = true;
 	}

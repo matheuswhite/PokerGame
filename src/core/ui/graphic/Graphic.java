@@ -6,11 +6,11 @@ import org.eclipse.swt.widgets.Label;
 
 public abstract class Graphic {
 	private long _id;
-	protected short _layer;
+	protected int _layer;
 	protected Rectangle _bounds;
 	protected Label _label;
 	
-	public Graphic(long id, short layer, Rectangle bounds) {
+	public Graphic(long id, int layer, Rectangle bounds) {
 		_id = id;
 		_layer = layer;
 		_bounds = bounds;
@@ -20,7 +20,7 @@ public abstract class Graphic {
 		return _id;
 	}
 	
-	public short getLayer() {
+	public int getLayer() {
 		return _layer;
 	}
 	
