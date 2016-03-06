@@ -1,28 +1,57 @@
 package core;
 
 import core.ui.graphic.*;
+import core.ui.input.Button;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.graphics.Rectangle;
 
 public class Launcher {
 	
 	public static void main(String[] args) {
-		Renderer renderer = new Renderer();
+		Window window = new Window(700, 500, "PokerGame");
+		Map<String, Color> colors = new HashMap<String, Color>();
 		
-		Color black = new Color(renderer.getDisplay(), new RGB(0, 0, 0));
-		TextStyle style = new TextStyle(black, "Arial", 12, false, false);
-		Label l = new Label(0, new Rectangle(50, 50, 110, 20), "Test Label!", style);
-		renderer.createUI_Element(l);
+		colors.put("black", new Color(window.getDisplay(), new RGB(0, 0, 0)));
+		colors.put("red", new Color(window.getDisplay(), new RGB(1, 0, 0)));
+		colors.put("green", new Color(window.getDisplay(), new RGB(0, 1, 0)));
+		colors.put("blue", new Color(window.getDisplay(), new RGB(0, 0, 1)));
+		colors.put("white", new Color(window.getDisplay(), new RGB(1, 1, 1)));
 		
+		TextStyle style = new TextStyle(colors.get("black"), "Arial", 12, false, false);
+		Label l = new Label(window, new Point(50, 50), "Test Label!", style);
+
+		Button b = new Button(window, new Point(50, 100), new Point(100, 50), "Change label text", colors.get("red"), colors.get("white")) {
+			
+			@Override
+			public SelectionListener createSelectionListener() {
+				return new SelectionListener() {
+					
+					@Override
+					public void widgetSelected(SelectionEvent arg0) {
+						l.setText("Changed1!");
+					}
+					
+					@Override
+					public void widgetDefaultSelected(SelectionEvent arg0) {
+						l.setText("Changed2!");
+					}
+				};
+			}
+		};
 		
-		renderer.getShell().open();
-		while (!renderer.getShell().isDisposed())
+		window.getShell().open();
+		while (!window.getShell().isDisposed())
 		{
-			if (!renderer.getDisplay().readAndDispatch())
-				renderer.getDisplay().sleep();
+			if (!window.getDisplay().readAndDispatch())
+				window.getDisplay().sleep();
 		}
-		renderer.getDisplay().dispose();
+		window.getDisplay().dispose();
 	}
 }
