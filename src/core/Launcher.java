@@ -13,8 +13,8 @@ public class Launcher {
 		
 		Color black = new Color(renderer.getDisplay(), new RGB(0, 0, 0));
 		TextStyle style = new TextStyle(black, "Arial", 12, false, false);
-		Label l = new Label(1, 0, new Rectangle(50, 50, 110, 20), "Test Label!", style);
-		renderer.createGraphic(l);
+		Label l = new Label(0, new Rectangle(50, 50, 110, 20), "Test Label!", style);
+		renderer.createUI_Element(l);
 		
 		
 		renderer.getShell().open();

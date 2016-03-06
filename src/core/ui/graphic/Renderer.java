@@ -8,13 +8,15 @@ import java.util.List;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import core.ui.UI_Element;
+
 public class Renderer{
-	private List<Graphic> _listOfGraphics;
+	private List<UI_Element> _listOfUI_Elements;
 	private Shell _shell;
 	private Display _display;
 	
 	public Renderer() {
-		_listOfGraphics = new LinkedList<Graphic>();
+		_listOfUI_Elements = new LinkedList<UI_Element>();
 		_display = new Display();
 		_shell = new Shell(_display);
 		
@@ -25,18 +27,18 @@ public class Renderer{
 		_shell.setText("PokerGame");
 	}
 	
-	private void update(Graphic graphic) {
+	private void update(UI_Element graphic) {
 		
-		for (Graphic graphic2 : _listOfGraphics) {
+		for (UI_Element graphic2 : _listOfUI_Elements) {
 			if (graphic2.getLayer() >= graphic.getLayer())
 				graphic2.draw(this);
 		}
 	}
 	
-	private void updateMultiple(List<Graphic> listOfGraphics) {
+	private void updateMultiple(List<UI_Element> listOfUI_Elements) {
 		
-		Graphic updateParam = listOfGraphics.get(0);
-		for (Graphic graphic : listOfGraphics) {
+		UI_Element updateParam = listOfUI_Elements.get(0);
+		for (UI_Element graphic : listOfUI_Elements) {
 			if (graphic.getLayer() < updateParam.getLayer())
 				updateParam = graphic;
 		}
@@ -52,45 +54,45 @@ public class Renderer{
 		return _display;
 	}
 	
-	public void createGraphic(Graphic graphic) {
-		_listOfGraphics.add(graphic);
-		_listOfGraphics.sort(Graphic.GraphicLayerComparator);
+	public void createUI_Element(UI_Element graphic) {
+		_listOfUI_Elements.add(graphic);
+		_listOfUI_Elements.sort(UI_Element.UI_ElementLayerComparator);
 		
 		update(graphic);
 	}
 	
-	public void createMultipleGraphics(List<Graphic> listOfGraphics) {
-		_listOfGraphics.addAll(listOfGraphics);
-		_listOfGraphics.sort(Graphic.GraphicLayerComparator);
+	public void createMultipleUI_Elements(List<UI_Element> listOfUI_Elements) {
+		_listOfUI_Elements.addAll(listOfUI_Elements);
+		_listOfUI_Elements.sort(UI_Element.UI_ElementLayerComparator);
 		
-		updateMultiple(listOfGraphics);
+		updateMultiple(listOfUI_Elements);
 	}
 	
-	public void deleteGraphic(Graphic graphic) {
-		_listOfGraphics.remove(graphic);
+	public void deleteUI_Element(UI_Element graphic) {
+		_listOfUI_Elements.remove(graphic);
 		
 		update(graphic);
 	}
 	
-	public void deleteMultiplesGraphics(List<Graphic> listOfGraphics) {
-		_listOfGraphics.removeAll(listOfGraphics);
+	public void deleteMultiplesUI_Elements(List<UI_Element> listOfUI_Elements) {
+		_listOfUI_Elements.removeAll(listOfUI_Elements);
 		
-		updateMultiple(listOfGraphics);
+		updateMultiple(listOfUI_Elements);
 	}
 
-	public void updateGraphic(Graphic oldGraphic, Graphic newGraphic) {
-		_listOfGraphics.remove(oldGraphic);
-		_listOfGraphics.add(newGraphic);
-		_listOfGraphics.sort(Graphic.GraphicLayerComparator);
+	public void updateUI_Element(UI_Element oldUI_Element, UI_Element newUI_Element) {
+		_listOfUI_Elements.remove(oldUI_Element);
+		_listOfUI_Elements.add(newUI_Element);
+		_listOfUI_Elements.sort(UI_Element.UI_ElementLayerComparator);
 		
-		update(newGraphic);
+		update(newUI_Element);
 	}
 	
-	public void updateMultiplesGraphics(List<Graphic> listOfOldGraphics, List<Graphic> listOfNewGraphics) {
-		_listOfGraphics.removeAll(listOfOldGraphics);
-		_listOfGraphics.addAll(listOfNewGraphics);
-		_listOfGraphics.sort(Graphic.GraphicLayerComparator);
+	public void updateMultiplesUI_Elements(List<UI_Element> listOfOldUI_Elements, List<UI_Element> listOfNewUI_Elements) {
+		_listOfUI_Elements.removeAll(listOfOldUI_Elements);
+		_listOfUI_Elements.addAll(listOfNewUI_Elements);
+		_listOfUI_Elements.sort(UI_Element.UI_ElementLayerComparator);
 		
-		updateMultiple(listOfNewGraphics);
+		updateMultiple(listOfNewUI_Elements);
 	}
 }

@@ -2,29 +2,18 @@ package core.ui.graphic;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
+import core.ui.UI_Element;
 
-public class Label extends Graphic {
+public class Label extends UI_Element {
 
 	private String _text;
 	private TextStyle _style;
 	
-	public Label(long id, int layer, Rectangle bounds, String text, TextStyle style) {
-		super(id, layer, bounds);
+	public Label(int layer, Rectangle bounds, String text, TextStyle style) {
+		super(layer, bounds);
 		
 		_text = text;
 		_style = style;
-	}
-
-	public void setText(String text) {
-		_text = text;
-	}
-	
-	public void setTextStyle(TextStyle style) {
-		_style = style;
-	}
-	
-	public TextStyle getTextStyle() {
-		return _style;
 	}
 	
 	@Override
