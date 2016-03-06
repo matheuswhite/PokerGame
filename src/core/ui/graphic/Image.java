@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Label;
 
 import core.ui.UI_Element;
 
-public abstract class Image extends UI_Element {
+public class Image extends UI_Element {
 
 	private org.eclipse.swt.graphics.Image _image;
 	private String _currentFilePath;
