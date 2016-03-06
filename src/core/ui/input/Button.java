@@ -25,9 +25,9 @@ public abstract class Button {
 		
 		setLocation(location);
 		setSize(size);
-		setBackgroundColor(backgroundColor);
+		if (backgroundColor != null) setBackgroundColor(backgroundColor);
 		setText(text);
-		setForegroundColor(textColor);
+		if (textColor != null) setTextColor(textColor);
 		setSelectionListener(createSelectionListener());
 	}
 	
@@ -45,12 +45,13 @@ public abstract class Button {
 		_button.setSize(size);
 	}
 	
-	public void setForegroundColor(Color textColor) {
+	public void setTextColor(Color textColor) {
 		_button.setForeground(textColor);
 	}
 
 	public void setText(String text) {
 		_button.setText(text);
+		_button.setAlignment(SWT.CENTER);
 	}
 
 	public void setBackgroundColor(Color backgroundColor) {

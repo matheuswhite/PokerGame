@@ -22,14 +22,13 @@ public class Image {
 	}
 	
 	public void resize(Rectangle bounds) {
-		if (bounds != null) 
-			_label.setBounds(bounds);
+		_label.setBounds(bounds);
 	}
 	
 	private void draw(String filePath, Rectangle bounds) {
 		_label = new Label(_window.getShell(), SWT.None );
 		loadNewImage(filePath);
-		resize(bounds);
+		if (bounds != null) resize(bounds);
 	}
 	
 	public void erase() {

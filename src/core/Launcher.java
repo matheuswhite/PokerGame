@@ -16,18 +16,17 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		Window window = new Window(700, 500, "PokerGame");
-		Map<String, Color> colors = new HashMap<String, Color>();
 		
-		colors.put("black", new Color(window.getDisplay(), new RGB(0, 0, 0)));
-		colors.put("red", new Color(window.getDisplay(), new RGB(1, 0, 0)));
-		colors.put("green", new Color(window.getDisplay(), new RGB(0, 1, 0)));
-		colors.put("blue", new Color(window.getDisplay(), new RGB(0, 0, 1)));
-		colors.put("white", new Color(window.getDisplay(), new RGB(1, 1, 1)));
+		Color black = new Color(window.getDisplay(), new RGB(0, 0, 0));
+		Color white = new Color(window.getDisplay(), new RGB(1, 1, 1));
+		Color red = new Color(window.getDisplay(), new RGB(1, 0, 0));
+		Color green = new Color(window.getDisplay(), new RGB(0, 1, 0));
+		Color blue = new Color(window.getDisplay(), new RGB(0, 0, 1));
 		
-		TextStyle style = new TextStyle(colors.get("black"), "Arial", 12, false, false);
+		TextStyle style = new TextStyle(green, "Arial", 12, false, false);
 		Label l = new Label(window, new Point(50, 50), "Test Label!", style);
 
-		Button b = new Button(window, new Point(50, 100), new Point(100, 50), "Change label text", colors.get("red"), colors.get("white")) {
+		Button b = new Button(window, new Point(50, 100), new Point(150, 50), "Change label text", null, red) {
 			
 			@Override
 			public SelectionListener createSelectionListener() {
