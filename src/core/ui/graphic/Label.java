@@ -1,28 +1,42 @@
 package core.ui.graphic;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
-import core.ui.UI_Element;
+import org.eclipse.swt.graphics.Point;
 
-public class Label extends UI_Element {
+public class Label {
 
-	private String _text;
-	private TextStyle _style;
+	private Window _window;
+	private org.eclipse.swt.widgets.Label _label;
 	
-	public Label(int layer, Rectangle bounds, String text, TextStyle style) {
-		super(layer, bounds);
+	public Label(Window window, Point Location, String text, TextStyle style) {
 		
-		_text = text;
-		_style = style;
+		_window = window;
+		_label = null;
+		draw(Location, text, style);
 	}
 	
-	@Override
-	public void draw(Renderer renderer) {
-		if (_label == null) 
-			_label = new org.eclipse.swt.widgets.Label(renderer.getShell(), SWT.None );
+	public void setLocation(Point point) {
+		_label.setLocation(point);
+	}
+	
+	public void setText(String text) {
+		_label.setText(text);
+	}
+	
+	public void changeTextStyle(TextStyle style) {
+		style.setStyle(_window, _label);
+	}
+	
+	private void draw(Point location, String text, TextStyle style) {
+		_label = new org.eclipse.swt.widgets.Label(_window.getShell(), SWT.None );
+		_label.setBounds(_window.getShell().getClientArea());
 		
-		_label.setText(_text);
-		_style.setStyle(renderer, _label);
-		_label.setBounds(_bounds);
+		setText(text);
+		changeTextStyle(style);
+		setLocation(location);
+	}
+
+	public void erase() {
+		_label.dispose();
 	}
 }

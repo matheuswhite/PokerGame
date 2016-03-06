@@ -26,11 +26,11 @@ public class TextStyle {
 		_fontChange = true;
 	}
 	
-	public void setStyle(Renderer renderer, Label label) {
+	public void setStyle(Window window, Label label) {
 		int flag = (_boldFlag ? SWT.BOLD : (_italicFlag ? SWT.ITALIC : SWT.None));
 		
 		if (_fontChange || _font == null) {
-			_font = new Font(renderer.getDisplay(), new FontData(getFontName(), _fontSize, flag));
+			_font = new Font(window.getDisplay(), new FontData(getFontName(), _fontSize, flag));
 			label.setFont(_font);
 			_fontChange = false;
 		}

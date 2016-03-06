@@ -3,36 +3,61 @@ package core.ui.input;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.graphics.Point;
 
-import core.ui.UI_Element;
-import core.ui.graphic.Renderer;
+import core.ui.graphic.Window;
 
-public class Button extends UI_Element {
+public abstract class Button {
 
+	private Window _window;
 	private org.eclipse.swt.widgets.Button _button;
-	private String _text;
-	private Color _backgroundColor;
-	private Color _textColor;
-	private SelectionListener _selectionListener;
 	
-	public Button(int layer, Rectangle bounds, String text, Color backgroundColor, Color textColor, SelectionListener selectionListener) {
-		super(layer, bounds);
+	public Button(Window window, Point location, Point size, String text, Color backgroundColor, Color textColor) {
 		
-		_text = text;
-		_textColor = textColor;
-		_backgroundColor = backgroundColor;
-		_selectionListener = selectionListener;
+		_window = window;
+		_button = null;
+		draw(location, size, text, backgroundColor, textColor);
+	}
+	
+	private void draw(Point location, Point size, String text, Color backgroundColor, Color textColor) {
+		_button = new org.eclipse.swt.widgets.Button(_window.getShell(), SWT.PUSH);
+		_button.setBounds(_window.getShell().getClientArea());
+		
+		setLocation(location);
+		setSize(size);
+		setBackgroundColor(backgroundColor);
+		setText(text);
+		setForegroundColor(textColor);
+		setSelectionListener(createSelectionListener());
+	}
+	
+	public abstract SelectionListener createSelectionListener();
+	
+	public void setSelectionListener(SelectionListener selectionListener) {
+		_button.addSelectionListener(selectionListener);
 	}
 
-	@Override
-	public void draw(Renderer renderer) {
-		if (_button == null)
-			_button = new org.eclipse.swt.widgets.Button(renderer.getShell(), SWT.PUSH);
-		
-		_button.addSelectionListener(_selectionListener);
-		_button.setBackground(_backgroundColor);
-		_button.setText(_text);
-		_button.setForeground(_textColor);
+	public void setLocation(Point location) {
+		_button.setLocation(location);
+	}
+	
+	public void setSize(Point size) {
+		_button.setSize(size);
+	}
+	
+	public void setForegroundColor(Color textColor) {
+		_button.setForeground(textColor);
+	}
+
+	public void setText(String text) {
+		_button.setText(text);
+	}
+
+	public void setBackgroundColor(Color backgroundColor) {
+		_button.setBackground(backgroundColor);
+	}
+
+	public void erase() {
+		_button.dispose();
 	}
 }

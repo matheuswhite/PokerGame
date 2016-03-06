@@ -4,27 +4,35 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Label;
 
-import core.ui.UI_Element;
+public class Image {
 
-public class Image extends UI_Element {
-
-	private org.eclipse.swt.graphics.Image _image;
-	private String _currentFilePath;
+	private Window _window;
+	private Label _label;
 	
-	public Image(int layer, Rectangle bounds, String filePath) {
-		super(layer, bounds);
+	public Image(Window window, Rectangle bounds, String filePath) {
 		
+		_window = window;
 		_label = null;
-		_currentFilePath = filePath;
+		draw(filePath, bounds);
+	}
+
+	public void loadNewImage(String filePath) {
+		org.eclipse.swt.graphics.Image image = new org.eclipse.swt.graphics.Image(_window.getDisplay(), filePath);
+		_label.setImage(image);
 	}
 	
-	@Override
-	public void draw(Renderer renderer) {
-		_image = new org.eclipse.swt.graphics.Image(renderer.getDisplay(), _currentFilePath);
-		if (_label == null) 
-			_label = new Label(renderer.getShell(), SWT.None );
-		
-		_label.setImage(_image);
-		_label.setBounds(_bounds);
+	public void resize(Rectangle bounds) {
+		if (bounds != null) 
+			_label.setBounds(bounds);
+	}
+	
+	private void draw(String filePath, Rectangle bounds) {
+		_label = new Label(_window.getShell(), SWT.None );
+		loadNewImage(filePath);
+		resize(bounds);
+	}
+	
+	public void erase() {
+		_label.dispose();
 	}
 }
