@@ -1,37 +1,44 @@
 package core.ui.graphic;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Label;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Image {
 
-	private Window _window;
-	private Label _label;
+	private BufferedImage _bigImage;
+	private JLabel _label;
 	
-	public Image(Window window, Rectangle bounds, String filePath) {
-		
-		_window = window;
-		_label = null;
-		draw(filePath, bounds);
-	}
-
-	public void loadNewImage(String filePath) {
-		org.eclipse.swt.graphics.Image image = new org.eclipse.swt.graphics.Image(_window.getDisplay(), filePath);
-		_label.setImage(image);
+	public Image(Rectangle bounds, String filePath) {
+		_label = new JLabel();
+		load(filePath);
+				
+		_label.setIcon(new ImageIcon(_bigImage));
+		_label.setLocation(bounds.x, bounds.y);
+		_label.setSize(bounds.width, bounds.height);
 	}
 	
-	public void resize(Rectangle bounds) {
-		_label.setBounds(bounds);
+	private void load(String filePath) {
+		try {
+			_bigImage = ImageIO.read(new File(filePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private void draw(String filePath, Rectangle bounds) {
-		_label = new Label(_window.getShell(), SWT.None );
-		loadNewImage(filePath);
-		if (bounds != null) resize(bounds);
+	public void resize(Dimension size) {
+		_label.setSize(size.width, size.height);
 	}
 	
-	public void erase() {
-		_label.dispose();
+	public void crop(Rectangle source) {
+		BufferedImage image = _bigImage.getSubimage(source.x, source.y, source.width, source.height);
+		_label.setIcon(new ImageIcon(image));
+		_label.setSize(source.width, source.height);
 	}
 }

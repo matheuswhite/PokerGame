@@ -1,18 +1,18 @@
 package core.ui.graphic;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Point;
+import java.awt.Point;
+
+import javax.swing.JLabel;
 
 public class Label {
 
-	private Window _window;
-	private org.eclipse.swt.widgets.Label _label;
+	private JLabel _label;
 	
-	public Label(Window window, Point Location, String text, TextStyle style) {
+	public Label(Point location, String text, TextStyle style) {
+		_label = new JLabel(text);
 		
-		_window = window;
-		_label = null;
-		draw(Location, text, style);
+		setLocation(location);
+		changeTextStyle(style);
 	}
 	
 	public void setLocation(Point point) {
@@ -24,19 +24,6 @@ public class Label {
 	}
 	
 	public void changeTextStyle(TextStyle style) {
-		style.setStyle(_window, _label);
-	}
-	
-	private void draw(Point location, String text, TextStyle style) {
-		_label = new org.eclipse.swt.widgets.Label(_window.getShell(), SWT.None );
-		_label.setBounds(_window.getShell().getClientArea());
-		
-		setText(text);
-		changeTextStyle(style);
-		setLocation(location);
-	}
-
-	public void erase() {
-		_label.dispose();
+		style.setStyle(_label);
 	}
 }

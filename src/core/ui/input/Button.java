@@ -1,47 +1,32 @@
 package core.ui.input;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Point;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionListener;
 
-import core.ui.graphic.Window;
+import javax.swing.JButton;
 
-public abstract class Button {
+public class Button {
 
-	private Window _window;
-	private org.eclipse.swt.widgets.Button _button;
+	private JButton _button;
 	
-	public Button(Window window, Point location, Point size, String text, Color backgroundColor, Color textColor) {
+	public Button(Rectangle bounds, String text, Color backgroundColor, Color textColor, ActionListener actionListener) {
+		_button = new JButton(text);
 		
-		_window = window;
-		_button = null;
-		draw(location, size, text, backgroundColor, textColor);
-	}
-	
-	private void draw(Point location, Point size, String text, Color backgroundColor, Color textColor) {
-		_button = new org.eclipse.swt.widgets.Button(_window.getShell(), SWT.PUSH);
-		_button.setBounds(_window.getShell().getClientArea());
-		
-		setLocation(location);
-		setSize(size);
-		if (backgroundColor != null) setBackgroundColor(backgroundColor);
-		setText(text);
-		if (textColor != null) setTextColor(textColor);
-		setSelectionListener(createSelectionListener());
-	}
-	
-	public abstract SelectionListener createSelectionListener();
-	
-	public void setSelectionListener(SelectionListener selectionListener) {
-		_button.addSelectionListener(selectionListener);
+		_button.setLocation(bounds.x, bounds.y);
+		_button.setSize(bounds.width, bounds.height);
+		_button.setForeground(textColor);
+		_button.setBackground(backgroundColor);
+		_button.addActionListener(actionListener);
 	}
 
 	public void setLocation(Point location) {
 		_button.setLocation(location);
 	}
 	
-	public void setSize(Point size) {
+	public void resize(Dimension size) {
 		_button.setSize(size);
 	}
 	
@@ -51,14 +36,13 @@ public abstract class Button {
 
 	public void setText(String text) {
 		_button.setText(text);
-		_button.setAlignment(SWT.CENTER);
 	}
 
 	public void setBackgroundColor(Color backgroundColor) {
 		_button.setBackground(backgroundColor);
 	}
-
-	public void erase() {
-		_button.dispose();
+	
+	public void setActionListener(ActionListener actionListener) {
+		_button.addActionListener(actionListener);
 	}
 }
