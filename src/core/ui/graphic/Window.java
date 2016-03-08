@@ -28,6 +28,7 @@ public class Window {
 	
 	public void addComponent(UI_Element element) {
 		_panel.add(element.getComponent());
+		_panel.repaint();
 	}
 	
 	public void removeComponent(UI_Element element) {
