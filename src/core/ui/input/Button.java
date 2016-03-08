@@ -7,9 +7,12 @@ import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
-public class Button {
+import core.ui.UI_Element;
 
+public class Button implements UI_Element {
+	
 	private JButton _button;
 	
 	public Button(Rectangle bounds, String text, Color backgroundColor, Color textColor, ActionListener actionListener) {
@@ -44,5 +47,10 @@ public class Button {
 	
 	public void setActionListener(ActionListener actionListener) {
 		_button.addActionListener(actionListener);
+	}
+
+	@Override
+	public JComponent getComponent() {
+		return _button;
 	}
 }

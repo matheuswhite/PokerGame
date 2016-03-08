@@ -8,12 +8,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-public class Image {
+import core.ui.UI_Element;
 
-	private BufferedImage _bigImage;
+public class Image implements UI_Element {
+
 	private JLabel _label;
+	private BufferedImage _bigImage;
 	
 	public Image(Rectangle bounds, String filePath) {
 		_label = new JLabel();
@@ -40,5 +43,10 @@ public class Image {
 		BufferedImage image = _bigImage.getSubimage(source.x, source.y, source.width, source.height);
 		_label.setIcon(new ImageIcon(image));
 		_label.setSize(source.width, source.height);
+	}
+
+	@Override
+	public JComponent getComponent() {
+		return _label;
 	}
 }
