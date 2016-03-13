@@ -8,9 +8,8 @@ import java.net.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ClientSocket implements Runnable {
+public class ClientSocket extends Thread {
 	private Socket _socket;
-	private boolean _isConnected;
 	private Queue<String> _serverMessages;
 	private BufferedReader _inputFromServer;
 	private DataOutputStream _outputToServer;
@@ -22,27 +21,36 @@ public class ClientSocket implements Runnable {
 		_serverMessages = new LinkedList<String>();
 	}
 	
-	public void connect() throws UnknownHostException, IOException {
-		if (!_isConnected) {
+	public boolean connect() {
+		try {
 			_socket = new Socket(SERVER_IP, SERVER_PORT);
 			_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 			_outputToServer = new DataOutputStream(_socket.getOutputStream());
-			
-			new Thread(this).start();
-			_isConnected = true;
+			this.start();
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
-	public void disconnect() throws IOException {
-		if (_isConnected) {
+	public boolean disconnect() {
+		try {
 			_socket.close();
-			_isConnected = false;
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
-	public void write(String message) throws IOException {
-		if (_isConnected) {
+	public boolean write(String message) {
+		try {
 			_outputToServer.writeBytes(message);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
@@ -63,28 +71,28 @@ public class ClientSocket implements Runnable {
 		return null;
 	}
 	
-	public boolean isConnected()
-	{
-		return _isConnected;
-	}
-	
 	@Override
 	public void run() {
-		while (true) {
+		boolean exit = false;
+		
+		while (!exit) {
 			String checker = null;
 			String serverMessage = null;
 			
 			do {
 				try {
 					checker = _inputFromServer.readLine();
+					if (checker != null) 
+						serverMessage += checker;
 				} catch (IOException e) {
 					e.printStackTrace();
+					exit = false;
 				}
-				if (checker != null) 
-					serverMessage += checker;
-			} while (checker != null);
+				
+			} while (checker != null && !exit);
 			
-			_serverMessages.add(serverMessage);
+			if (!exit)
+				_serverMessages.add(serverMessage);
 		}
 	}
 }

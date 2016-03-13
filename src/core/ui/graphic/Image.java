@@ -17,6 +17,8 @@ public class Image implements UI_Element {
 
 	private JLabel _label;
 	private BufferedImage _bigImage;
+	private BufferedImage _croppedImage;
+	private boolean _isCropped;
 	
 	public Image(Rectangle bounds, String filePath) {
 		_label = new JLabel();
@@ -25,6 +27,7 @@ public class Image implements UI_Element {
 		_label.setIcon(new ImageIcon(_bigImage));
 		_label.setLocation(bounds.x, bounds.y);
 		_label.setSize(bounds.width, bounds.height);
+		_isCropped = false;
 	}
 	
 	private void load(String filePath) {
@@ -35,14 +38,40 @@ public class Image implements UI_Element {
 		}
 	}
 	
-	public void resize(Dimension size) {
-		_label.setSize(size.width, size.height);
+	public void resize(Dimension size, boolean isFast) {
+		BufferedImage image = null;
+		if (_isCropped) {
+			image = _croppedImage;
+		}
+		else {
+			image = _bigImage;
+		}
+		
+		ImageIcon icon = new ImageIcon(image.getScaledInstance(size.width, size.height, isFast ? java.awt.Image.SCALE_FAST : java.awt.Image.SCALE_SMOOTH));
+		_label.setIcon(icon);
+		_label.setSize(size);
+	}
+	
+	public void resize(double percentage, boolean isFast) {
+		BufferedImage image = null;
+		if (_isCropped) {
+			image = _croppedImage;
+		}
+		else {
+			image = _bigImage;
+		}
+		
+		int w = (int)(image.getWidth() * percentage);
+		int h = (int)(image.getHeight() * percentage);
+		
+		resize(new Dimension(w, h), isFast);
 	}
 	
 	public void crop(Rectangle source) {
-		BufferedImage image = _bigImage.getSubimage(source.x, source.y, source.width, source.height);
-		_label.setIcon(new ImageIcon(image));
+		_croppedImage = _bigImage.getSubimage(source.x, source.y, source.width, source.height);
+		_label.setIcon(new ImageIcon(_croppedImage));
 		_label.setSize(source.width, source.height);
+		_isCropped = true;
 	}
 
 	@Override
