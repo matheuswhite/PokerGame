@@ -5,94 +5,55 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Observable;
 
-public class ClientSocket extends Thread {
+public class ServerConnection extends Observable implements Runnable {
 	private Socket _socket;
-	private Queue<String> _serverMessages;
 	private BufferedReader _inputFromServer;
 	private DataOutputStream _outputToServer;
 	
-	public final static int SERVER_PORT = 95;
-	public final static String SERVER_IP = "";
+	public static final String DISCONNECT_MESSAGE = "";
+	public final static int SERVER_PORT = 1095;
+	public final static String SERVER_IP = "127.0.0.1";
 	
-	public ClientSocket() {
-		_serverMessages = new LinkedList<String>();
-	}
-	
-	public boolean connect() {
-		try {
+	public void connect() throws UnknownHostException, IOException {
 			_socket = new Socket(SERVER_IP, SERVER_PORT);
 			_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 			_outputToServer = new DataOutputStream(_socket.getOutputStream());
-			this.start();
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
 	}
 	
-	public boolean disconnect() {
-		try {
-			_socket.close();
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public void disconnect() throws IOException {
+		_socket.close();
 	}
 	
-	public boolean write(String message) {
-		try {
-			_outputToServer.writeBytes(message);
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return false;
-		}
+	public void write(String message) throws IOException {
+		_outputToServer.writeBytes(message);
 	}
 	
-	public Queue<String> readAll() {
-		if (!_serverMessages.isEmpty()) {
-			Queue<String> out = _serverMessages;
-			_serverMessages.clear();
-			return out;
-		}
-		return null;
-	}
-	
-	public String read() {
-		if (!_serverMessages.isEmpty()) {
-			return _serverMessages.poll();
-		}
+	private void listen() throws IOException {
+		String serverMessage = null;
 		
-		return null;
+		System.out.println("Listen from server...");
+		serverMessage = _inputFromServer.readLine();
+		
+		if (serverMessage == null)
+			throw new IOException("Read line null!");
+			
+		System.out.println("Message from server: " + serverMessage + "\n");
+		notifyObservers(serverMessage);
 	}
 	
 	@Override
 	public void run() {
 		boolean exit = false;
-		
 		while (!exit) {
-			String checker = null;
-			String serverMessage = null;
-			
-			do {
-				try {
-					checker = _inputFromServer.readLine();
-					if (checker != null) 
-						serverMessage += checker;
-				} catch (IOException e) {
-					e.printStackTrace();
-					exit = false;
-				}
-				
-			} while (checker != null && !exit);
-			
-			if (!exit)
-				_serverMessages.add(serverMessage);
+			try {
+				listen();
+			} catch (IOException e) {
+				e.printStackTrace();
+				exit = true;
+			}
 		}
+		notifyObservers(DISCONNECT_MESSAGE);
 	}
 }
