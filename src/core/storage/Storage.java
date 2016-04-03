@@ -1,4 +1,4 @@
-package core.service.storage;
+package core.storage;
 
 public interface Storage<K, V> {
 

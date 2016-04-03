@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import core.service.net.ServerConnection;
+import core.net.ServerConnection;
 import core.ui.graphic.Label;
 import core.ui.graphic.TextStyle;
 import core.ui.graphic.Window;
@@ -25,7 +25,6 @@ public class ConnectionTestScreen extends Window {
 		super(400, 500, "Connection tests");
 		
 		_connection = new ServerConnection();
-		initializeComponents();
 		try {
 			_connection.connect();
 			_connectionThread = new Thread(_connection);
@@ -33,6 +32,7 @@ public class ConnectionTestScreen extends Window {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		initializeComponents();
 	}
 
 	/*
@@ -64,7 +64,7 @@ public class ConnectionTestScreen extends Window {
 	private void initializeLabels() {
 		_lbl1 = new Label(new Point(20, 20), "Messages From Server", new TextStyle(Color.BLACK, "Arial", 12, false, false));
 		_messageFromServer = new Label(new Point(20, 50), "None", new TextStyle(Color.RED, "Arial", 12, false, false));
-
+		
 		addComponent(_lbl1);
 		addComponent(_messageFromServer);
 	}

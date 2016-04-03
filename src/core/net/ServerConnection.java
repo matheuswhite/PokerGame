@@ -1,4 +1,4 @@
-package core.service.net;
+package core.net;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
