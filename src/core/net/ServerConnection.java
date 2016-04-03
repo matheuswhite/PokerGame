@@ -26,8 +26,8 @@ public class ServerConnection extends Observable implements Runnable {
 		_socket.close();
 	}
 	
-	public void write(String message) throws IOException {
-		_outputToServer.writeBytes(message);
+	public void write(Message message) throws IOException {
+		_outputToServer.writeBytes(message.getJsonString());
 	}
 	
 	private void listen() throws IOException {
@@ -40,7 +40,7 @@ public class ServerConnection extends Observable implements Runnable {
 			throw new IOException("Read line null!");
 			
 		System.out.println("Message from server: " + serverMessage + "\n");
-		notifyObservers(serverMessage);
+		notifyObservers(new Message(serverMessage));
 	}
 	
 	@Override
