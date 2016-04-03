@@ -3,10 +3,15 @@ package core.ui.graphic.screen;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import core.net.Message;
 import core.net.ServerConnection;
 import core.ui.graphic.Label;
 import core.ui.graphic.TextStyle;
@@ -29,10 +34,12 @@ public class ConnectionTestScreen extends Window {
 			_connection.connect();
 			_connectionThread = new Thread(_connection);
 			_connectionThread.start();
+			
+			initializeComponents();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		initializeComponents();
 	}
 
 	/*
@@ -54,7 +61,28 @@ public class ConnectionTestScreen extends Window {
 	
 	private void initializeButtons() {
 		_buttons = new HashMap<String, Button>();
-		_buttons.put("go", new Button(new Rectangle(20, 310, 70, 30), "Go!", Color.YELLOW, Color.WHITE, null));
+		_buttons.put("go", new Button(new Rectangle(20, 310, 70, 30), "Go!", Color.YELLOW, Color.WHITE, new ActionListener() {
+			
+			private Message msg;
+			private List<Object> content;
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				content = new ArrayList<Object>();
+				content.add("test string");
+				
+				msg = new Message(1.0, "echo", content);
+				System.out.println("Message sent to server: " + msg.getJsonString() + "\n");
+				
+				try {
+					_connection.write(msg);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				System.out.println("Message sent!");
+			}
+		}));
 
 		for (String button : _buttons.keySet()) {
 			addComponent(_buttons.get(button));
