@@ -3,19 +3,13 @@ package core.ui.graphic.screen;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import core.domain.Money;
-import core.domain.PlayerInfo;
-import core.net.Message;
+import core.domain.actionListener.EchoAction;
+import core.domain.actionListener.GetRoomsAction;
 import core.net.ServerConnection;
-import core.service.PrefixMultiplier;
 import core.ui.graphic.Label;
 import core.ui.graphic.TextStyle;
 import core.ui.graphic.Window;
@@ -64,32 +58,9 @@ public class ConnectionTestScreen extends Window {
 	
 	private void initializeButtons() {
 		_buttons = new HashMap<String, Button>();
-		_buttons.put("go", new Button(new Rectangle(20, 310, 70, 30), "Go!", Color.YELLOW, Color.WHITE, new ActionListener() {
-			
-			private Message msg;
-			private List<Object> content;
-			private PlayerInfo playerInfo;
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				playerInfo = new PlayerInfo(3);
-				playerInfo.setSeat(1);
-				playerInfo.addMoney(new Money(54, PrefixMultiplier.MEGA));
-				
-				content = new ArrayList<Object>();
-				content.add(new Money(3, PrefixMultiplier.KILO));
-				content.add(playerInfo);
-				
-				msg = new Message(1.0, "echo", content);
-				
-				try {
-					_connection.write(msg);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}));
-
+		_buttons.put("echo", new Button(new Rectangle(20, 310, 70, 30), "Echo", Color.YELLOW, Color.WHITE, new EchoAction(_connection)));
+		_buttons.put("get_rooms", new Button(new Rectangle(100, 310, 110, 30), "Get Rooms", Color.YELLOW, Color.WHITE, new GetRoomsAction(_connection)));
+		
 		for (String button : _buttons.keySet()) {
 			addComponent(_buttons.get(button));
 		}
