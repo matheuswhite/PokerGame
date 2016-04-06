@@ -17,9 +17,9 @@ public class ServerConnection extends Observable implements Runnable {
 	public final static String SERVER_IP = "127.0.0.1";
 	
 	public void connect() throws UnknownHostException, IOException {
-			_socket = new Socket(SERVER_IP, SERVER_PORT);
-			_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
-			_outputToServer = new DataOutputStream(_socket.getOutputStream());
+		_socket = new Socket(SERVER_IP, SERVER_PORT);
+		_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
+		_outputToServer = new DataOutputStream(_socket.getOutputStream());
 	}
 	
 	public void disconnect() throws IOException {
@@ -37,7 +37,7 @@ public class ServerConnection extends Observable implements Runnable {
 		serverMessage = _inputFromServer.readLine();
 		
 		if (serverMessage == null)
-			throw new IOException("Read line null!");
+			throw new IOException("Server is offline!");
 			
 		System.out.println("Message from server: " + serverMessage + "\n");
 		notifyObservers(new Message(serverMessage));
