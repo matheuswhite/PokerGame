@@ -40,6 +40,7 @@ public class ServerConnection extends Observable implements Runnable {
 			throw new IOException("Server is offline!");
 			
 		System.out.println("Message from server: " + serverMessage + "\n");
+		setChanged();
 		notifyObservers(new Message(serverMessage));
 	}
 	
