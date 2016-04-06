@@ -11,8 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import core.domain.Money;
+import core.domain.PlayerInfo;
 import core.net.Message;
 import core.net.ServerConnection;
+import core.service.PrefixMultiplier;
 import core.ui.graphic.Label;
 import core.ui.graphic.TextStyle;
 import core.ui.graphic.Window;
@@ -65,22 +68,25 @@ public class ConnectionTestScreen extends Window {
 			
 			private Message msg;
 			private List<Object> content;
+			private PlayerInfo playerInfo;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				playerInfo = new PlayerInfo(3);
+				playerInfo.setSeat(1);
+				playerInfo.addMoney(new Money(54, PrefixMultiplier.MEGA));
+				
 				content = new ArrayList<Object>();
-				content.add("test string");
+				content.add(new Money(3, PrefixMultiplier.KILO));
+				content.add(playerInfo);
 				
 				msg = new Message(1.0, "echo", content);
-				System.out.println("Message sent to server: " + msg.getJsonString() + "\n");
 				
 				try {
 					_connection.write(msg);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
-				System.out.println("Message sent!");
 			}
 		}));
 
