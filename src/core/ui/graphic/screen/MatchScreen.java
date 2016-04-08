@@ -9,23 +9,21 @@ import java.awt.event.ActionListener;
 import core.domain.Card;
 import core.domain.Suit;
 import core.ui.graphic.BetTokenImage;
-import core.ui.graphic.DealerImage;
-import core.ui.graphic.EmptySeatImage;
 import core.ui.graphic.HandImage;
+import core.ui.graphic.Image;
 import core.ui.graphic.PlayerInfoImage;
 import core.ui.graphic.PotValue;
-import core.ui.graphic.TableImage;
 import core.ui.graphic.Window;
 import core.ui.input.Button;
 
 public class MatchScreen extends Window {
 
-	private EmptySeatImage[] _emptySeats;
+	private Image[] _emptySeats;
 	private HandImage[] _handsImages;
 	private PlayerInfoImage[] _infoImages;
 	private BetTokenImage[] _betTokenImages;
-	private DealerImage _dealerImage;
-	private TableImage _tableImage;
+	private Image _dealerImage;
+	private Image _tableImage;
 	private PotValue _potValue;
 	
 	private Button _check_callButton;
@@ -56,5 +54,4 @@ public class MatchScreen extends Window {
 		addComponent(_handsImages[0].getHiddenCards());
 		addComponent(_testButton);
 	}
-
 }
