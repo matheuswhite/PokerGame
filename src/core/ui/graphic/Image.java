@@ -1,6 +1,7 @@
 package core.ui.graphic;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -73,7 +74,19 @@ public class Image implements UI_Element {
 		_label.setSize(source.width, source.height);
 		_isCropped = true;
 	}
-
+	
+	public void setLocation(Point point) {
+		_label.setLocation(point);
+	}
+	
+	public void hide() {
+		_label.setVisible(false);
+	}
+	
+	public void show() {
+		_label.setVisible(true);
+	}
+	
 	@Override
 	public JComponent getComponent() {
 		return _label;
