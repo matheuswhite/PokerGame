@@ -2,6 +2,7 @@ package core.domain.actionListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import core.net.Message;
@@ -15,6 +16,7 @@ public abstract class ButtonAction implements ActionListener {
 	
 	public ButtonAction(ServerConnection connection) {
 		_connection = connection;
+		_content = new ArrayList<Object>();
 	}
 	
 	@Override

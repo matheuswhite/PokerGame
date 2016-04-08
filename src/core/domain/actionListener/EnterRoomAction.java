@@ -5,27 +5,25 @@ import java.io.IOException;
 
 import core.net.Message;
 import core.net.ServerConnection;
-import core.service.Range;
 
-public class GetRoomsAction extends ButtonAction {
+public class EnterRoomAction extends ButtonAction {
 
-	private Range _range;
+	private long _roomId;
+	private long _myId;
 	
-	public GetRoomsAction(ServerConnection connection) {
+	public EnterRoomAction(ServerConnection connection, long roomId, long myId) {
 		super(connection);
-		_range = new Range(1,1);
-	}
-	
-	public void setRange(Range range) {
-		_range = range;
+		_roomId = roomId;
+		_myId = myId;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		_content.clear();
-		_content.add(_range);
+		_content.add(_roomId);
+		_content.add(_myId);
 		
-		_msg = new Message(1.0, "get_rooms", _content);
+		_msg = new Message(1.0, "enter_room", _content);
 		
 		try {
 			_connection.write(_msg);
@@ -33,4 +31,5 @@ public class GetRoomsAction extends ButtonAction {
 			e1.printStackTrace();
 		}
 	}
+
 }

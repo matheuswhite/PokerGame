@@ -2,7 +2,6 @@ package core.domain.actionListener;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import core.domain.Money;
 import core.domain.PlayerInfo;
@@ -24,7 +23,7 @@ public class EchoAction extends ButtonAction {
 		playerInfo.setSeat(1);
 		playerInfo.addMoney(new Money(54, PrefixMultiplier.MEGA));
 		
-		_content = new ArrayList<Object>();
+		_content.clear();
 		_content.add(new Money(3, PrefixMultiplier.KILO));
 		_content.add(playerInfo);
 		
