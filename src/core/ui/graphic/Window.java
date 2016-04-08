@@ -1,5 +1,6 @@
 package core.ui.graphic;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -37,5 +38,9 @@ public class Window {
 	protected void removeComponent(UI_Element element, String panel) {
 		_defaltPanel.remove(element.getComponent());
 		_defaltPanel.repaint();
+	}
+	
+	protected void setBackgroundColor(Color color) {
+		_defaltPanel.setBackground(color);
 	}
 }
