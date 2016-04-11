@@ -28,6 +28,11 @@ public class Money {
 		return _prefixMultiplier;
 	}
 	
+	@Override
+	public String toString() {
+		return _value + _prefixMultiplier.toString();
+	}
+	
 	public void addMoney(Money money) {
 		if (_value == 1000 && _prefixMultiplier.equals(PrefixMultiplier.TERA))
 			throw new IllegalArgumentException("The max value of money has been reached");

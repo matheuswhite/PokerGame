@@ -14,6 +14,7 @@ import core.ui.UI_Element;
 public class Button implements UI_Element {
 	
 	private JButton _button;
+	private boolean _enable;
 	
 	public Button(Rectangle bounds, String text, Color backgroundColor, Color textColor, ActionListener actionListener) {
 		_button = new JButton(text);
@@ -23,6 +24,8 @@ public class Button implements UI_Element {
 		_button.setForeground(textColor);
 		_button.setBackground(backgroundColor);
 		_button.addActionListener(actionListener);
+		
+		_enable = true;
 	}
 
 	public void setLocation(Point location) {
@@ -49,6 +52,11 @@ public class Button implements UI_Element {
 		_button.addActionListener(actionListener);
 	}
 
+	public void changeEnable() {
+		_enable = !_enable;
+		_button.setEnabled(_enable);
+	}
+	
 	@Override
 	public JComponent getComponent() {
 		return _button;

@@ -30,7 +30,7 @@ public class Window {
 		_frame.setResizable(false);
 	}
 	
-	protected void addComponent(UI_Element element) {
+	public void addComponent(UI_Element element) {
 		_defaltPanel.add(element.getComponent());
 		_defaltPanel.repaint();
 	}
