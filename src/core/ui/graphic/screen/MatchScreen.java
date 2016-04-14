@@ -7,12 +7,9 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.sun.org.apache.regexp.internal.recompile;
-
 import core.domain.Card;
 import core.domain.Money;
 import core.domain.Suit;
-import core.service.PrefixMultiplier;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.HandImage;
 import core.ui.graphic.Image;
@@ -39,8 +36,8 @@ public class MatchScreen extends Window {
 	private Button _leaveRoomButton;
 	private Button _buyInButton;
 	
-	public MatchScreen() {
-		super(850, 590, "PokerGame - Match");
+	public MatchScreen(long roomId) {
+		super(850, 590, "PokerGame - Room" + roomId);
 		
 		setBackgroundColor(Color.BLACK);
 		
@@ -79,7 +76,6 @@ public class MatchScreen extends Window {
 		
 		for (int i = 0; i < _emptySeatsImages.length; i++) {
 			_emptySeatsImages[i].resize(0.8, false);
-			_emptySeatsImages[i].hide();
 			addComponent(_emptySeatsImages[i]);
 		}
 	}
@@ -87,13 +83,14 @@ public class MatchScreen extends Window {
 	private void addHandImages() {
 		_handsImages = new HandImage[6];
 		
-		_handsImages[0] = new HandImage(this, new Point(720, 195), new Card(Suit.HEARTS, 4), new Card(Suit.CLUBS, 1));
-		_handsImages[1] = new HandImage(this, new Point(540, 365), new Card(Suit.HEARTS, 4), new Card(Suit.CLUBS, 1));
-		_handsImages[2] = new HandImage(this, new Point(200, 365), new Card(Suit.HEARTS, 4), new Card(Suit.CLUBS, 1));
-		_handsImages[3] = new HandImage(this, new Point(20, 195), new Card(Suit.HEARTS, 4), new Card(Suit.CLUBS, 1));
-		_handsImages[4] = new HandImage(this, new Point(230, 45), new Card(Suit.HEARTS, 4), new Card(Suit.CLUBS, 1));
-		_handsImages[5] = new HandImage(this, new Point(520, 45), new Card(Suit.HEARTS, 4), new Card(Suit.CLUBS, 1));
+		_handsImages[0] = new HandImage(this, new Point(720, 195), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
+		_handsImages[1] = new HandImage(this, new Point(540, 365), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
+		_handsImages[2] = new HandImage(this, new Point(200, 365), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
+		_handsImages[3] = new HandImage(this, new Point(20, 195), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
+		_handsImages[4] = new HandImage(this, new Point(230, 45), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
+		_handsImages[5] = new HandImage(this, new Point(520, 45), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
 		
+		/*
 		Button _testButton = new Button(new Rectangle(0, 0, 70, 30), "Flip", Color.YELLOW, Color.WHITE, new ActionListener() {
 			
 			@Override
@@ -101,29 +98,29 @@ public class MatchScreen extends Window {
 				_handsImages[0].flipCard();
 			}
 		});
-		addComponent(_testButton);
+		addComponent(_testButton);*/
 	}
 	
 	private void addPlayerInfoImages() {
 		_infoImages = new PlayerInfoImage[6];
 		
-		_infoImages[0] = new PlayerInfoImage(this, new Point(710, 265), "player1", new Money(982, PrefixMultiplier.NONE));
-		_infoImages[1] = new PlayerInfoImage(this, new Point(530, 435), "player2", new Money(182, PrefixMultiplier.KILO));
-		_infoImages[2] = new PlayerInfoImage(this, new Point(190, 435), "player3", new Money(284, PrefixMultiplier.MEGA));
-		_infoImages[3] = new PlayerInfoImage(this, new Point(10, 265), "player4", new Money(159, PrefixMultiplier.GIGA));
-		_infoImages[4] = new PlayerInfoImage(this, new Point(220, 115), "player5", new Money(187, PrefixMultiplier.KILO));
-		_infoImages[5] = new PlayerInfoImage(this, new Point(510, 115), "player6", new Money(12, PrefixMultiplier.TERA));
+		_infoImages[0] = new PlayerInfoImage(this, new Point(710, 265), "player1", new Money());
+		_infoImages[1] = new PlayerInfoImage(this, new Point(530, 435), "player2", new Money());
+		_infoImages[2] = new PlayerInfoImage(this, new Point(190, 435), "player3", new Money());
+		_infoImages[3] = new PlayerInfoImage(this, new Point(10, 265), "player4", new Money());
+		_infoImages[4] = new PlayerInfoImage(this, new Point(220, 115), "player5", new Money());
+		_infoImages[5] = new PlayerInfoImage(this, new Point(510, 115), "player6", new Money());
 	}
 	
 	private void addBetTokenImages() {
 		_betTokenImages = new BetTokenImage[6];
 
-		_betTokenImages[0] = new BetTokenImage(this, new Point(605, 220), new Money(100, PrefixMultiplier.KILO));
-		_betTokenImages[1] = new BetTokenImage(this, new Point(550, 325), new Money(50, PrefixMultiplier.KILO));
-		_betTokenImages[2] = new BetTokenImage(this, new Point(210, 325), new Money(100, PrefixMultiplier.KILO));
-		_betTokenImages[3] = new BetTokenImage(this, new Point(130, 220), new Money(100, PrefixMultiplier.KILO));
-		_betTokenImages[4] = new BetTokenImage(this, new Point(230, 165), new Money(100, PrefixMultiplier.KILO));
-		_betTokenImages[5] = new BetTokenImage(this, new Point(520, 165), new Money(100, PrefixMultiplier.KILO));
+		_betTokenImages[0] = new BetTokenImage(this, new Point(605, 220), new Money());
+		_betTokenImages[1] = new BetTokenImage(this, new Point(550, 325), new Money());
+		_betTokenImages[2] = new BetTokenImage(this, new Point(210, 325), new Money());
+		_betTokenImages[3] = new BetTokenImage(this, new Point(130, 220), new Money());
+		_betTokenImages[4] = new BetTokenImage(this, new Point(230, 165), new Money());
+		_betTokenImages[5] = new BetTokenImage(this, new Point(520, 165), new Money());
 	}
 	
 	private void addDealerImages() {
@@ -141,18 +138,24 @@ public class MatchScreen extends Window {
 		_dealerImages[5] = new Image(new Rectangle(600, 120, width, height), filePath);
 		
 		for (int i = 0; i < _dealerImages.length; i++) {
-			if (i!=0) 
-				_dealerImages[i].hide();
+			_dealerImages[i].hide();
 			addComponent(_dealerImages[i]);
 		}
 	}
 	
 	private void addTableCardsImages() {
+		Card[] cards = new Card[5];
+		cards[0] = new Card(Suit.HEARTS, 1);
+		cards[1] = new Card(Suit.SPADES, 1);
+		cards[2] = new Card(Suit.CLUBS, 1);
+		cards[3] = new Card(Suit.DIAMONDS, 1);
+		cards[4] = new Card(Suit.HEARTS, 13);
 		
+		_tableCardsImages = new TableCardsImages(this, new Point(260, 210), cards);
 	}
 	
 	private void addPotValueImage() {
-		_potValueImage = new BetTokenImage(this, new Point(365, 310), new Money(236, PrefixMultiplier.MEGA));
+		_potValueImage = new BetTokenImage(this, new Point(365, 310), new Money());
 	}
 	
 	private void addRaise_BetButton() {

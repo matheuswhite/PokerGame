@@ -17,6 +17,10 @@ public class PlayerInfoImage {
 		_playerName = new Label(new Point(point.x + 5, point.y - 5), playerName, new TextStyle(Color.WHITE, "Arial", 12, true, false));
 		_playerMoney = new Label(new Point(point.x + 5, point.y + 15), "$" + playerMoney.toString(), new TextStyle(Color.WHITE, "Arial", 14, true, false));
 		
+		_background.hide();
+		_playerName.hide();
+		_playerMoney.hide();
+		
 		window.addComponent(_playerName);
 		window.addComponent(_playerMoney);
 		window.addComponent(_background);
@@ -28,5 +32,17 @@ public class PlayerInfoImage {
 	
 	public void setPlayerMoney(String playerMoney) {
 		_playerMoney.setText(playerMoney);
+	}
+	
+	public void hide() {
+		_background.hide();
+		_playerName.hide();
+		_playerMoney.hide();
+	}
+	
+	public void show() {
+		_background.show();
+		_playerName.show();
+		_playerMoney.show();
 	}
 }
