@@ -32,6 +32,14 @@ public class Label implements UI_Element {
 		style.setStyle(_label);
 	}
 
+	public void hide() {
+		_label.setVisible(false);
+	}
+	
+	public void show() {
+		_label.setVisible(true);
+	}
+	
 	@Override
 	public JComponent getComponent() {
 		return _label;
