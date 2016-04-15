@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import core.domain.Money;
+import core.domain.PlayerInfo;
 
 public class PlayerInfoImage {
 
@@ -12,10 +13,10 @@ public class PlayerInfoImage {
 	private Label _playerName;
 	private Label _playerMoney;
 	
-	public PlayerInfoImage(Window window, Point point, String playerName, Money playerMoney) {
+	public PlayerInfoImage(Window window, Point point) {
 		_background = new Image(new Rectangle(point.x, point.y, 135, 40), "src/imgs/playerInfo");
-		_playerName = new Label(new Point(point.x + 5, point.y - 5), playerName, new TextStyle(Color.WHITE, "Arial", 12, true, false));
-		_playerMoney = new Label(new Point(point.x + 5, point.y + 15), "$" + playerMoney.toString(), new TextStyle(Color.WHITE, "Arial", 14, true, false));
+		_playerName = new Label(new Point(point.x + 5, point.y - 5), "none", new TextStyle(Color.WHITE, "Arial", 12, true, false));
+		_playerMoney = new Label(new Point(point.x + 5, point.y + 15), "$" + "000", new TextStyle(Color.WHITE, "Arial", 14, true, false));
 		
 		_background.hide();
 		_playerName.hide();
@@ -24,14 +25,6 @@ public class PlayerInfoImage {
 		window.addComponent(_playerName);
 		window.addComponent(_playerMoney);
 		window.addComponent(_background);
-	}
-	
-	public void setPlayerName(String playerName) {
-		_playerName.setText(playerName);
-	}
-	
-	public void setPlayerMoney(String playerMoney) {
-		_playerMoney.setText(playerMoney);
 	}
 	
 	public void hide() {
@@ -44,5 +37,10 @@ public class PlayerInfoImage {
 		_background.show();
 		_playerName.show();
 		_playerMoney.show();
+	}
+
+	public void setInfos(PlayerInfo player) {
+		_playerName.setText(player.getName());
+		_playerMoney.setText("$" + player.getMoneyPlayer().toString());
 	}
 }

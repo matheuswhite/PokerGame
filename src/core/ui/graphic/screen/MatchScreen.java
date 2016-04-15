@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 
 import core.domain.Card;
 import core.domain.Money;
+import core.domain.PlayerInfo;
 import core.domain.Suit;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.HandImage;
 import core.ui.graphic.Image;
+import core.ui.graphic.PlayersGraphicsManager;
 import core.ui.graphic.PlayerInfoImage;
 import core.ui.graphic.TableCardsImages;
 import core.ui.graphic.Window;
@@ -21,11 +23,7 @@ import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
 
-	private Image[] _emptySeatsImages;
-	private HandImage[] _handsImages;
-	private PlayerInfoImage[] _infoImages;
-	private BetTokenImage[] _betTokenImages;
-	private Image[] _dealerImages;
+	private PlayersGraphicsManager _playersGraphicsManager;
 	private TableCardsImages _tableCardsImages;
 	private Image _tableImage;
 	private BetTokenImage _potValueImage;
@@ -36,18 +34,14 @@ public class MatchScreen extends Window {
 	private Button _leaveRoomButton;
 	private Button _buyInButton;
 	
-	public MatchScreen(long roomId) {
+	public MatchScreen(long roomId, PlayerInfo player1) {
 		super(850, 590, "PokerGame - Room" + roomId);
 		
 		setBackgroundColor(Color.BLACK);
 		
-		addDealerImages();
-		addPlayerInfoImages();
-		addHandImages();
-		addEmptySeatImages();
+		_playersGraphicsManager = new PlayersGraphicsManager(this, player1);
 		addPotValueImage();
-		addTableCardsImages();
-		addBetTokenImages();		
+		addTableCardsImages();		
 		addTableImage();
 		
 		addFoldButton();
@@ -64,84 +58,7 @@ public class MatchScreen extends Window {
 		addComponent(_tableImage);
 	}
 	
-	private void addEmptySeatImages() {
-		_emptySeatsImages = new Image[6];
-		
-		_emptySeatsImages[0] = new Image(new Rectangle(750, 210, 117, 117), "src/imgs/emptySeat");
-		_emptySeatsImages[1] = new Image(new Rectangle(530, 370, 117, 117), "src/imgs/emptySeat");
-		_emptySeatsImages[2] = new Image(new Rectangle(220, 370, 117, 117), "src/imgs/emptySeat");
-		_emptySeatsImages[3] = new Image(new Rectangle(10, 210, 117, 117), "src/imgs/emptySeat");
-		_emptySeatsImages[4] = new Image(new Rectangle(220, 60, 117, 117), "src/imgs/emptySeat");
-		_emptySeatsImages[5] = new Image(new Rectangle(530, 60, 117, 117), "src/imgs/emptySeat");
-		
-		for (int i = 0; i < _emptySeatsImages.length; i++) {
-			_emptySeatsImages[i].resize(0.8, false);
-			addComponent(_emptySeatsImages[i]);
-		}
-	}
 	
-	private void addHandImages() {
-		_handsImages = new HandImage[6];
-		
-		_handsImages[0] = new HandImage(this, new Point(720, 195), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
-		_handsImages[1] = new HandImage(this, new Point(540, 365), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
-		_handsImages[2] = new HandImage(this, new Point(200, 365), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
-		_handsImages[3] = new HandImage(this, new Point(20, 195), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
-		_handsImages[4] = new HandImage(this, new Point(230, 45), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
-		_handsImages[5] = new HandImage(this, new Point(520, 45), new Card(Suit.HEARTS, 1), new Card(Suit.HEARTS, 13));
-		
-		/*
-		Button _testButton = new Button(new Rectangle(0, 0, 70, 30), "Flip", Color.YELLOW, Color.WHITE, new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				_handsImages[0].flipCard();
-			}
-		});
-		addComponent(_testButton);*/
-	}
-	
-	private void addPlayerInfoImages() {
-		_infoImages = new PlayerInfoImage[6];
-		
-		_infoImages[0] = new PlayerInfoImage(this, new Point(710, 265), "player1", new Money());
-		_infoImages[1] = new PlayerInfoImage(this, new Point(530, 435), "player2", new Money());
-		_infoImages[2] = new PlayerInfoImage(this, new Point(190, 435), "player3", new Money());
-		_infoImages[3] = new PlayerInfoImage(this, new Point(10, 265), "player4", new Money());
-		_infoImages[4] = new PlayerInfoImage(this, new Point(220, 115), "player5", new Money());
-		_infoImages[5] = new PlayerInfoImage(this, new Point(510, 115), "player6", new Money());
-	}
-	
-	private void addBetTokenImages() {
-		_betTokenImages = new BetTokenImage[6];
-
-		_betTokenImages[0] = new BetTokenImage(this, new Point(605, 220), new Money());
-		_betTokenImages[1] = new BetTokenImage(this, new Point(550, 325), new Money());
-		_betTokenImages[2] = new BetTokenImage(this, new Point(210, 325), new Money());
-		_betTokenImages[3] = new BetTokenImage(this, new Point(130, 220), new Money());
-		_betTokenImages[4] = new BetTokenImage(this, new Point(230, 165), new Money());
-		_betTokenImages[5] = new BetTokenImage(this, new Point(520, 165), new Money());
-	}
-	
-	private void addDealerImages() {
-		int width = 34;
-		int height = 28;
-		String filePath = "src/imgs/dealerToken";
-		
-		_dealerImages = new Image[6];
-		
-		_dealerImages[0] = new Image(new Rectangle(800, 270, width, height), filePath);
-		_dealerImages[1] = new Image(new Rectangle(640, 440, width, height), filePath);
-		_dealerImages[2] = new Image(new Rectangle(280, 440, width, height), filePath);
-		_dealerImages[3] = new Image(new Rectangle(100, 270, width, height), filePath);
-		_dealerImages[4] = new Image(new Rectangle(310, 120, width, height), filePath);
-		_dealerImages[5] = new Image(new Rectangle(600, 120, width, height), filePath);
-		
-		for (int i = 0; i < _dealerImages.length; i++) {
-			_dealerImages[i].hide();
-			addComponent(_dealerImages[i]);
-		}
-	}
 	
 	private void addTableCardsImages() {
 		Card[] cards = new Card[5];
@@ -155,7 +72,7 @@ public class MatchScreen extends Window {
 	}
 	
 	private void addPotValueImage() {
-		_potValueImage = new BetTokenImage(this, new Point(365, 310), new Money());
+		_potValueImage = new BetTokenImage(this, new Point(365, 310));
 	}
 	
 	private void addRaise_BetButton() {
