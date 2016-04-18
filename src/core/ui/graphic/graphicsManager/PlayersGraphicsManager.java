@@ -1,4 +1,4 @@
-package core.ui.graphic;
+package core.ui.graphic.graphicsManager;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -8,6 +8,11 @@ import java.util.List;
 import core.domain.Card;
 import core.domain.Money;
 import core.domain.PlayerInfo;
+import core.ui.graphic.BetTokenImage;
+import core.ui.graphic.HandImage;
+import core.ui.graphic.Image;
+import core.ui.graphic.PlayerInfoImage;
+import core.ui.graphic.Window;
 
 public class PlayersGraphicsManager {
 	
@@ -86,7 +91,7 @@ public class PlayersGraphicsManager {
 		if (_playerInfos.get(seat) == null)
 			throw new Exception("Without player in this seat");
 		
-		_betTokenImages[seat].setMoney(money);
+		_betTokenImages[seat].addMoney(money);
 		_betTokenImages[seat].show();
 	}
 	public void clearBet(int seat) throws Exception {
@@ -94,6 +99,7 @@ public class PlayersGraphicsManager {
 			throw new Exception("Without player in this seat");
 		
 		_betTokenImages[seat].hide();
+		_betTokenImages[seat].clearMoney();
 	}
 	
 	
@@ -134,7 +140,6 @@ public class PlayersGraphicsManager {
 			window.addComponent(_emptySeatsImages[i]);
 		}
 	}
-	
 	private void addHandImages(Window window) {
 		_handsImages = new HandImage[6];
 		
@@ -145,7 +150,6 @@ public class PlayersGraphicsManager {
 		_handsImages[4] = new HandImage(window, new Point(230, 45));
 		_handsImages[5] = new HandImage(window, new Point(520, 45));
 	}
-	
 	private void addPlayerInfoImages(Window window) {
 		_infoImages = new PlayerInfoImage[6];
 		
@@ -156,7 +160,6 @@ public class PlayersGraphicsManager {
 		_infoImages[4] = new PlayerInfoImage(window, new Point(220, 115));
 		_infoImages[5] = new PlayerInfoImage(window, new Point(510, 115));
 	}
-	
 	private void addBetTokenImages(Window window) {
 		_betTokenImages = new BetTokenImage[6];
 
@@ -167,7 +170,6 @@ public class PlayersGraphicsManager {
 		_betTokenImages[4] = new BetTokenImage(window, new Point(230, 165));
 		_betTokenImages[5] = new BetTokenImage(window, new Point(520, 165));
 	}
-	
 	private void addDealerImages(Window window) {
 		int width = 34;
 		int height = 28;
