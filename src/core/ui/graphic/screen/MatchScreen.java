@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.domain.PlayerInfo;
-import core.ui.graphic.Window;
+import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
 import core.ui.graphic.graphicsManager.TableGraphicsManager;
 import core.ui.input.Button;

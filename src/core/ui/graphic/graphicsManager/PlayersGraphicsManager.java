@@ -10,9 +10,9 @@ import core.domain.Money;
 import core.domain.PlayerInfo;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.HandImage;
-import core.ui.graphic.Image;
 import core.ui.graphic.PlayerInfoImage;
-import core.ui.graphic.Window;
+import core.ui.graphic.basics.Image;
+import core.ui.graphic.basics.Window;
 
 public class PlayersGraphicsManager {
 	

@@ -1,4 +1,4 @@
-package core.ui.graphic;
+package core.ui.graphic.basics;
 
 import java.awt.Point;
 

@@ -10,9 +10,9 @@ import java.util.Map;
 import core.domain.actionListener.EchoAction;
 import core.domain.actionListener.GetRoomsAction;
 import core.net.ServerConnection;
-import core.ui.graphic.Label;
-import core.ui.graphic.TextStyle;
-import core.ui.graphic.Window;
+import core.ui.graphic.basics.Label;
+import core.ui.graphic.basics.TextStyle;
+import core.ui.graphic.basics.Window;
 import core.ui.input.Button;
 
 public class ConnectionTestScreen extends Window {
