@@ -13,8 +13,8 @@ public class EchoAction extends ButtonAction {
 
 	private PlayerInfo playerInfo;
 	
-	public EchoAction(ServerConnection connection) {
-		super(connection);
+	public EchoAction() {
+		super();
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class EchoAction extends ButtonAction {
 		_msg = new Message(1.0, "echo", _content);
 		
 		try {
-			_connection.write(_msg);
+			ServerConnection.Instance().write(_msg);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

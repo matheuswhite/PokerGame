@@ -8,15 +8,32 @@ import java.net.*;
 import java.util.Observable;
 
 public class ServerConnection extends Observable implements Runnable {
+	
+	private static ServerConnection _instance = null;
+	
 	private Socket _socket;
 	private BufferedReader _inputFromServer;
 	private DataOutputStream _outputToServer;
 	
-	public static final String DISCONNECT_MESSAGE = "";
 	public final static int SERVER_PORT = 1095;
 	public final static String SERVER_IP = "127.0.0.1";
 	
-	public void connect() throws UnknownHostException, IOException {
+	private ServerConnection() {
+		try {
+			connect();
+			new Thread(this).start();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static synchronized ServerConnection Instance() {
+		if (_instance == null)
+			_instance = new ServerConnection();
+		return _instance;
+	}
+	
+	private void connect() throws UnknownHostException, IOException {
 		_socket = new Socket(SERVER_IP, SERVER_PORT);
 		_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 		_outputToServer = new DataOutputStream(_socket.getOutputStream());
@@ -55,6 +72,5 @@ public class ServerConnection extends Observable implements Runnable {
 				exit = true;
 			}
 		}
-		notifyObservers(DISCONNECT_MESSAGE);
 	}
 }

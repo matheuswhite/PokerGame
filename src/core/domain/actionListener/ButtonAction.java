@@ -10,12 +10,10 @@ import core.net.ServerConnection;
 
 public abstract class ButtonAction implements ActionListener {
 
-	protected ServerConnection _connection;
 	protected Message _msg;
 	protected List<Object> _content;
 	
-	public ButtonAction(ServerConnection connection) {
-		_connection = connection;
+	public ButtonAction() {
 		_content = new ArrayList<Object>();
 	}
 	

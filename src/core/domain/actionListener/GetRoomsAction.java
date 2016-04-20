@@ -11,8 +11,8 @@ public class GetRoomsAction extends ButtonAction {
 
 	private Range _range;
 	
-	public GetRoomsAction(ServerConnection connection) {
-		super(connection);
+	public GetRoomsAction() {
+		super();
 		_range = new Range(1,1);
 	}
 	
@@ -28,7 +28,7 @@ public class GetRoomsAction extends ButtonAction {
 		_msg = new Message(1.0, "get_rooms", _content);
 		
 		try {
-			_connection.write(_msg);
+			ServerConnection.Instance().write(_msg);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
