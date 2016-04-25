@@ -9,6 +9,7 @@ public class PlayerInfo {
 	private long _id;
 	private Card[] _hand;
 	private Money _moneyPlayer;
+	private Money _moneyBetting;
 	private String _name;
 	private int _seat;
 	
@@ -17,6 +18,7 @@ public class PlayerInfo {
 		_hand = new Card[2];
 		_moneyPlayer = new Money(0, PrefixMultiplier.NONE);
 		_name = "Player" + id;
+		_moneyBetting = new Money();
 	}
 	
 	public synchronized static void Create(long id) {
@@ -58,7 +60,10 @@ public class PlayerInfo {
 	public void setName(String name) {
 		_name = name;
 	}
-	
+	public void setMoneyBetting(Money _moneyBetting) {
+		this._moneyBetting = _moneyBetting;
+	}
+
 	public int getSeat() {
 		return _seat;
 	}
