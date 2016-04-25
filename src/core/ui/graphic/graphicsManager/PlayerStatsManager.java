@@ -6,6 +6,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 import core.domain.Money;
+import core.domain.PlayerInfo;
+import core.domain.PlayerStats;
 import core.service.PrefixMultiplier;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Label;
@@ -30,10 +32,30 @@ public class PlayerStatsManager {
 		_wins = new Label(new Point(260, 55), "Wins:    83", new TextStyle(Color.WHITE, "Arial", size, true, false));
 		_losses = new Label(new Point(260, 75), "Losses: 14", new TextStyle(Color.WHITE, "Arial", size, true, false));
 		
+		loadPlayerStats();
+		
 		window.addComponent(_name);
 		window.addComponent(_money);
 		window.addComponent(_wins);
 		window.addComponent(_losses);
 		window.addComponent(_background);
+	}
+	
+	public void updatePlayerStats(PlayerStats stats) {
+		_name.setText("Name: " + stats.getName());
+		_money.setText("Money: " + stats.getMoney());
+		_wins.setText("Wins: " + stats.getWins());
+		_losses.setText("Losses: " + stats.getLosses());
+	}
+	
+	private void loadPlayerStats() {
+		String file = "src/data/playerStats.json";
+		if (JSON_File.exist(file)) {
+			PlayerStats stats = JSON_File.load(file, PlayerStats.class);
+			updatePlayerStats(stats);
+		}
+		else {
+			JSON_File.save(file, new PlayerStats(PlayerInfo.Instance().getId()));
+		}
 	}
 }

@@ -4,17 +4,28 @@ import core.service.PrefixMultiplier;
 
 public class PlayerInfo {
 	
+	private static PlayerInfo _instance = null;
+	
 	private long _id;
 	private Card[] _hand;
 	private Money _moneyPlayer;
 	private String _name;
 	private int _seat;
 	
-	public PlayerInfo(long id) {
+	private PlayerInfo(long id) {
 		_id = id;
 		_hand = new Card[2];
 		_moneyPlayer = new Money(0, PrefixMultiplier.NONE);
 		_name = "Player" + id;
+	}
+	
+	public synchronized static void Create(long id) {
+		if (_instance == null)
+			_instance = new PlayerInfo(id);
+	}
+	
+	public synchronized static PlayerInfo Instance() {
+		return _instance;
 	}
 	
 	public Card[] getHand() {
