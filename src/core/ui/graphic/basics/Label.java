@@ -25,7 +25,7 @@ public class Label implements UI_Element {
 	
 	public void setText(String text) {
 		_label.setText(text);
-		_label.setSize(text.length() * 10, 30);
+		_label.setSize(text.length() * 30, 30);
 	}
 	
 	public void changeTextStyle(TextStyle style) {

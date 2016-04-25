@@ -5,16 +5,16 @@ import java.io.IOException;
 
 import core.net.Message;
 import core.net.ServerConnection;
-import core.ui.graphic.basics.PopUp;
-import core.ui.graphic.basics.Window;
 
 public class EnterRoomAction extends ButtonAction {
 
 	private long _roomId;
 	
-	public EnterRoomAction(long roomId) {
+	public EnterRoomAction() {
 		super();
-		
+	}
+	
+	public void setRoomId(long roomId) {
 		_roomId = roomId;
 	}
 	

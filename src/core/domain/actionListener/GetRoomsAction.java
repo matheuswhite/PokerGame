@@ -16,13 +16,17 @@ public class GetRoomsAction extends ButtonAction {
 		_range = new Range(1,1);
 	}
 	
+	public Range getRange() {
+		return _range;
+	}
+	
 	public void setRange(Range range) {
 		_range = range;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		_content.clear();
+		/*_content.clear();
 		_content.add(_range);
 		
 		_msg = new Message(1.0, "get_rooms", _content);
@@ -31,6 +35,6 @@ public class GetRoomsAction extends ButtonAction {
 			ServerConnection.Instance().write(_msg);
 		} catch (IOException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 	}
 }

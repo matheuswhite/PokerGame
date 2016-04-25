@@ -57,4 +57,8 @@ public class PopUp extends JDialog {
 		_confirmButton.addActionListener(hideAction);
 		_cancelButton.addActionListener(hideAction);
 	}
+	
+	public void setMessage(String message) {
+		((JLabel)_messagePanel.getComponent(0)).setText(message);
+	}
 }
