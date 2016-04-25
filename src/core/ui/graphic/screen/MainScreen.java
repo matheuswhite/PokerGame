@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import core.domain.PlayerInfo;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayerStatsManager;
@@ -22,6 +23,8 @@ public class MainScreen extends Window {
 	
 	public MainScreen() {
 		super(450, 700, "PokerGame - v1.0");
+		
+		PlayerInfo.Create(2413);
 		
 		setBackgroundColor(new Color(0, 58, 98, 255));
 		

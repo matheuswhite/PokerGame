@@ -3,15 +3,10 @@ package core.domain.actionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.domain.Money;
-import core.domain.PlayerInfo;
 import core.net.Message;
 import core.net.ServerConnection;
-import core.service.PrefixMultiplier;
 
 public class EchoAction extends ButtonAction {
-
-	private PlayerInfo playerInfo;
 	
 	public EchoAction() {
 		super();
@@ -19,13 +14,9 @@ public class EchoAction extends ButtonAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		playerInfo = new PlayerInfo(3);
-		playerInfo.setSeat(1);
-		playerInfo.addMoney(new Money(54, PrefixMultiplier.MEGA));
 		
 		_content.clear();
-		_content.add(new Money(3, PrefixMultiplier.KILO));
-		_content.add(playerInfo);
+		_content.add("Can you hear me server?");
 		
 		_msg = new Message(1.0, "echo", _content);
 		

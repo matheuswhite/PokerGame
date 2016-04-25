@@ -1,9 +1,8 @@
 package core.storage;
 
-public interface Storage<K, V> {
+public interface Storage {
 
-	void insert(V data);
-	V consult(K key);
-	void change(V data, K key);
-	void delete(K key);
+	boolean exist(String filePath);
+	<T> T load(String filePath, Class<T> type);
+	void save(String file, Object object);
 }

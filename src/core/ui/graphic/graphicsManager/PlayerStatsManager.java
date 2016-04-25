@@ -5,10 +5,9 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import core.domain.Money;
 import core.domain.PlayerInfo;
 import core.domain.PlayerStats;
-import core.service.PrefixMultiplier;
+import core.storage.JSON_File;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.TextStyle;
@@ -27,10 +26,10 @@ public class PlayerStatsManager {
 		_background.resize(new Dimension(187, 170), false);
 		
 		int size = 14;
-		_name = new Label(new Point(260, 15), "Name: Matheus San", new TextStyle(Color.WHITE, "Arial", size, true, false));
-		_money = new Label(new Point(260, 35), "Money: " + new Money(999, PrefixMultiplier.MEGA).toString(), new TextStyle(Color.WHITE, "Arial", size, true, false));
-		_wins = new Label(new Point(260, 55), "Wins:    83", new TextStyle(Color.WHITE, "Arial", size, true, false));
-		_losses = new Label(new Point(260, 75), "Losses: 14", new TextStyle(Color.WHITE, "Arial", size, true, false));
+		_name = new Label(new Point(260, 15), "Name: ", new TextStyle(Color.WHITE, "Arial", size, true, false));
+		_money = new Label(new Point(260, 35), "Money: ", new TextStyle(Color.WHITE, "Arial", size, true, false));
+		_wins = new Label(new Point(260, 55), "Wins: ", new TextStyle(Color.WHITE, "Arial", size, true, false));
+		_losses = new Label(new Point(260, 75), "Losses: ", new TextStyle(Color.WHITE, "Arial", size, true, false));
 		
 		loadPlayerStats();
 		
@@ -50,12 +49,16 @@ public class PlayerStatsManager {
 	
 	private void loadPlayerStats() {
 		String file = "src/data/playerStats.json";
-		if (JSON_File.exist(file)) {
-			PlayerStats stats = JSON_File.load(file, PlayerStats.class);
+		PlayerStats stats = null;
+		
+		if (JSON_File.Instance().exist(file)) {
+			stats = JSON_File.Instance().load(file, PlayerStats.class);
 			updatePlayerStats(stats);
 		}
 		else {
-			JSON_File.save(file, new PlayerStats(PlayerInfo.Instance().getId()));
+			stats = new PlayerStats(PlayerInfo.Instance().getId());
+			updatePlayerStats(stats);
+			JSON_File.Instance().save(file, stats);
 		}
 	}
 }

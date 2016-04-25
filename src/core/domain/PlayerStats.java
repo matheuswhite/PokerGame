@@ -3,6 +3,7 @@ package core.domain;
 import core.service.PrefixMultiplier;
 
 public class PlayerStats {
+	
 	private String _name;
 	private Money _money;
 	private int _wins;
