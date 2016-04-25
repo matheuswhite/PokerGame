@@ -69,7 +69,7 @@ public class RoomListManager {
 		_roomsListItens.get(0).setInfos(new Room(1023, new Money(100, PrefixMultiplier.NONE), new Money(5, PrefixMultiplier.KILO)));
 		window.addComponent(_roomsListItens.get(0));
 		
-		for (int i = 0; i < 13; i++) {
+		for (int i = 1; i < 13; i++) {
 			_roomsListItens.add(new RoomListIten(window, 195 + (i * 35)));
 			_roomsListItens.get(i).disable();
 			window.addComponent(_roomsListItens.get(i));
