@@ -39,6 +39,14 @@ public class Window {
 		_defaltPanel.repaint();
 	}
 	
+	public void hide() {
+		_frame.setVisible(false);
+	}
+	
+	public void show() {
+		_frame.setVisible(true);
+	}
+	
 	protected void removeComponent(UI_Element element, String panel) {
 		_defaltPanel.remove(element.getComponent());
 		_defaltPanel.repaint();

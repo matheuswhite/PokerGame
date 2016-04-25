@@ -6,8 +6,10 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.domain.Money;
 import core.domain.Room;
 import core.domain.actionListener.GetRoomsAction;
+import core.service.PrefixMultiplier;
 import core.service.Range;
 import core.ui.graphic.RoomListIten;
 import core.ui.graphic.basics.Image;
@@ -61,6 +63,11 @@ public class RoomListManager {
 	
 	private void initRoomListItens(Window window) {
 		_roomsListItens = new ArrayList<RoomListIten>();
+		
+		/*
+		_roomsListItens.add(new RoomListIten(window, 195));
+		_roomsListItens.get(0).setInfos(new Room(1023, new Money(100, PrefixMultiplier.NONE), new Money(5, PrefixMultiplier.KILO)));
+		window.addComponent(_roomsListItens.get(0));*/
 		
 		for (int i = 0; i < 13; i++) {
 			_roomsListItens.add(new RoomListIten(window, 195 + (i * 35)));

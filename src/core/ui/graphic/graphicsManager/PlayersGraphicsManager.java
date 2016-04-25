@@ -25,9 +25,11 @@ public class PlayersGraphicsManager {
 	private List<PlayerInfo> _playerInfos;
 	private int _dealer;
 	
-	public PlayersGraphicsManager(Window window, PlayerInfo player1) {
+	public PlayersGraphicsManager(Window window) {
 		_playerInfos = new ArrayList<PlayerInfo>(6);
-		_playerInfos.add(player1);
+		for (int i = 0; i < 6; i++) {
+			_playerInfos.add(null);
+		}
 		
 		_dealer = -1;
 		
@@ -36,6 +38,12 @@ public class PlayersGraphicsManager {
 		addHandImages(window);
 		addEmptySeatImages(window);
 		addBetTokenImages(window);
+		
+		try {
+			addPlayer(PlayerInfo.Instance());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -49,6 +57,8 @@ public class PlayersGraphicsManager {
 				_emptySeatsImages[i].hide();
 				_infoImages[i].setInfos(player);
 				_infoImages[i].show();
+				
+				return ;
 			}
 		}
 		throw new Exception("All seats already were occupied!");

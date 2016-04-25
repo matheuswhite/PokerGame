@@ -6,10 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.domain.Money;
+import core.domain.PlayerInfo;
+import core.domain.PlayerStats;
 import core.domain.Room;
 import core.domain.actionListener.EnterRoomAction;
 import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.Window;
+import core.ui.graphic.screen.MatchScreen;
 import core.ui.input.Button;
 
 public class RoomListIten extends Button {
@@ -24,6 +27,16 @@ public class RoomListIten extends Button {
 		_roomInfo = new Room(404, new Money(), new Money());
 		_enterRoomAction = new EnterRoomAction();
 		_confirmPopUp = new PopUp(window.getFrame(), "", "You want to enter the room 00000000 ?", _enterRoomAction); 
+		_confirmPopUp.addActionToConfirmButton(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				window.hide();
+				PlayerStats.Instance().getMoney().removeMoney(_roomInfo.getMatchInfo().getMinimumBuyIn());
+				PlayerInfo.Instance().getMoneyPlayer().addMoney(_roomInfo.getMatchInfo().getMinimumBuyIn());
+				new MatchScreen(_roomInfo.getId());
+			}
+		});
 		
 		addActionListener(new ActionListener() {
 			

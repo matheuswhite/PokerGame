@@ -24,12 +24,12 @@ public class MatchScreen extends Window {
 	private Button _leaveRoomButton;
 	private Button _buyInButton;
 	
-	public MatchScreen(long roomId, PlayerInfo player1) {
+	public MatchScreen(long roomId) {
 		super(850, 590, "PokerGame - Room" + roomId);
 		
 		setBackgroundColor(Color.BLACK);
 		
-		_playersGraphicsManager = new PlayersGraphicsManager(this, player1);
+		_playersGraphicsManager = new PlayersGraphicsManager(this);
 		_tableGraphicsManager = new TableGraphicsManager(this);
 		
 		addFoldButton();

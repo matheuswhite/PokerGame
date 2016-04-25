@@ -31,7 +31,7 @@ public class PlayerStatsManager {
 		_wins = new Label(new Point(260, 55), "Wins: ", new TextStyle(Color.WHITE, "Arial", size, true, false));
 		_losses = new Label(new Point(260, 75), "Losses: ", new TextStyle(Color.WHITE, "Arial", size, true, false));
 		
-		loadPlayerStats();
+		updatePlayerStats();
 		
 		window.addComponent(_name);
 		window.addComponent(_money);
@@ -40,25 +40,10 @@ public class PlayerStatsManager {
 		window.addComponent(_background);
 	}
 	
-	public void updatePlayerStats(PlayerStats stats) {
-		_name.setText("Name: " + stats.getName());
-		_money.setText("Money: " + stats.getMoney());
-		_wins.setText("Wins: " + stats.getWins());
-		_losses.setText("Losses: " + stats.getLosses());
-	}
-	
-	private void loadPlayerStats() {
-		String file = "src/data/playerStats.json";
-		PlayerStats stats = null;
-		
-		if (JSON_File.Instance().exist(file)) {
-			stats = JSON_File.Instance().load(file, PlayerStats.class);
-			updatePlayerStats(stats);
-		}
-		else {
-			stats = new PlayerStats(PlayerInfo.Instance().getId());
-			updatePlayerStats(stats);
-			JSON_File.Instance().save(file, stats);
-		}
+	public void updatePlayerStats() {
+		_name.setText("Name: " + PlayerStats.Instance().getName());
+		_money.setText("Money: " + PlayerStats.Instance().getMoney());
+		_wins.setText("Wins: " + PlayerStats.Instance().getWins());
+		_losses.setText("Losses: " + PlayerStats.Instance().getLosses());
 	}
 }

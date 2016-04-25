@@ -49,4 +49,12 @@ public class MainScreen extends Window {
 		
 		addComponent(_createRoomButton);
 	}
+	
+	public PlayerStatsManager getPlayerStatsManager() {
+		return _playerStatsManager;
+	}
+	
+	public RoomListManager getRoomListManager() {
+		return _roomListManager;
+	}
 }
