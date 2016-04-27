@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import core.ui.UI_Element;
 
 public class PopUp extends JDialog {
 
@@ -19,15 +21,15 @@ public class PopUp extends JDialog {
 
 	private JButton _confirmButton;
 	private JButton _cancelButton;
-	private JPanel _buttonPanel;
-	private JPanel _messagePanel;
-	protected JPanel _mainPanel;
 	
-	public PopUp(JFrame owner, String title, String message, ActionListener action) {
+	private JPanel _buttonPanel;
+	private JPanel _contentPanel;
+	private JPanel _mainPanel;
+	
+	public PopUp(JFrame owner, String title) {
 		super(owner, title, false);
 		
-		_messagePanel = new JPanel();
-		_messagePanel.add(new JLabel(message));
+		_contentPanel = new JPanel();
 		
 		_confirmButton = new JButton("Yes");
 		_cancelButton = new JButton("No");
@@ -36,7 +38,7 @@ public class PopUp extends JDialog {
 		_buttonPanel.add(_cancelButton);
 		
 		_mainPanel = new JPanel(new BorderLayout());
-		_mainPanel.add(_messagePanel, BorderLayout.CENTER);
+		_mainPanel.add(_contentPanel, BorderLayout.CENTER);
 		_mainPanel.add(_buttonPanel, BorderLayout.SOUTH);
 		
 		add(_mainPanel);
@@ -53,16 +55,15 @@ public class PopUp extends JDialog {
 				setVisible(false);
 			}
 		};
-		_confirmButton.addActionListener(action);
 		_confirmButton.addActionListener(hideAction);
 		_cancelButton.addActionListener(hideAction);
 	}
 	
-	public void addActionToConfirmButton(ActionListener action) {
-		_confirmButton.addActionListener(action);
+	protected void addContent(JComponent content) {
+		_contentPanel.add(content);
 	}
 	
-	public void setMessage(String message) {
-		((JLabel)_messagePanel.getComponent(0)).setText(message);
+	protected void addActionToConfirmButton(ActionListener action) {
+		_confirmButton.addActionListener(action);
 	}
 }

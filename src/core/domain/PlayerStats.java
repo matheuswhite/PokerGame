@@ -28,13 +28,14 @@ public class PlayerStats {
 	private static void create() {
 		String file = "src/data/playerStats.json";
 		
+		/*
 		if (JSON_File.Instance().exist(file)) {
 			_instance = JSON_File.Instance().load(file, PlayerStats.class);
 		}
 		else {
 			_instance = new PlayerStats(PlayerInfo.Instance().getId());
 			JSON_File.Instance().save(file, _instance);
-		}
+		}*/
 	}
 
 	public void setName(String name) {

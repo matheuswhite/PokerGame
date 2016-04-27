@@ -18,7 +18,7 @@ import core.ui.input.Button;
 public class RoomListIten extends Button {
 
 	private Room _roomInfo;
-	private PopUp _confirmPopUp;
+	private EnterRoomPopUp _enterRoomPopUp;
 	private EnterRoomAction _enterRoomAction;
 	
 	public RoomListIten(Window window, int posY) {
@@ -26,6 +26,7 @@ public class RoomListIten extends Button {
 	
 		_roomInfo = new Room(404, new Money(), new Money());
 		_enterRoomAction = new EnterRoomAction();
+		_enterRoomPopUp = new EnterRoomPopUp(window.getFrame(), "Do you enter int the room " + _ro)
 		_confirmPopUp = new PopUp(window.getFrame(), "", "You want to enter the room 00000000 ?", _enterRoomAction); 
 		_confirmPopUp.addActionToConfirmButton(new ActionListener() {
 			
