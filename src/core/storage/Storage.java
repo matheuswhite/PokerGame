@@ -4,5 +4,5 @@ public interface Storage {
 
 	boolean exist(String filePath);
 	<T> T load(String filePath, Class<T> type);
-	void save(String file, Object object);
+	void save(String filePath, Object object);
 }
