@@ -10,8 +10,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import core.ui.UI_Element;
-
 public class PopUp extends JDialog {
 
 	/**
