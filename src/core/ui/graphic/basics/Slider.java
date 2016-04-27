@@ -37,6 +37,7 @@ public class Slider implements UI_Element {
 		_panel.add(_slider);
 		_panel.add(_labelValue.getComponent());
 		_panel.setLocation(location);
+		_panel.setSize(160, 30);
 	}
 	
 	public void setRange(Range range) {
