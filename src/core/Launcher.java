@@ -14,7 +14,7 @@ public class Launcher {
 	public static void main(String[] args) {
 		PlayerInfo.Create(2114);
 		//ConnectionTestScreen screen = new ConnectionTestScreen();
-		MatchScreen screen = new MatchScreen(new Room(2415, new Money(100, PrefixMultiplier.NONE), new Money(5, PrefixMultiplier.KILO)));
-		//MainScreen screen = new MainScreen();
+		//MatchScreen screen = new MatchScreen(new Room(2415, new Money(100, PrefixMultiplier.NONE), new Money(5, PrefixMultiplier.KILO)));
+		MainScreen screen = new MainScreen();
 	}
 }
