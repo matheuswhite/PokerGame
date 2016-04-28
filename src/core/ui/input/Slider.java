@@ -1,5 +1,6 @@
-package core.ui.graphic.basics;
+package core.ui.input;
 
+import java.awt.Color;
 import java.awt.Point;
 
 import javax.swing.JComponent;
@@ -10,6 +11,8 @@ import javax.swing.event.ChangeListener;
 
 import core.service.Range;
 import core.ui.UI_Element;
+import core.ui.graphic.basics.Label;
+import core.ui.graphic.basics.TextStyle;
 
 public class Slider implements UI_Element {
 
@@ -21,7 +24,7 @@ public class Slider implements UI_Element {
 	public Slider(Point location, Range range, TextStyle valueStyle) {
 		_slider = new JSlider(range.getInitialIndex(), range.getFinalIndex(), range.getInitialIndex());
 		_value = range.getInitialIndex();
-		_labelValue = new Label(new Point(0, 0), Integer.toString(_value), valueStyle);
+		_labelValue = new Label(new Point(0 + 30, 0), Integer.toString(_value), valueStyle);
 		
 		_slider.addChangeListener(new ChangeListener() {
 			
@@ -38,6 +41,7 @@ public class Slider implements UI_Element {
 		_panel.add(_labelValue.getComponent());
 		_panel.setLocation(location);
 		_panel.setSize(160, 30);
+		_panel.setBackground(Color.RED);
 	}
 	
 	public void setRange(Range range) {
