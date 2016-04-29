@@ -5,7 +5,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
 
+import core.ui.graphic.Timer;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
 import core.ui.graphic.graphicsManager.TableGraphicsManager;
@@ -23,6 +25,8 @@ public class MatchScreen extends Window {
 	private Button _leaveRoomButton;
 	private Button _buyInButton;
 	
+	private Timer _timeToPlay;
+	
 	public MatchScreen(long roomId) {
 		super(850, 590, "PokerGame - Room" + roomId);
 		
@@ -36,13 +40,26 @@ public class MatchScreen extends Window {
 		addCheck_CallButton();
 		addLeaveRoomButton();
 		addBuyInButton();
+		
+		addTimeToPlay();
 	}
-	
+
 	public PlayersGraphicsManager getPlayerGraphicsManager() {
 		return _playersGraphicsManager;
 	}
 	public TableGraphicsManager getTableGraphicsManager() {
 		return _tableGraphicsManager;
+	}
+	
+	private void addTimeToPlay() {
+		_timeToPlay = new Timer(this, new Point(50, 505), 30*1000, new TimerTask() {
+			
+			@Override
+			public void run() {
+				_timeToPlay.stop();
+			}
+		});
+		_timeToPlay.start();
 	}
 	
 	private void addRaise_BetButton() {
