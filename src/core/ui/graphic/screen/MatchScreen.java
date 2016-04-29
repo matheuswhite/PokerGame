@@ -6,9 +6,6 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import core.domain.PlayerInfo;
-import core.domain.Room;
-import core.service.Range;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
 import core.ui.graphic.graphicsManager.TableGraphicsManager;
@@ -16,8 +13,6 @@ import core.ui.input.Button;
 import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
-
-	private Room _room;
 	
 	private PlayersGraphicsManager _playersGraphicsManager;
 	private TableGraphicsManager _tableGraphicsManager;
@@ -28,12 +23,11 @@ public class MatchScreen extends Window {
 	private Button _leaveRoomButton;
 	private Button _buyInButton;
 	
-	public MatchScreen(Room room) {
-		super(850, 590, "PokerGame - Room" + room.getId());
+	public MatchScreen(long roomId) {
+		super(850, 590, "PokerGame - Room" + roomId);
 		
 		setBackgroundColor(Color.BLACK);
 		
-		_room = room;
 		_playersGraphicsManager = new PlayersGraphicsManager(this);
 		_tableGraphicsManager = new TableGraphicsManager(this);
 		
@@ -52,10 +46,7 @@ public class MatchScreen extends Window {
 	}
 	
 	private void addRaise_BetButton() {
-		int min = _room.getMatchInfo().getSmallBlindValue().parseToInteger() * 4;
-		int max = PlayerInfo.Instance().getMoneyPlayer().parseToInteger();
-		
-		_raise_betInput = new Raise_BetInput(new Point(310, 510), new Range(min, max), new ActionListener() {
+		_raise_betInput = new Raise_BetInput(new Point(480, 500), new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -63,8 +54,9 @@ public class MatchScreen extends Window {
 			}
 		});
 		
-		addComponent(_raise_betInput.getSlider());
+		addComponent(_raise_betInput.getValue());
 		addComponent(_raise_betInput.getButton());
+		addComponent(_raise_betInput.getPrefixMultiplierButton());
 	}
 	private void addCheck_CallButton() {
 		_check_callButton = new Button(new Rectangle(570, 500, 130, 50), "Check", Color.BLUE, Color.WHITE, new ActionListener() {
