@@ -30,7 +30,7 @@ public class EnterRoomPopUp extends PopUp {
 		addContent(_message.getComponent());
 		addContent(_moneyInput.getComponent());
 		
-		setSize(260, 100);
+		setSize(260, 150);
 		//addActionToConfirmButton(action);
 	}
 	
