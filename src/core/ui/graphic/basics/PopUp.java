@@ -46,15 +46,13 @@ public class PopUp extends JDialog {
 		setAlwaysOnTop(true);
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		
-		ActionListener hideAction = new ActionListener() {
+		_cancelButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
-		};
-		_confirmButton.addActionListener(hideAction);
-		_cancelButton.addActionListener(hideAction);
+		});
 	}
 	
 	protected void addContent(JComponent content) {

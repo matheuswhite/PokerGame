@@ -30,7 +30,7 @@ public class MoneyInput implements UI_Element {
 	
 	public Money getValue() {
 		PrefixMultiplier prefix = PrefixMultiplier.NONE;
-		double value = (double) _spinner.getValue();
+		int value =  (int) _spinner.getValue();
 		
 		if (_comboBox.getSelectedItem() == "K") {
 			prefix = PrefixMultiplier.KILO;

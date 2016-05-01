@@ -33,8 +33,8 @@ public class Money {
 		return _value + _prefixMultiplier.toString();
 	}
 	
-	public int parseToInteger() {
-		return (int) (_value * Math.pow(10, _prefixMultiplier.getValue()));
+	public long parseToLong() {
+		return (long) (_value * Math.pow(10, _prefixMultiplier.getValue()));
 	}
 	
 	public void addMoney(Money money) {

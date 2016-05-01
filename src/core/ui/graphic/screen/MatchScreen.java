@@ -5,8 +5,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.TimerTask;
 
+import javax.swing.JFrame;
+
+import core.domain.Room;
 import core.ui.graphic.Timer;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
@@ -15,6 +20,8 @@ import core.ui.input.Button;
 import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
+	
+	private Room _room;
 	
 	private PlayersGraphicsManager _playersGraphicsManager;
 	private TableGraphicsManager _tableGraphicsManager;
@@ -27,10 +34,55 @@ public class MatchScreen extends Window {
 	
 	private Timer _timeToPlay;
 	
-	public MatchScreen(long roomId) {
-		super(850, 590, "PokerGame - Room" + roomId);
+	public MatchScreen(JFrame mainWindow, Room room) {
+		super(850, 590, "PokerGame - Room" + room.getId());
+		
+		_room = room;
 		
 		setBackgroundColor(Color.BLACK);
+		getFrame().addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				mainWindow.setVisible(true);
+			}
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		_playersGraphicsManager = new PlayersGraphicsManager(this);
 		_tableGraphicsManager = new TableGraphicsManager(this);
@@ -49,6 +101,10 @@ public class MatchScreen extends Window {
 	}
 	public TableGraphicsManager getTableGraphicsManager() {
 		return _tableGraphicsManager;
+	}
+	
+	public Room getRoom() {
+		return _room;
 	}
 	
 	private void addTimeToPlay() {
