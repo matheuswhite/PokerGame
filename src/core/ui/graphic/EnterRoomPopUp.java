@@ -5,9 +5,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import core.domain.Money;
 import core.domain.PlayerInfo;
@@ -29,11 +27,12 @@ public class EnterRoomPopUp extends PopUp {
 	private Label _message;
 	private MoneyInput _moneyInput;
 	private Room _room;
+	private MessagePopUp _messagePopUp;
 	
 	public EnterRoomPopUp(JFrame owner, String title) {
 		super(owner, title);
 		
-		_message = new Label(new Point(0, 0), "Enter with the Buy In value", new TextStyle(Color.BLACK, "Arial", 12, true, true));
+		_message = new Label(new Point(0, 0), "Enter with the BuyIn value", new TextStyle(Color.BLACK, "Arial", 12, false, false));
 		_moneyInput = new MoneyInput(new Point(0, 20));
 		
 		addContent(_message.getComponent());
@@ -48,10 +47,12 @@ public class EnterRoomPopUp extends PopUp {
 				Money buyIn = _moneyInput.getValue();
 				
 				if (buyIn.parseToLong() < _room.getMatchInfo().getMinimumBuyIn().parseToLong()) {
-					JOptionPane.showMessageDialog(owner, "The minimun BuyIn is " + _room.getMatchInfo().getMinimumBuyIn().toString());
+					_messagePopUp = new MessagePopUp(owner, "BuyIn wrong!", "The minimun BuyIn is " + _room.getMatchInfo().getMinimumBuyIn().toString());
+					_messagePopUp.setVisible(true);
 				}
 				else if (buyIn.parseToLong() > PlayerStats.Instance().getMoney().parseToLong()) {
-					JOptionPane.showMessageDialog(owner, "The maximun BuyIn is " + PlayerStats.Instance().getMoney().toString());
+					_messagePopUp = new MessagePopUp(owner, "BuyIn wrong!", "The most money that you have is " + PlayerStats.Instance().getMoney().toString());
+					_messagePopUp.setVisible(true);
 				}
 				else {
 					setVisible(false);

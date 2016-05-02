@@ -11,7 +11,10 @@ import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
+import core.domain.PlayerInfo;
+import core.domain.PlayerStats;
 import core.domain.Room;
+import core.ui.graphic.BuyInPopUp;
 import core.ui.graphic.Timer;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
@@ -21,6 +24,7 @@ import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
 	
+	private JFrame _matchWindow;
 	private Room _room;
 	
 	private PlayersGraphicsManager _playersGraphicsManager;
@@ -37,14 +41,21 @@ public class MatchScreen extends Window {
 	public MatchScreen(JFrame mainWindow, Room room) {
 		super(850, 590, "PokerGame - Room" + room.getId());
 		
+		_matchWindow = this.getFrame();
 		_room = room;
 		
 		setBackgroundColor(Color.BLACK);
 		getFrame().addWindowListener(new WindowListener() {
 			
 			@Override
-			public void windowClosing(WindowEvent e) {
+			public void windowClosed(WindowEvent e) {
+				PlayerStats.Instance().getMoney().addMoney(PlayerInfo.Instance().getMoneyPlayer());
 				mainWindow.setVisible(true);
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				_matchWindow.dispose();
 			}
 			
 			@Override
@@ -67,12 +78,6 @@ public class MatchScreen extends Window {
 			
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowClosed(WindowEvent e) {
 				// TODO Auto-generated method stub
 				
 			}
@@ -115,7 +120,6 @@ public class MatchScreen extends Window {
 				_timeToPlay.stop();
 			}
 		});
-		_timeToPlay.start();
 	}
 	
 	private void addRaise_BetButton() {
@@ -158,7 +162,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				_matchWindow.dispose();
 			}
 		});
 		
@@ -169,7 +173,8 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				BuyInPopUp popUp = new BuyInPopUp(_matchWindow, "How much money you want?");
+				popUp.setVisible(true);
 			}
 		});
 		

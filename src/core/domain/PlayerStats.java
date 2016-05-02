@@ -38,6 +38,13 @@ public class PlayerStats {
 			storage.save(file, _instance);
 		}
 	}
+	
+	public void save() {
+		String file = "src/data/playerStats.json";
+		Storage storage = JSON_File.Instance();
+		
+		storage.save(file, _instance);
+	}
 
 	public void setName(String name) {
 		_name = name;
