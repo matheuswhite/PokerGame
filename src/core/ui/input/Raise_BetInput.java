@@ -18,7 +18,7 @@ public class Raise_BetInput {
 	public Raise_BetInput(Point point, ActionListener actionListener) {
 		
 		_raise_betButton = new Button(new Rectangle(point.x, point.y, 80, 50), "Raise", Color.BLUE, Color.WHITE, actionListener);
-		_raise_betValue = new NumberBox(new Rectangle(point.x - 110, point.y + 10, 50, 30), 0, 1000);
+		_raise_betValue = new NumberBox(new Rectangle(point.x - 110, point.y + 10, 50, 30), 1, 999);
 		
 		_prefixMultiplier = PrefixMultiplier.NONE;
 		_prefixMultiplierButton = new Button(new Rectangle(point.x - 55, point.y, 50, 50), "_", Color.BLUE, Color.WHITE, new ActionListener() {

@@ -22,7 +22,6 @@ public class Window {
 		_defaltPanel.setLocation(0,0);
 		_defaltPanel.setSize(width, height);
 		
-		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_frame.add(_defaltPanel);
 		_frame.setSize(width, height);
 		_frame.setLocation((int)(screenSize.getWidth()/2 - _frame.getSize().width/2), (int)(screenSize.getHeight()/2 - _frame.getSize().height/2));

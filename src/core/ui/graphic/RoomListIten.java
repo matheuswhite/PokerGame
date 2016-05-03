@@ -6,57 +6,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.domain.Money;
-import core.domain.PlayerInfo;
-import core.domain.PlayerStats;
 import core.domain.Room;
-import core.domain.actionListener.EnterRoomAction;
-import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.Window;
-import core.ui.graphic.screen.MatchScreen;
 import core.ui.input.Button;
 
 public class RoomListIten extends Button {
 
-	private Room _roomInfo;
-	private PopUp _confirmPopUp;
-	private EnterRoomAction _enterRoomAction;
+	private Room _room;
+	private EnterRoomPopUp _enterRoomPopUp;
 	
 	public RoomListIten(Window window, int posY) {
 		super(new Rectangle(10, posY, 430, 30), "", new Color(93, 22, 255, 255), Color.WHITE, null);
 	
-		_roomInfo = new Room(404, new Money(), new Money());
-		_enterRoomAction = new EnterRoomAction();
-		_confirmPopUp = new PopUp(window.getFrame(), "", "You want to enter the room 00000000 ?", _enterRoomAction); 
-		_confirmPopUp.addActionToConfirmButton(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				window.hide();
-				PlayerStats.Instance().getMoney().removeMoney(_roomInfo.getMatchInfo().getMinimumBuyIn());
-				PlayerInfo.Instance().getMoneyPlayer().addMoney(_roomInfo.getMatchInfo().getMinimumBuyIn());
-				new MatchScreen(_roomInfo.getId());
-			}
-		});
+		_room = new Room(404, new Money(), new Money());
+		_enterRoomPopUp = new EnterRoomPopUp(window.getFrame(), "Do you enter in the Room00000000 ?");
 		
 		addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {		
-				_confirmPopUp.setVisible(true);
+				_enterRoomPopUp.setVisible(true);
 			}
 		});
 	}
 	
-	public void setInfos(Room roomInfo) {
-		_roomInfo = roomInfo;
-		_enterRoomAction.setRoomId(_roomInfo.getId());
-		String text = "Room " + _roomInfo.getId() + repeat(" ", 20) + 
-				_roomInfo.getPlayers().size() + "/6" + repeat(" ", 30) +
-				_roomInfo.getMatchInfo().getSmallBlindValue().toString() + "/" +
-				_roomInfo.getMatchInfo().getMinimumBuyIn().toString();
-			
+	public void setInfos(Room room) {
+		_room = room;
+		_enterRoomPopUp.setRoom(_room);
+		
+		String text = "Room " + _room.getId() + repeat(" ", 20) + 
+				_room.getPlayers().size() + "/6" + repeat(" ", 30) +
+				_room.getMatchInfo().getSmallBlindValue().toString() + "/" +
+				_room.getMatchInfo().getMinimumBuyIn().toString();	
 		setText(text);
-		_confirmPopUp.setMessage("You want to enter the room " + _roomInfo.getId() + " ?");
 	}
 
 	private String repeat(String value, int times) {

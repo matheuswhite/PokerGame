@@ -5,8 +5,13 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+import javax.swing.JFrame;
 
 import core.domain.PlayerInfo;
+import core.ui.graphic.CreateRoomPopUp;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayerStatsManager;
@@ -15,6 +20,8 @@ import core.ui.input.Button;
 
 public class MainScreen extends Window {
 
+	private Window _windowInstance = this;
+	
 	private Image _logo;
 	private PlayerStatsManager _playerStatsManager;
 	private RoomListManager _roomListManager;
@@ -24,9 +31,10 @@ public class MainScreen extends Window {
 	public MainScreen() {
 		super(450, 700, "PokerGame - v1.0");
 		
-		PlayerInfo.Create(2413);
+		createPlayerInfo();
 		
 		setBackgroundColor(new Color(0, 58, 98, 255));
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		_logo = new Image(new Rectangle(8, 15, 16, 16), "src/imgs/blueQuad");
 		_logo.resize(new Dimension(240, 128), false);
@@ -36,6 +44,19 @@ public class MainScreen extends Window {
 		
 		_playerStatsManager = new PlayerStatsManager(this);
 		_roomListManager = new RoomListManager(this);
+		
+		getFrame().addComponentListener(new ComponentAdapter() {
+			
+			public void componentShown(ComponentEvent e) {
+				_playerStatsManager.updatePlayerStats();
+			}
+			
+		});
+	}
+
+	private void createPlayerInfo() {
+		//messageHandler 'requestId' must be create PlayerInfo
+		PlayerInfo.Create(2413);
 	}
 
 	private void addCreateRoomButton() {
@@ -43,7 +64,8 @@ public class MainScreen extends Window {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				CreateRoomPopUp popUp = new CreateRoomPopUp(_windowInstance.getFrame(), "Enter with the BuyIn and the SmallBlind value");
+				popUp.setVisible(true);
 			}
 		});
 		

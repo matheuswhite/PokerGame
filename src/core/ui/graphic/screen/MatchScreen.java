@@ -5,8 +5,17 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.TimerTask;
+
+import javax.swing.JFrame;
 
 import core.domain.PlayerInfo;
+import core.domain.PlayerStats;
+import core.domain.Room;
+import core.ui.graphic.BuyInPopUp;
+import core.ui.graphic.Timer;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
 import core.ui.graphic.graphicsManager.TableGraphicsManager;
@@ -14,7 +23,10 @@ import core.ui.input.Button;
 import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
-
+	
+	private JFrame _matchWindow;
+	private Room _room;
+	
 	private PlayersGraphicsManager _playersGraphicsManager;
 	private TableGraphicsManager _tableGraphicsManager;
 	
@@ -24,26 +36,90 @@ public class MatchScreen extends Window {
 	private Button _leaveRoomButton;
 	private Button _buyInButton;
 	
-	public MatchScreen(long roomId) {
-		super(850, 590, "PokerGame - Room" + roomId);
+	private Timer _timeToPlay;
+	
+	public MatchScreen(JFrame mainWindow, Room room) {
+		super(850, 590, "PokerGame - Room" + room.getId());
+		
+		_matchWindow = this.getFrame();
+		_room = room;
 		
 		setBackgroundColor(Color.BLACK);
+		getFrame().addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				PlayerStats.Instance().getMoney().addMoney(PlayerInfo.Instance().getMoneyPlayer());
+				mainWindow.setVisible(true);
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				_matchWindow.dispose();
+			}
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		_playersGraphicsManager = new PlayersGraphicsManager(this);
 		_tableGraphicsManager = new TableGraphicsManager(this);
 		
+		addRaise_BetButton();
 		addFoldButton();
 		addCheck_CallButton();
-		addRaise_BetButton();
 		addLeaveRoomButton();
 		addBuyInButton();
+		
+		addTimeToPlay();
 	}
-	
+
 	public PlayersGraphicsManager getPlayerGraphicsManager() {
 		return _playersGraphicsManager;
 	}
 	public TableGraphicsManager getTableGraphicsManager() {
 		return _tableGraphicsManager;
+	}
+	
+	public Room getRoom() {
+		return _room;
+	}
+	
+	private void addTimeToPlay() {
+		_timeToPlay = new Timer(this, new Point(50, 505), 30*1000, new TimerTask() {
+			
+			@Override
+			public void run() {
+				_timeToPlay.stop();
+			}
+		});
 	}
 	
 	private void addRaise_BetButton() {
@@ -55,8 +131,8 @@ public class MatchScreen extends Window {
 			}
 		});
 		
-		addComponent(_raise_betInput.getButton());
 		addComponent(_raise_betInput.getValue());
+		addComponent(_raise_betInput.getButton());
 		addComponent(_raise_betInput.getPrefixMultiplierButton());
 	}
 	private void addCheck_CallButton() {
@@ -86,7 +162,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				_matchWindow.dispose();
 			}
 		});
 		
@@ -97,7 +173,8 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				BuyInPopUp popUp = new BuyInPopUp(_matchWindow, "How much money you want?");
+				popUp.setVisible(true);
 			}
 		});
 		

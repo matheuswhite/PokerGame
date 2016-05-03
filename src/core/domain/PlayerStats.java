@@ -2,6 +2,7 @@ package core.domain;
 
 import core.service.PrefixMultiplier;
 import core.storage.JSON_File;
+import core.storage.Storage;
 
 public class PlayerStats {
 	
@@ -28,13 +29,21 @@ public class PlayerStats {
 	private static void create() {
 		String file = "src/data/playerStats.json";
 		
-		if (JSON_File.Instance().exist(file)) {
-			_instance = JSON_File.Instance().load(file, PlayerStats.class);
+		Storage storage = JSON_File.Instance();
+		if (storage.exist(file)) {
+			_instance = storage.load(file, PlayerStats.class);
 		}
 		else {
 			_instance = new PlayerStats(PlayerInfo.Instance().getId());
-			JSON_File.Instance().save(file, _instance);
+			storage.save(file, _instance);
 		}
+	}
+	
+	public void save() {
+		String file = "src/data/playerStats.json";
+		Storage storage = JSON_File.Instance();
+		
+		storage.save(file, _instance);
 	}
 
 	public void setName(String name) {
