@@ -51,6 +51,7 @@ public class MatchScreen extends Window {
 			public void windowClosed(WindowEvent e) {
 				PlayerStats.Instance().getMoney().addMoney(PlayerInfo.Instance().getMoneyPlayer());
 				mainWindow.setVisible(true);
+				//send message 'leaveRoom'
 			}
 			
 			@Override

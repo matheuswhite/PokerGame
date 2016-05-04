@@ -16,15 +16,10 @@ public class ServerConnection extends Observable implements Runnable {
 	private DataOutputStream _outputToServer;
 	
 	public final static int SERVER_PORT = 1095;
-	public final static String SERVER_IP = "127.0.0.1";
+	//public final static String SERVER_IP = "";
 	
 	private ServerConnection() {
-		try {
-			connect();
-			new Thread(this).start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 	public static synchronized ServerConnection Instance() {
@@ -33,8 +28,9 @@ public class ServerConnection extends Observable implements Runnable {
 		return _instance;
 	}
 	
-	private void connect() throws UnknownHostException, IOException {
-		_socket = new Socket(SERVER_IP, SERVER_PORT);
+	public void connect(String serverIp) throws UnknownHostException, IOException, SocketTimeoutException {
+		_socket = new Socket();
+		_socket.connect(new InetSocketAddress(serverIp, SERVER_PORT), 2000);
 		_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 		_outputToServer = new DataOutputStream(_socket.getOutputStream());
 	}

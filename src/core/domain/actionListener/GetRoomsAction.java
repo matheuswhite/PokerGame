@@ -29,7 +29,7 @@ public class GetRoomsAction extends ButtonAction {
 		/*_content.clear();
 		_content.add(_range);
 		
-		_msg = new Message(1.0, "get_rooms", _content);
+		_msg = new Message(1.0, "GET_ROOMS", _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);
