@@ -16,7 +16,6 @@ public class ServerConnection extends Observable implements Runnable {
 	private DataOutputStream _outputToServer;
 	
 	public final static int SERVER_PORT = 1095;
-	//public final static String SERVER_IP = "";
 	
 	private ServerConnection() {
 		
@@ -52,7 +51,6 @@ public class ServerConnection extends Observable implements Runnable {
 		if (serverMessage == null)
 			throw new IOException("Server is offline!");
 			
-		System.out.println("Message from server: " + serverMessage + "\n");
 		setChanged();
 		notifyObservers(new Message(serverMessage));
 	}
@@ -68,5 +66,11 @@ public class ServerConnection extends Observable implements Runnable {
 				exit = true;
 			}
 		}
+		createDisconnectMessage();
+	}
+	
+	private void createDisconnectMessage() {
+		Message message = new Message(1.0, "DISCONNECT_MESSAGE", null);
+		notifyObservers(message);
 	}
 }

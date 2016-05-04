@@ -13,6 +13,9 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import core.domain.PlayerStats;
+import core.domain.actionListener.EchoAction;
+import core.domain.messageHandler.EchoRET;
+import core.net.ServerConnection;
 import core.ui.graphic.CreateRoomPopUp;
 import core.ui.graphic.ServerIpPopUp;
 import core.ui.graphic.basics.Image;
@@ -36,6 +39,11 @@ public class MainScreen extends Window {
 		
 		ServerIpPopUp popUp = new ServerIpPopUp(this.getFrame());
 		popUp.setVisible(true);
+
+		createMessageHandlers();
+		
+		//test
+		new EchoAction().actionPerformed(null);
 		
 		setBackgroundColor(new Color(0, 58, 98, 255));
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +108,10 @@ public class MainScreen extends Window {
 			}
 			
 		});
+	}
+
+	private void createMessageHandlers() {
+		ServerConnection.Instance().addObserver(new EchoRET());
 	}
 
 	private void addCreateRoomButton() {
