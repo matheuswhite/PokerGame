@@ -5,15 +5,20 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
-import java.util.Observable;
 
-public class ServerConnection extends Observable implements Runnable {
+import core.domain.messageHandler.Handler;
+
+
+public class ServerConnection extends Thread {
 	
 	private static ServerConnection _instance = null;
 	
 	private Socket _socket;
 	private BufferedReader _inputFromServer;
 	private DataOutputStream _outputToServer;
+	
+	private Message _message;
+	private Handler _handler;
 	
 	public final static int SERVER_PORT = 1095;
 	
@@ -51,8 +56,9 @@ public class ServerConnection extends Observable implements Runnable {
 		if (serverMessage == null)
 			throw new IOException("Server is offline!");
 			
-		setChanged();
-		notifyObservers(new Message(serverMessage));
+		_message = new Message(serverMessage);
+		_handler = _message.getHandler();
+		_handler.handle(_message.getContents());
 	}
 	
 	@Override
@@ -71,6 +77,5 @@ public class ServerConnection extends Observable implements Runnable {
 	
 	private void createDisconnectMessage() {
 		Message message = new Message(1.0, "DISCONNECT_MESSAGE", null);
-		notifyObservers(message);
 	}
 }
