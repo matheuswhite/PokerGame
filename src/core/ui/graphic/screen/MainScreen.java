@@ -44,6 +44,7 @@ public class MainScreen extends Window {
 		
 		//test
 		new EchoAction().actionPerformed(null);
+		//end test
 		
 		setBackgroundColor(new Color(0, 58, 98, 255));
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
