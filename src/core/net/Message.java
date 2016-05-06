@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import core.domain.messageHandler.Handler;
+import core.domain.handler.Handler;
 
 public class Message {
 

@@ -1,4 +1,4 @@
-package core.domain.messageHandler;
+package core.domain.handler;
 
 import java.util.List;
 

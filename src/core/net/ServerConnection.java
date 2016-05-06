@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.ArrayList;
 
-import core.domain.messageHandler.DisconnectHandler;
+import core.domain.handler.DisconnectHandler;
 
 public class ServerConnection extends Thread {
 	
