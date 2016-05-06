@@ -3,7 +3,7 @@ package core.domain.actionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.domain.handler.EchoHandler;
+import core.domain.handler.serverSideCopy.EchoHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
