@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.net.Message;
-import core.net.ServerConnection;
 
 public abstract class ButtonAction implements ActionListener {
 
