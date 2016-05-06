@@ -5,9 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.ArrayList;
 
-import core.domain.messageHandler.Handler;
-
+import core.domain.messageHandler.DisconnectHandler;
 
 public class ServerConnection extends Thread {
 	
@@ -17,13 +17,16 @@ public class ServerConnection extends Thread {
 	private BufferedReader _inputFromServer;
 	private DataOutputStream _outputToServer;
 	
-	private Message _message;
-	private Handler _handler;
+	private MessageHandler _messageHandler;
 	
 	public final static int SERVER_PORT = 1095;
 	
 	private ServerConnection() {
-		
+		_messageHandler = new MessageHandler();
+	}
+	
+	public MessageHandler getMessageHandler() {
+		return _messageHandler;
 	}
 	
 	public static synchronized ServerConnection Instance() {
@@ -56,9 +59,7 @@ public class ServerConnection extends Thread {
 		if (serverMessage == null)
 			throw new IOException("Server is offline!");
 			
-		_message = new Message(serverMessage);
-		_handler = _message.getHandler();
-		_handler.handle(_message.getContents());
+		_messageHandler.handler(new Message(serverMessage));
 	}
 	
 	@Override
@@ -72,10 +73,6 @@ public class ServerConnection extends Thread {
 				exit = true;
 			}
 		}
-		createDisconnectMessage();
-	}
-	
-	private void createDisconnectMessage() {
-		Message message = new Message(1.0, "DISCONNECT_MESSAGE", null);
+		_messageHandler.handler(new Message(new DisconnectHandler(), new ArrayList<Object>()));
 	}
 }

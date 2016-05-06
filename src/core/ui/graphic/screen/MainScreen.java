@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 
 import core.domain.PlayerStats;
 import core.domain.actionListener.EchoAction;
-import core.domain.messageHandler.EchoRET;
 import core.net.ServerConnection;
 import core.ui.graphic.CreateRoomPopUp;
 import core.ui.graphic.ServerIpPopUp;
@@ -39,8 +38,8 @@ public class MainScreen extends Window {
 		
 		ServerIpPopUp popUp = new ServerIpPopUp(this.getFrame());
 		popUp.setVisible(true);
-
-		createMessageHandlers();
+		
+		ServerConnection.Instance().getMessageHandler().setMainScreen(this);
 		
 		//test
 		new EchoAction().actionPerformed(null);
@@ -109,10 +108,6 @@ public class MainScreen extends Window {
 			}
 			
 		});
-	}
-
-	private void createMessageHandlers() {
-		ServerConnection.Instance().addObserver(new EchoRET());
 	}
 
 	private void addCreateRoomButton() {
