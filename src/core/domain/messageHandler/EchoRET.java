@@ -1,18 +1,11 @@
 package core.domain.messageHandler;
 
-import java.util.Observable;
+import java.util.List;
 
-import core.net.Message;
-
-public class EchoRET extends MessageHandler {
+public class EchoRET extends Handler {
 	
 	@Override
-	public void update(Observable o, Object arg) {
-		_message = (Message) arg;
-		if (!_message.getHandler().equals("ECHO_RET") || _message.getVersion() != 1.0) {
-			return ;
-		}
-		
-		System.out.println(_message.getContents().get(0));
+	public void handle(List<Object> content) {
+		System.out.println(content.get(2));
 	}
 }
