@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.domain.Card;
-import core.domain.Money;
-import core.domain.PlayerInfo;
+import core.domain.game.Card;
+import core.domain.game.Money;
+import core.domain.game.PlayerInfo;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.HandImage;
 import core.ui.graphic.PlayerInfoImage;

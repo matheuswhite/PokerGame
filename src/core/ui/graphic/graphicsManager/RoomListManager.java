@@ -6,9 +6,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.domain.Money;
-import core.domain.Room;
 import core.domain.actionListener.GetRoomsAction;
+import core.domain.game.Money;
+import core.domain.game.Room;
 import core.service.PrefixMultiplier;
 import core.service.Range;
 import core.ui.graphic.RoomListIten;

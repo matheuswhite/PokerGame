@@ -3,7 +3,7 @@ package core.ui.graphic;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import core.domain.Card;
+import core.domain.game.Card;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Window;
 

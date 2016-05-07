@@ -1,4 +1,4 @@
-package core.domain;
+package core.domain.game;
 
 public enum Suit {
 

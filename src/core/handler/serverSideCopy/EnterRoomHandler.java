@@ -1,8 +1,10 @@
-package core.domain.handler;
+package core.handler.serverSideCopy;
 
 import java.util.List;
 
-public class DisconnectHandler extends Handler {
+import core.handler.Handler;
+
+public class EnterRoomHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {

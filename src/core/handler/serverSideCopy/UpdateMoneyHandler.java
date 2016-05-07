@@ -1,8 +1,8 @@
-package core.domain.handler.serverSideCopy;
+package core.handler.serverSideCopy;
 
 import java.util.List;
 
-import core.domain.handler.Handler;
+import core.handler.Handler;
 
 public class UpdateMoneyHandler extends Handler {
 

@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import core.domain.Card;
-import core.domain.Money;
+import core.domain.game.Card;
+import core.domain.game.Money;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.TableCardsImages;
 import core.ui.graphic.basics.Image;

@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
-import core.domain.PlayerInfo;
+import core.domain.game.PlayerInfo;
 import core.net.ServerConnection;
 import core.ui.graphic.basics.PopUp;
 
@@ -62,11 +62,11 @@ public class ServerIpPopUp extends JDialog {
 				
 				try {
 					ServerConnection.Instance().connect(serverIp);
-					new Thread(ServerConnection.Instance()).start();
+					ServerConnection.Instance().start();
 
 					//messageHandler 'requestId' must be create PlayerInfo
 					PlayerInfo.Create(2413);
-
+					
 					setVisible(false);
 				} catch (SocketTimeoutException e1) {
 					PopUp popUp = new MessagePopUp(owner, "Server Ip invalid!", "Enter with server Ip valid!");

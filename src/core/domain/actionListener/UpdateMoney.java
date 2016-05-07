@@ -3,8 +3,8 @@ package core.domain.actionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.domain.Money;
-import core.domain.handler.serverSideCopy.UpdateMoneyHandler;
+import core.domain.game.Money;
+import core.handler.serverSideCopy.UpdateMoneyHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 

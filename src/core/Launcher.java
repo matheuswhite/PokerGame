@@ -1,6 +1,6 @@
 package core;
 
-import core.domain.PlayerInfo;
+import core.domain.game.PlayerInfo;
 import core.ui.graphic.screen.ConnectionTestScreen;
 import core.ui.graphic.screen.MainScreen;
 import core.ui.graphic.screen.MatchScreen;

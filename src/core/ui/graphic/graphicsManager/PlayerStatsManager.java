@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import core.domain.PlayerInfo;
-import core.domain.PlayerStats;
+import core.domain.game.PlayerInfo;
+import core.domain.game.PlayerStats;
 import core.storage.JSON_File;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Label;

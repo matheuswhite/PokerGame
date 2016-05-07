@@ -5,8 +5,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import core.domain.Money;
-import core.domain.Room;
+import core.domain.game.Money;
+import core.domain.game.Room;
 import core.ui.graphic.basics.Window;
 import core.ui.input.Button;
 

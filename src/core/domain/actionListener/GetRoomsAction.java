@@ -3,7 +3,7 @@ package core.domain.actionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.domain.handler.serverSideCopy.GetRoomsHandler;
+import core.handler.serverSideCopy.GetRoomsHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 import core.service.Range;

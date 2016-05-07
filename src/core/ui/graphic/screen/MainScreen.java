@@ -12,8 +12,8 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
-import core.domain.PlayerStats;
 import core.domain.actionListener.EchoAction;
+import core.domain.game.PlayerStats;
 import core.net.ServerConnection;
 import core.ui.graphic.CreateRoomPopUp;
 import core.ui.graphic.ServerIpPopUp;

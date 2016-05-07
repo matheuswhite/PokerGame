@@ -1,4 +1,4 @@
-package core.domain.handler;
+package core.handler;
 
 import java.util.List;
 

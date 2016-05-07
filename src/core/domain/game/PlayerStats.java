@@ -1,4 +1,4 @@
-package core.domain;
+package core.domain.game;
 
 import core.service.PrefixMultiplier;
 import core.storage.JSON_File;

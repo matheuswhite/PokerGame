@@ -3,7 +3,7 @@ package core.net;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.domain.handler.Handler;
+import core.handler.Handler;
 import core.ui.graphic.screen.MainScreen;
 import core.ui.graphic.screen.MatchScreen;
 

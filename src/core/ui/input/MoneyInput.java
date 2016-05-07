@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import core.domain.Money;
+import core.domain.game.Money;
 import core.service.PrefixMultiplier;
 import core.ui.UI_Element;
 

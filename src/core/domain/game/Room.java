@@ -1,11 +1,11 @@
-package core.domain;
+package core.domain.game;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import core.domain.MatchInfo;
-import core.domain.Money;
-import core.domain.PlayerInfo;
+import core.domain.game.MatchInfo;
+import core.domain.game.Money;
+import core.domain.game.PlayerInfo;
 
 public class Room {
 

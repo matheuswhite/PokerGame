@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import core.domain.Money;
+import core.domain.game.Money;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.TextStyle;

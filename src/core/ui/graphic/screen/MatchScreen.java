@@ -11,9 +11,9 @@ import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
-import core.domain.PlayerInfo;
-import core.domain.PlayerStats;
-import core.domain.Room;
+import core.domain.game.PlayerInfo;
+import core.domain.game.PlayerStats;
+import core.domain.game.Room;
 import core.ui.graphic.BuyInPopUp;
 import core.ui.graphic.Timer;
 import core.ui.graphic.basics.Window;

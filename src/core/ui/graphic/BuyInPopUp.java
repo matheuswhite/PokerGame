@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-import core.domain.Money;
-import core.domain.PlayerInfo;
-import core.domain.PlayerStats;
+import core.domain.game.Money;
+import core.domain.game.PlayerInfo;
+import core.domain.game.PlayerStats;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.TextStyle;
