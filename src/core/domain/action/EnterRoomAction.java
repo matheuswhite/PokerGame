@@ -1,31 +1,36 @@
-package core.domain.actionListener;
+package core.domain.action;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.EchoHandler;
+import core.handler.serverSideCopy.EnterRoomHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
-public class EchoAction extends ButtonAction {
+public class EnterRoomAction extends Action {
+
+	private long _roomId;
 	
-	public EchoAction() {
+	public EnterRoomAction() {
 		super();
+	}
+	
+	public void setRoomId(long roomId) {
+		_roomId = roomId;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		_content.clear();
-		_content.add("Can you hear me server?");
+		_content.add(_roomId);
 		
-		_msg = new Message(new EchoHandler(), _content);
+		_msg = new Message(new EnterRoomHandler(), _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-		System.out.println(_content.get(0));
 	}
+
 }

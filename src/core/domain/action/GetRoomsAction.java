@@ -1,4 +1,4 @@
-package core.domain.actionListener;
+package core.domain.action;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import core.net.Message;
 import core.net.ServerConnection;
 import core.service.Range;
 
-public class GetRoomsAction extends ButtonAction {
+public class GetRoomsAction extends Action {
 
 	private Range _range;
 	

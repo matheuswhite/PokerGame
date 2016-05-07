@@ -1,4 +1,4 @@
-package core.domain.actionListener;
+package core.domain.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,12 +7,12 @@ import java.util.List;
 
 import core.net.Message;
 
-public abstract class ButtonAction implements ActionListener {
+public abstract class Action implements ActionListener {
 
 	protected Message _msg;
 	protected List<Object> _content;
 	
-	public ButtonAction() {
+	public Action() {
 		_content = new ArrayList<Object>();
 	}
 	

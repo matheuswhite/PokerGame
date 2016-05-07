@@ -11,6 +11,7 @@ import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
 import core.domain.game.Room;
+import core.net.ServerConnection;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.TextStyle;
@@ -57,9 +58,11 @@ public class EnterRoomPopUp extends PopUp {
 				else {
 					setVisible(false);
 					owner.setVisible(false);
+					
 					PlayerStats.Instance().getMoney().removeMoney(buyIn);
 					PlayerInfo.Instance().setMoneyPlayer(buyIn);
-					new MatchScreen(owner, _room);
+					
+					ServerConnection.Instance().getMessageHandler().setMatchScreen(new MatchScreen(owner, _room));
 				}
 			}
 			

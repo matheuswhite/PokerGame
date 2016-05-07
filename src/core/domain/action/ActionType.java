@@ -1,4 +1,4 @@
-package core.domain.actionListener;
+package core.domain.action;
 
 public enum ActionType {
 	RAISE("RAISE"),

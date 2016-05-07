@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
-import core.domain.actionListener.EchoAction;
-import core.domain.actionListener.GetRoomsAction;
+import core.domain.action.EchoAction;
+import core.domain.action.GetRoomsAction;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.TextStyle;
 import core.ui.graphic.basics.Window;

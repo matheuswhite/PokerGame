@@ -12,7 +12,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
-import core.domain.actionListener.EchoAction;
+import core.domain.action.EchoAction;
 import core.domain.game.PlayerStats;
 import core.net.ServerConnection;
 import core.ui.graphic.CreateRoomPopUp;

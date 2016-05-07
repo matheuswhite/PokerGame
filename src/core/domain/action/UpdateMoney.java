@@ -1,4 +1,4 @@
-package core.domain.actionListener;
+package core.domain.action;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import core.handler.serverSideCopy.UpdateMoneyHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
-public class UpdateMoney extends ButtonAction {
+public class UpdateMoney extends Action {
 
 	private Money _moneyBet;
 	private ActionType _type;
