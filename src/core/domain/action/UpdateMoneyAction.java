@@ -8,12 +8,12 @@ import core.handler.serverSideCopy.UpdateMoneyHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
-public class UpdateMoney extends Action {
+public class UpdateMoneyAction extends Action {
 
 	private Money _moneyBet;
 	private ActionType _type;
 	
-	public UpdateMoney(ActionType type) {
+	public UpdateMoneyAction(ActionType type) {
 		_type = type;
 	}
 	

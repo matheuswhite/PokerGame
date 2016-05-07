@@ -1,10 +1,10 @@
 package core.domain.action;
 
 public enum ActionType {
-	RAISE("RAISE"),
-	CHECK("CHECK"),
+	BET("BET"),
 	CALL("CALL"),
-	FOLD("FOLD");
+	FOLD("FOLD"), 
+	BUY_IN("BUY_IN");
 	
 	private final String type;       
 

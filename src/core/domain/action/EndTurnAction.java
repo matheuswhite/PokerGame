@@ -6,11 +6,20 @@ import java.io.IOException;
 import core.handler.serverSideCopy.EndTurnHandler;
 import core.net.Message;
 import core.net.ServerConnection;
+import core.ui.graphic.screen.MatchScreen;
 
 public class EndTurnAction extends Action {
 
+	private MatchScreen _matchScreen;
+	
+	public EndTurnAction(MatchScreen matchScreen) {
+		_matchScreen = matchScreen;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		_matchScreen.endTurn();
+		
 		_content.clear();
 		
 		_msg = new Message(new EndTurnHandler(), _content);

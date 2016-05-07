@@ -11,6 +11,10 @@ import java.util.TimerTask;
 
 import javax.swing.JFrame;
 
+import core.domain.action.ActionType;
+import core.domain.action.EndTurnAction;
+import core.domain.action.LeaveRoomAction;
+import core.domain.action.UpdateMoneyAction;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
 import core.domain.game.Room;
@@ -24,7 +28,7 @@ import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
 	
-	private JFrame _mainWindow;
+	private JFrame _matchWindow;
 	private Room _room;
 	
 	private PlayersGraphicsManager _playersGraphicsManager;
@@ -38,11 +42,27 @@ public class MatchScreen extends Window {
 	
 	private Timer _timeToPlay;
 	
+	private EndTurnAction _endTurnAction;
+	private LeaveRoomAction _leaveRoomAction;
+	
+	private UpdateMoneyAction _callAction;
+	private UpdateMoneyAction _foldAction;
+	private UpdateMoneyAction _betAction;
+	private UpdateMoneyAction _buyInAction;
+	
 	public MatchScreen(JFrame mainWindow, Room room) {
 		super(850, 590, "PokerGame - Room" + room.getId());
 		
-		_mainWindow = this.getFrame();
+		_matchWindow = this.getFrame();
 		_room = room;
+		
+		_leaveRoomAction = new LeaveRoomAction();
+		_endTurnAction = new EndTurnAction(this);
+		
+		_callAction = new UpdateMoneyAction(ActionType.CALL);
+		_foldAction = new UpdateMoneyAction(ActionType.FOLD);
+		_betAction = new UpdateMoneyAction(ActionType.BET);
+		_buyInAction = new UpdateMoneyAction(ActionType.BUY_IN);
 		
 		setBackgroundColor(Color.BLACK);
 		getFrame().addWindowListener(new WindowListener() {
@@ -51,12 +71,12 @@ public class MatchScreen extends Window {
 			public void windowClosed(WindowEvent e) {
 				PlayerStats.Instance().getMoney().addMoney(PlayerInfo.Instance().getMoneyPlayer());
 				mainWindow.setVisible(true);
-				//send message 'leaveRoom'
+				_leaveRoomAction.actionPerformed(null);
 			}
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				_mainWindow.dispose();
+				_matchWindow.dispose();
 			}
 			
 			@Override
@@ -113,12 +133,32 @@ public class MatchScreen extends Window {
 		return _room;
 	}
 	
+	public void endTurn() {
+		_check_callButton.disable();
+		_foldButton.disable();
+		_raise_betInput.disable();
+		_timeToPlay.stop();
+	}
+	public void myTurn() {
+		_check_callButton.enable();
+		_foldButton.enable();
+		_raise_betInput.enable();
+		_timeToPlay.start();
+	}
+	
+	public void disableBuyIn() {
+		_buyInButton.disable();
+	}
+	public void enableBuyIn() {
+		_buyInButton.enable();
+	}
+	
 	private void addTimeToPlay() {
 		_timeToPlay = new Timer(this, new Point(50, 505), 30*1000, new TimerTask() {
 			
 			@Override
 			public void run() {
-				_timeToPlay.stop();
+				_endTurnAction.actionPerformed(null);
 			}
 		});
 	}
@@ -131,6 +171,9 @@ public class MatchScreen extends Window {
 				
 			}
 		});
+		
+		_raise_betInput.getButton().addActionListener(_endTurnAction);
+		_raise_betInput.disable();
 		
 		addComponent(_raise_betInput.getValue());
 		addComponent(_raise_betInput.getButton());
@@ -145,6 +188,9 @@ public class MatchScreen extends Window {
 			}
 		});
 		
+		_check_callButton.addActionListener(_endTurnAction);
+		_check_callButton.disable();
+		
 		addComponent(_check_callButton);
 	}
 	private void addFoldButton() {
@@ -156,6 +202,9 @@ public class MatchScreen extends Window {
 			}
 		});
 		
+		_foldButton.addActionListener(_endTurnAction);
+		_foldButton.disable();
+		
 		addComponent(_foldButton);
 	}
 	private void addLeaveRoomButton() {
@@ -163,7 +212,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_mainWindow.dispose();
+				_matchWindow.dispose();
 			}
 		});
 		
@@ -174,7 +223,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BuyInPopUp popUp = new BuyInPopUp(_mainWindow, "How much money you want?");
+				BuyInPopUp popUp = new BuyInPopUp(_matchWindow, "How much money you want?");
 				popUp.setVisible(true);
 			}
 		});

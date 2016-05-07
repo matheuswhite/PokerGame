@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import core.domain.action.EnterRoomAction;
 import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
@@ -29,12 +30,17 @@ public class EnterRoomPopUp extends PopUp {
 	private MoneyInput _moneyInput;
 	private Room _room;
 	private MessagePopUp _messagePopUp;
+	private EnterRoomAction _enterRoomAction;
 	
 	public EnterRoomPopUp(JFrame owner, String title) {
 		super(owner, title);
 		
 		_message = new Label(new Point(0, 0), "Enter with the BuyIn value", new TextStyle(Color.BLACK, "Arial", 12, false, false));
 		_moneyInput = new MoneyInput(new Point(0, 20));
+		
+		_enterRoomAction = new EnterRoomAction();
+		if (_room != null) 
+			_enterRoomAction.setRoomId(_room.getId());
 		
 		addContent(_message.getComponent());
 		addContent(_moneyInput.getComponent());
@@ -62,6 +68,7 @@ public class EnterRoomPopUp extends PopUp {
 					PlayerStats.Instance().getMoney().removeMoney(buyIn);
 					PlayerInfo.Instance().setMoneyPlayer(buyIn);
 					
+					 _enterRoomAction.actionPerformed(null);
 					ServerConnection.Instance().getMessageHandler().setMatchScreen(new MatchScreen(owner, _room));
 				}
 			}
@@ -71,6 +78,7 @@ public class EnterRoomPopUp extends PopUp {
 	
 	public void setRoom(Room room) {
 		_room = room;
+		_enterRoomAction.setRoomId(_room.getId());
 		setTitle("Do you enter in the Room" + room.getId() + " ?");
 	}
 }

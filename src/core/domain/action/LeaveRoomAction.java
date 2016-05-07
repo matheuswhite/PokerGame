@@ -11,10 +11,6 @@ public class LeaveRoomAction extends Action {
 
 	private long _roomId;
 	
-	public LeaveRoomAction() {
-		
-	}
-	
 	public void setRoomId(long roomId) {
 		_roomId = roomId;
 	}

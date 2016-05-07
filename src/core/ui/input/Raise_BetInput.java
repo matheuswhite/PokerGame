@@ -68,4 +68,12 @@ public class Raise_BetInput {
 	public PrefixMultiplier getPrefixMultiplierValue() {
 		return _prefixMultiplier;
 	}
+
+	public void disable() {
+		_raise_betButton.disable();
+	}
+	
+	public void enable() {
+		_raise_betButton.enable();
+	}
 }
