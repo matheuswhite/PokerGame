@@ -32,12 +32,13 @@ public class MainScreen extends Window {
 	private RoomListManager _roomListManager;
 	
 	private Button _createRoomButton;
+	private ServerIpPopUp _serverIpPopUp;
 	
 	public MainScreen() {
 		super(450, 700, "PokerGame - v1.0");
 		
-		ServerIpPopUp popUp = new ServerIpPopUp(this.getFrame());
-		popUp.setVisible(true);
+		_serverIpPopUp = new ServerIpPopUp(this.getFrame());
+		_serverIpPopUp.setVisible(true);
 		
 		ServerConnection.Instance().getMessageHandler().setMainScreen(this);
 		
@@ -121,6 +122,10 @@ public class MainScreen extends Window {
 		});
 		
 		addComponent(_createRoomButton);
+	}
+	
+	public ServerIpPopUp getServerIpPop() {
+		return _serverIpPopUp;
 	}
 	
 	public PlayerStatsManager getPlayerStatsManager() {

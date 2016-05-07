@@ -24,7 +24,7 @@ import core.ui.input.Raise_BetInput;
 
 public class MatchScreen extends Window {
 	
-	private JFrame _matchWindow;
+	private JFrame _mainWindow;
 	private Room _room;
 	
 	private PlayersGraphicsManager _playersGraphicsManager;
@@ -41,7 +41,7 @@ public class MatchScreen extends Window {
 	public MatchScreen(JFrame mainWindow, Room room) {
 		super(850, 590, "PokerGame - Room" + room.getId());
 		
-		_matchWindow = this.getFrame();
+		_mainWindow = this.getFrame();
 		_room = room;
 		
 		setBackgroundColor(Color.BLACK);
@@ -56,7 +56,7 @@ public class MatchScreen extends Window {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				_matchWindow.dispose();
+				_mainWindow.dispose();
 			}
 			
 			@Override
@@ -163,7 +163,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_matchWindow.dispose();
+				_mainWindow.dispose();
 			}
 		});
 		
@@ -174,7 +174,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BuyInPopUp popUp = new BuyInPopUp(_matchWindow, "How much money you want?");
+				BuyInPopUp popUp = new BuyInPopUp(_mainWindow, "How much money you want?");
 				popUp.setVisible(true);
 			}
 		});

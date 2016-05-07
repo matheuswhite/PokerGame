@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import core.domain.action.CreateRoomAction;
 import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
@@ -29,6 +30,7 @@ public class CreateRoomPopUp extends PopUp {
 	private MoneyInput _smallBlindInput;
 	
 	private MessagePopUp _messagePopUp;
+	private CreateRoomAction _createRoomAction;
 	
 	public CreateRoomPopUp(JFrame owner, String title) {
 		super(owner, title);
@@ -39,6 +41,7 @@ public class CreateRoomPopUp extends PopUp {
 		_smallBlindLabel = new Label(new Point(0, 20), "SmallBlind ", new TextStyle(Color.BLACK, "Arial", 12, false, false));
 		_smallBlindInput = new MoneyInput(new Point(0, 20));
 		
+		_createRoomAction = new CreateRoomAction();
 		
 		addContent(_minBuyInLabel.getComponent());
 		addContent(_minBuyInInput.getComponent());
@@ -66,14 +69,12 @@ public class CreateRoomPopUp extends PopUp {
 				else {
 					setVisible(false);
 					owner.setVisible(false);
+					
 					PlayerStats.Instance().getMoney().removeMoney(minBuyIn);
 					PlayerStats.Instance().getMoney().toString();
 					PlayerInfo.Instance().setMoneyPlayer(minBuyIn);
-					//To send 'createRoom' message
 					
-					//messageHandler 'createRoomRet' must instantiate MatchScreen
-					//new MatchScreen(owner, new Room(0000, smallBlind, minBuyIn));
-					System.out.println("Room created - " + smallBlind.toString() + "/" + minBuyIn.toString());
+					_createRoomAction.actionPerformed(null);
 				}
 			}
 			
