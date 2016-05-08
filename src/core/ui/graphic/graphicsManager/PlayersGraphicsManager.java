@@ -8,6 +8,7 @@ import java.util.List;
 import core.domain.game.Card;
 import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
+import core.domain.game.Room;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.HandImage;
 import core.ui.graphic.PlayerInfoImage;
@@ -25,7 +26,7 @@ public class PlayersGraphicsManager {
 	private List<PlayerInfo> _playerInfos;
 	private int _dealer;
 	
-	public PlayersGraphicsManager(Window window) {
+	public PlayersGraphicsManager(Window window, Room room) {
 		_playerInfos = new ArrayList<PlayerInfo>(6);
 		for (int i = 0; i < 6; i++) {
 			_playerInfos.add(null);
@@ -39,14 +40,30 @@ public class PlayersGraphicsManager {
 		addEmptySeatImages(window);
 		addBetTokenImages(window);
 		
-		try {
-			addPlayer(PlayerInfo.Instance());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		analyzeRoom(room);
 	}
 	
-	
+	private void analyzeRoom(Room room) {
+		for (PlayerInfo playerInfo : room.getPlayers()) {
+			try {
+				addPlayer(playerInfo);
+				int seat = playerInfo.getSeat();
+				
+				if (playerInfo.isInGame()) {
+					giveCards(seat, playerInfo.getHand()[0], playerInfo.getHand()[1]);
+					
+					if (playerInfo.getMoneyBetting() != new Money())
+						bet(seat, playerInfo.getMoneyBetting());
+					if (room.getMatchInfo().getDealerPlayerId() == playerInfo.getId()) 
+						setDealer(seat);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public void addPlayer(PlayerInfo player) throws Exception {
 		for (int i = 0; i < 6; i++) {
 			if (_playerInfos.get(i) == null) 

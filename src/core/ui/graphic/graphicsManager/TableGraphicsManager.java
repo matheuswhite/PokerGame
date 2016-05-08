@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import core.domain.game.Card;
 import core.domain.game.Money;
+import core.domain.game.Room;
 import core.ui.graphic.BetTokenImage;
 import core.ui.graphic.TableCardsImages;
 import core.ui.graphic.basics.Image;
@@ -17,12 +18,35 @@ public class TableGraphicsManager {
 	private Image _tableImage;
 	private BetTokenImage _potValueImage;
 
-	public TableGraphicsManager(Window window) {
+	public TableGraphicsManager(Window window, Room room) {
 		addPotValueImage(window);
 		addTableCardsImages(window);		
 		addTableImage(window);
+		
+		analyzeRoom(room);
 	}
 	
+	private void analyzeRoom(Room room) {
+		if (room.getMatchInfo().getPotValue() != new Money())
+			addBetToPot(room.getMatchInfo().getPotValue());
+		
+		switch (room.getMatchInfo().getCurrentMatchPhase()) {
+		case FLOP:
+			Card[] cards = new Card[3];
+			for (int i = 0; i < 3; i++) {
+				cards[i] = room.getMatchInfo().getCardsInTable()[i];
+			}
+			addThreeCards(cards);
+		case TURN:
+			addFourthCard(room.getMatchInfo().getCardsInTable()[3]);
+		case RIVER:
+			addFifthCard(room.getMatchInfo().getCardsInTable()[4]);
+			break;
+		default:
+			break;
+		}
+	}
+
 	public void addThreeCards(Card[] cards) {
 		_tableCardsImages.flipThreeCards(cards);
 	}

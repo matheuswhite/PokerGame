@@ -20,7 +20,9 @@ import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
 import core.domain.game.Room;
 import core.ui.graphic.BuyInPopUp;
+import core.ui.graphic.MessagePopUp;
 import core.ui.graphic.Timer;
+import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.Window;
 import core.ui.graphic.graphicsManager.PlayersGraphicsManager;
 import core.ui.graphic.graphicsManager.TableGraphicsManager;
@@ -109,8 +111,8 @@ public class MatchScreen extends Window {
 			}
 		});
 		
-		_playersGraphicsManager = new PlayersGraphicsManager(this);
-		_tableGraphicsManager = new TableGraphicsManager(this);
+		_playersGraphicsManager = new PlayersGraphicsManager(this, room);
+		_tableGraphicsManager = new TableGraphicsManager(this, room);
 		
 		addRaise_BetButton();
 		addFoldButton();
@@ -168,20 +170,28 @@ public class MatchScreen extends Window {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Money bet = new Money(_raise_betInput.getValue().getValue(), _raise_betInput.getPrefixMultiplierValue());
-				_betAction.setMoneyBet(bet);
 				
-				PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
-				
-				try {
-					_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
-				} catch (Exception e1) {
-					e1.printStackTrace();
+				if (bet.parseToLong() * 2 <= _room.getMatchInfo().getHigherCurrentBet().parseToLong()) {
+					_betAction.setMoneyBet(bet);
+					
+					PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
+					
+					try {
+						_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					
+					_betAction.actionPerformed(null);
+					_endTurnAction.actionPerformed(null);
+				}
+				else {
+					PopUp errorPopUp = new MessagePopUp(getFrame(), "Raise invalid!", "The raise must be double of higher bet");
+					errorPopUp.setVisible(true);
 				}
 			}
 		});
 		
-		_raise_betInput.getButton().addActionListener(_betAction);
-		_raise_betInput.getButton().addActionListener(_endTurnAction);
 		_raise_betInput.disable();
 		
 		addComponent(_raise_betInput.getValue());

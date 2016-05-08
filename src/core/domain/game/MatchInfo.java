@@ -6,6 +6,7 @@ public class MatchInfo{
 	private Long _currentTurnPlayerId;
 	private Long _smallBlindPlayerId;
 	private Long _bigBlindPlayerId;
+	private Long _dealerPlayerId;
 	private Card[] _cardsInTable;
 	private int _numCardsInTable;
 	private Money _smallBlindValue;
@@ -18,6 +19,7 @@ public class MatchInfo{
 		_currentTurnPlayerId = null;
 		_smallBlindPlayerId = null;
 		_bigBlindPlayerId = null;
+		_dealerPlayerId = null;
 		_cardsInTable = new Card[5];
 		_numCardsInTable = 0;
 		_smallBlindValue = new Money();
@@ -51,6 +53,13 @@ public class MatchInfo{
 	}
 	public void setSmallBlindPlayerId(long smallBlindPlayerId) {
 		_smallBlindPlayerId = smallBlindPlayerId;
+	}
+	
+	public long getDealerPlayerId() {
+		return _dealerPlayerId;
+	}
+	public void setDealerPlayerId(long dealerPlayerId) {
+		_dealerPlayerId = dealerPlayerId;
 	}
 	
 	public long getBigBlindPlayerId() {
