@@ -15,6 +15,7 @@ import core.domain.action.ActionType;
 import core.domain.action.EndTurnAction;
 import core.domain.action.LeaveRoomAction;
 import core.domain.action.UpdateMoneyAction;
+import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
 import core.domain.game.Room;
@@ -48,7 +49,6 @@ public class MatchScreen extends Window {
 	private UpdateMoneyAction _callAction;
 	private UpdateMoneyAction _foldAction;
 	private UpdateMoneyAction _betAction;
-	private UpdateMoneyAction _buyInAction;
 	
 	public MatchScreen(JFrame mainWindow, Room room) {
 		super(850, 590, "PokerGame - Room" + room.getId());
@@ -62,7 +62,6 @@ public class MatchScreen extends Window {
 		_callAction = new UpdateMoneyAction(ActionType.CALL);
 		_foldAction = new UpdateMoneyAction(ActionType.FOLD);
 		_betAction = new UpdateMoneyAction(ActionType.BET);
-		_buyInAction = new UpdateMoneyAction(ActionType.BUY_IN);
 		
 		setBackgroundColor(Color.BLACK);
 		getFrame().addWindowListener(new WindowListener() {
@@ -168,10 +167,20 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Money bet = new Money(_raise_betInput.getValue().getValue(), _raise_betInput.getPrefixMultiplierValue());
+				_betAction.setMoneyBet(bet);
 				
+				PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
+				
+				try {
+					_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
+		_raise_betInput.getButton().addActionListener(_betAction);
 		_raise_betInput.getButton().addActionListener(_endTurnAction);
 		_raise_betInput.disable();
 		
@@ -184,10 +193,23 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Money bet = _room.getMatchInfo().getHigherCurrentBet();
 				
+				if (bet != new Money()) {
+					_callAction.setMoneyBet(bet);
+					
+					PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
+					
+					try {
+						_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		
+		_check_callButton.addActionListener(_callAction);
 		_check_callButton.addActionListener(_endTurnAction);
 		_check_callButton.disable();
 		
@@ -198,10 +220,15 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
+		_foldButton.addActionListener(_foldAction);
 		_foldButton.addActionListener(_endTurnAction);
 		_foldButton.disable();
 		

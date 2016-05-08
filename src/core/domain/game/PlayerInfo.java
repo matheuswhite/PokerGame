@@ -12,6 +12,7 @@ public class PlayerInfo {
 	private Money _moneyBetting;
 	private String _name;
 	private int _seat;
+	private boolean _inGame;
 	
 	private PlayerInfo(long id) {
 		_id = id;
@@ -19,6 +20,7 @@ public class PlayerInfo {
 		_moneyPlayer = new Money(0, PrefixMultiplier.NONE);
 		_name = "Player" + id;
 		_moneyBetting = new Money();
+		_inGame = false;
 	}
 	
 	public synchronized static void Create(long id) {
@@ -69,5 +71,13 @@ public class PlayerInfo {
 	}
 	public void setSeat(int seat) {
 		_seat = seat;
+	}
+	
+	public boolean isInGame() {
+		return _inGame;
+	}
+	
+	public void setInGame(boolean inGame) {
+		_inGame = inGame;
 	}
 }

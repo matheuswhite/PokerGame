@@ -11,6 +11,7 @@ public class MatchInfo{
 	private Money _smallBlindValue;
 	private Money _minimumBuyIn;
 	private Money _potValue;
+	private Money _higherCurrentBet;
 	
 	public MatchInfo() {
 		_currentMatchPhase = MatchPhase.PRE_FLOP;
@@ -22,6 +23,7 @@ public class MatchInfo{
 		_smallBlindValue = new Money();
 		_minimumBuyIn = new Money();
 		_potValue = new Money();
+		_higherCurrentBet = new Money();
 	}
 	
 	public MatchInfo(Money smallBlindValue, Money minimumBuyIn) {
@@ -89,5 +91,12 @@ public class MatchInfo{
 		for (int i = 0; i < 5; i++) {
 			_cardsInTable[i] = null;
 		}
+	}
+	
+	public Money getHigherCurrentBet() {
+		return _higherCurrentBet;
+	}
+	public void setHigherCurrentBet(Money higherCurrentBet) {
+		_higherCurrentBet = higherCurrentBet;
 	}
 }

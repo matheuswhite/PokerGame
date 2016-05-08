@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import core.domain.action.ActionType;
+import core.domain.action.UpdateMoneyAction;
 import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
@@ -27,11 +29,15 @@ public class BuyInPopUp extends PopUp {
 	
 	private MessagePopUp _messagePopUp;
 	
+	private UpdateMoneyAction _buyInAction;
+	
 	public BuyInPopUp(JFrame owner, String title) {
 		super(owner, title);
 		
 		_minBuyInLabel = new Label(new Point(0, 0), "Mininum BuyIn ", new TextStyle(Color.BLACK, "Arial", 12, false, false));
 		_minBuyInInput = new MoneyInput(new Point(0, 0));
+		
+		_buyInAction = new UpdateMoneyAction(ActionType.BUY_IN);
 		
 		addContent(_minBuyInLabel.getComponent());
 		addContent(_minBuyInInput.getComponent());
@@ -42,16 +48,19 @@ public class BuyInPopUp extends PopUp {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Money minBuyIn = _minBuyInInput.getValue();
+				Money buyIn = _minBuyInInput.getValue();
 				
-				if (minBuyIn.parseToLong() > PlayerStats.Instance().getMoney().parseToLong()) {
+				if (buyIn.parseToLong() > PlayerStats.Instance().getMoney().parseToLong()) {
 					_messagePopUp = new MessagePopUp(owner, "BuyIn wrong!", "The most money that you have is " + PlayerStats.Instance().getMoney().toString());
 					_messagePopUp.setVisible(true);
 				}
-				else {
+				else if (!PlayerInfo.Instance().isInGame()) {
 					setVisible(false);
-					PlayerStats.Instance().getMoney().removeMoney(minBuyIn);
-					PlayerInfo.Instance().getMoneyPlayer().addMoney(minBuyIn);
+					PlayerStats.Instance().getMoney().removeMoney(buyIn);
+					PlayerInfo.Instance().getMoneyPlayer().addMoney(buyIn);
+					
+					_buyInAction.setMoneyBet(buyIn);
+					_buyInAction.actionPerformed(e);
 				}
 			}
 			
