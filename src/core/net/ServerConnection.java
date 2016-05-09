@@ -7,9 +7,6 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.ArrayList;
 
-import core.handler.DisconnectHandler;
-import core.handler.serverSideCopy.RequestIDHandler;
-
 public class ServerConnection extends Thread {
 	
 	private static ServerConnection _instance = null;
@@ -42,7 +39,7 @@ public class ServerConnection extends Thread {
 		_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 		_outputToServer = new DataOutputStream(_socket.getOutputStream());
 		
-		write(new Message(new RequestIDHandler(), new ArrayList<Object>()));
+		write(new Message("REQUEST_ID", new ArrayList<Object>()));
 	}
 	
 	public void disconnect() throws IOException {
@@ -76,6 +73,6 @@ public class ServerConnection extends Thread {
 				exit = true;
 			}
 		}
-		_messageHandler.handler(new Message(new DisconnectHandler(), new ArrayList<Object>()));
+		_messageHandler.handler(new Message("DISCONNECT", new ArrayList<Object>()));
 	}
 }

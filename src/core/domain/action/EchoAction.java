@@ -3,7 +3,6 @@ package core.domain.action;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.EchoHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
@@ -18,7 +17,7 @@ public class EchoAction extends Action {
 		_content.clear();
 		_content.add("Can you hear me server?");
 		
-		_msg = new Message(new EchoHandler(), _content);
+		_msg = new Message("ECHO", _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);

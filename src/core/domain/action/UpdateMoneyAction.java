@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import core.domain.game.Money;
-import core.handler.serverSideCopy.UpdateMoneyHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
@@ -27,7 +26,7 @@ public class UpdateMoneyAction extends Action {
 		_content.add(_type);
 		_content.add(_moneyBet);
 		
-		_msg = new Message(new UpdateMoneyHandler(), _content);
+		_msg = new Message("UPDATE_MONEY", _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);

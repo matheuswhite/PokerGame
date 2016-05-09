@@ -3,7 +3,6 @@ package core.domain.action;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.CreateRoomHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
@@ -13,7 +12,7 @@ public class CreateRoomAction extends Action {
 	public void actionPerformed(ActionEvent e) {
 		_content.clear();
 		
-		_msg = new Message(new CreateRoomHandler(), _content);
+		_msg = new Message("CREATE_ROOM", _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);

@@ -3,7 +3,6 @@ package core.domain.action;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.GetRoomsHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 import core.service.Range;
@@ -30,7 +29,7 @@ public class GetRoomsAction extends Action {
 		_content.clear();
 		_content.add(_range);
 		
-		_msg = new Message(new GetRoomsHandler(), _content);
+		_msg = new Message("GET_ROOMS", _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);

@@ -3,7 +3,6 @@ package core.domain.action;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.LeaveRoomHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 
@@ -20,7 +19,7 @@ public class LeaveRoomAction extends Action {
 		_content.clear();
 		_content.add(_roomId);
 		
-		_msg = new Message(new LeaveRoomHandler(), _content);
+		_msg = new Message("LEAVE_ROOM", _content);
 		
 		try {
 			ServerConnection.Instance().write(_msg);

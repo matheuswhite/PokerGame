@@ -5,7 +5,6 @@ import java.util.List;
 
 import core.domain.game.PlayerInfo;
 import core.handler.Handler;
-import core.handler.serverSideCopy.CreatePlayerInfoHandler;
 import core.net.Message;
 import core.ui.graphic.screen.MainScreen;
 
@@ -20,7 +19,7 @@ public class RequestID_RET extends Handler {
 		
 		List<Object> contents = new ArrayList<Object>();
 		contents.add(PlayerInfo.Instance());
-		new Message(new CreatePlayerInfoHandler(), contents);
+		new Message("CREATE_PLAYER_INFO", contents);
 		
 		mainScreen.getServerIpPop().setVisible(false);
 	}
