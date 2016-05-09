@@ -41,39 +41,31 @@ public class Money {
 		if (_value == 1000 && _prefixMultiplier.equals(PrefixMultiplier.TERA))
 			throw new IllegalArgumentException("The max value of money has been reached");
 		
-		double otherValue = 0;
-		if (_prefixMultiplier.getValue() < money.getPrefixMultiplier().getValue()) {
-			otherValue = _value / Math.pow(10, money.getPrefixMultiplier().getValue() - _prefixMultiplier.getValue());   	
-			_value = otherValue + money.getValue();
-			_prefixMultiplier = money._prefixMultiplier;
+		long totalValue = parseToLong() + money.parseToLong();
+		PrefixMultiplier prefix = PrefixMultiplier.NONE;
+		int value = (int)totalValue;
+		
+		if (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()));
+			prefix = PrefixMultiplier.TERA;
+			if (value >= 1000)
+				value = 1000;
 		}
-		else {
-			otherValue = money.getValue() / Math.pow(10, _prefixMultiplier.getValue() - money.getPrefixMultiplier().getValue());
-			_value += otherValue;
+		else if (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
+			prefix = PrefixMultiplier.GIGA;
+		}
+		else if (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
+			prefix = PrefixMultiplier.MEGA;
+		}
+		else if (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()));
+			prefix = PrefixMultiplier.KILO;
 		}
 		
-		if (_value >= 1000) {
-			_value /= 1000;
-			switch (_prefixMultiplier) {
-			case NONE:
-				_prefixMultiplier = PrefixMultiplier.KILO;
-				break;
-			case KILO:
-				_prefixMultiplier = PrefixMultiplier.MEGA;
-				break;
-			case MEGA:
-				_prefixMultiplier = PrefixMultiplier.GIGA;
-				break;
-			case GIGA:
-				_prefixMultiplier = PrefixMultiplier.TERA;
-				break;
-			case TERA:
-				_value = 1000;
-				break;
-			default:
-				break;
-			}
-		}
+		_value = value;
+		_prefixMultiplier = prefix;
 	}
 
 	
@@ -81,13 +73,31 @@ public class Money {
 		if (_value == 0)
 			throw new IllegalArgumentException("The value of money already is minimum");
 		
-		if (_prefixMultiplier.getValue() < money.getPrefixMultiplier().getValue()) {
-			_value = 0;
-			_prefixMultiplier = PrefixMultiplier.NONE;
+		long totalValue = parseToLong() - money.parseToLong();
+		PrefixMultiplier prefix = PrefixMultiplier.NONE;
+		int value = (int)totalValue;
+		
+		if (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()));
+			prefix = PrefixMultiplier.TERA;
 		}
-		else {
-			double otherValue = money.getValue() / Math.pow(10, _prefixMultiplier.getValue() - money.getPrefixMultiplier().getValue());
-			_value -= otherValue;
+		else if (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
+			prefix = PrefixMultiplier.GIGA;
 		}
+		else if (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
+			prefix = PrefixMultiplier.MEGA;
+		}
+		else if (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()) > 0) {
+			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()));
+			prefix = PrefixMultiplier.KILO;
+		}
+		else if (totalValue <= 0) {
+			value = 0;
+		}
+		
+		_value = value;
+		_prefixMultiplier = prefix;
 	}
 }
