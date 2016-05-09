@@ -6,6 +6,6 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		MainScreen screen = new MainScreen();
+		MainScreen screen = new MainScreen();  
 	}
 }
