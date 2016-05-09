@@ -1,13 +1,14 @@
-package core.handler.serverSideCopy;
+package core.handler.handlerServer;
 
 import java.util.List;
 
 import core.handler.Handler;
 
-public class EchoHandler extends Handler {
+public class CreatePlayerInfoHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		
+
 	}
+
 }

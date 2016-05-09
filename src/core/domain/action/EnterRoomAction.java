@@ -3,7 +3,7 @@ package core.domain.action;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.EnterRoomHandler;
+import core.handler.handlerServer.EnterRoomHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 

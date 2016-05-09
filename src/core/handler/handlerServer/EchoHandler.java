@@ -1,13 +1,13 @@
-package core.handler.ret;
+package core.handler.handlerServer;
 
 import java.util.List;
 
 import core.handler.Handler;
 
-public class EchoRET extends Handler {
-	
+public class EchoHandler extends Handler {
+
 	@Override
 	public void handle(List<Object> content) {
-		System.out.println(content.get(2));
+		
 	}
 }

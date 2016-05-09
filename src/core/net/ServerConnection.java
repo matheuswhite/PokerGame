@@ -8,7 +8,7 @@ import java.net.*;
 import java.util.ArrayList;
 
 import core.handler.DisconnectHandler;
-import core.handler.serverSideCopy.RequestIDHandler;
+import core.handler.handlerServer.RequestIDHandler;
 
 public class ServerConnection extends Thread {
 	

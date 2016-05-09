@@ -3,7 +3,7 @@ package core.domain.action;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-import core.handler.serverSideCopy.EndTurnHandler;
+import core.handler.handlerServer.EndTurnHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 import core.ui.graphic.screen.MatchScreen;

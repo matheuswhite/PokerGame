@@ -1,11 +1,11 @@
-package core.handler.ret;
+package core.handler.handlerClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import core.domain.game.PlayerInfo;
 import core.handler.Handler;
-import core.handler.serverSideCopy.CreatePlayerInfoHandler;
+import core.handler.handlerServer.CreatePlayerInfoHandler;
 import core.net.Message;
 import core.ui.graphic.screen.MainScreen;
 

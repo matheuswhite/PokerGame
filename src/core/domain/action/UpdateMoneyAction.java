@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import core.domain.game.Money;
-import core.handler.serverSideCopy.UpdateMoneyHandler;
+import core.handler.handlerServer.UpdateMoneyHandler;
 import core.net.Message;
 import core.net.ServerConnection;
 

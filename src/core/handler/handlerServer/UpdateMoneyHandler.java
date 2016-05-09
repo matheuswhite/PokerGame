@@ -1,10 +1,10 @@
-package core.handler.serverSideCopy;
+package core.handler.handlerServer;
 
 import java.util.List;
 
 import core.handler.Handler;
 
-public class EndTurnHandler extends Handler {
+public class UpdateMoneyHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {

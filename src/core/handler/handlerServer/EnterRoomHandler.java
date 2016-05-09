@@ -1,10 +1,10 @@
-package core.handler.serverSideCopy;
+package core.handler.handlerServer;
 
 import java.util.List;
 
 import core.handler.Handler;
 
-public class LeaveRoomHandler extends Handler {
+public class EnterRoomHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
