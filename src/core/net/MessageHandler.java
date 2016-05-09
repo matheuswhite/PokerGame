@@ -33,6 +33,7 @@ public class MessageHandler {
 	public void handler(Message message) {
 		_handler = _factory.getHandlerInstance(message.getHandler());
 		
+		_objects.clear();
 		_objects.add(_mainScreen);
 		_objects.add(_matchScreen);
 		_objects.addAll(message.getContents());
