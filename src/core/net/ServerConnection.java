@@ -8,6 +8,7 @@ import java.net.*;
 import java.util.ArrayList;
 
 import core.handler.DisconnectHandler;
+import core.handler.serverSideCopy.RequestIDHandler;
 
 public class ServerConnection extends Thread {
 	
@@ -40,6 +41,8 @@ public class ServerConnection extends Thread {
 		_socket.connect(new InetSocketAddress(serverIp, SERVER_PORT), 2000);
 		_inputFromServer = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 		_outputToServer = new DataOutputStream(_socket.getOutputStream());
+		
+		write(new Message(new RequestIDHandler(), new ArrayList<Object>()));
 	}
 	
 	public void disconnect() throws IOException {

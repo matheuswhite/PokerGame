@@ -1,14 +1,15 @@
-package core.handler;
+package core.handler.ret;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import core.domain.game.PlayerInfo;
-import core.handler.serverSideCopy.CreatePlayerInfo;
+import core.handler.Handler;
+import core.handler.serverSideCopy.CreatePlayerInfoHandler;
 import core.net.Message;
 import core.ui.graphic.screen.MainScreen;
 
-public class RequestIDHandler extends Handler {
+public class RequestID_RET extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
@@ -19,9 +20,8 @@ public class RequestIDHandler extends Handler {
 		
 		List<Object> contents = new ArrayList<Object>();
 		contents.add(PlayerInfo.Instance());
-		new Message(new CreatePlayerInfo(), contents);
+		new Message(new CreatePlayerInfoHandler(), contents);
 		
 		mainScreen.getServerIpPop().setVisible(false);
 	}
-
 }
