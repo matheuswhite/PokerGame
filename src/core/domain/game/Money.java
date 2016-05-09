@@ -43,24 +43,24 @@ public class Money {
 		
 		long totalValue = parseToLong() + money.parseToLong();
 		PrefixMultiplier prefix = PrefixMultiplier.NONE;
-		int value = (int)totalValue;
+		double value = (double)totalValue;
 		
-		if (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()));
+		if ((long)(totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()));
 			prefix = PrefixMultiplier.TERA;
 			if (value >= 1000)
 				value = 1000;
 		}
-		else if (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
+		else if ((long)(totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
 			prefix = PrefixMultiplier.GIGA;
 		}
-		else if (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
+		else if ((long)(totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
 			prefix = PrefixMultiplier.MEGA;
 		}
-		else if (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()));
+		else if ((long)(totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()));
 			prefix = PrefixMultiplier.KILO;
 		}
 		
@@ -75,22 +75,22 @@ public class Money {
 		
 		long totalValue = parseToLong() - money.parseToLong();
 		PrefixMultiplier prefix = PrefixMultiplier.NONE;
-		int value = (int)totalValue;
+		double value = (double) totalValue;
 		
-		if (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()));
+		if ((long)(totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.TERA.getValue()));
 			prefix = PrefixMultiplier.TERA;
 		}
-		else if (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
+		else if ((long)(totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
 			prefix = PrefixMultiplier.GIGA;
 		}
-		else if (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
+		else if ((long)(totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
 			prefix = PrefixMultiplier.MEGA;
 		}
-		else if (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()) > 0) {
-			value = (int) (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()));
+		else if ((long)(totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue())) > 0) {
+			value = (double) (totalValue / Math.pow(10, PrefixMultiplier.KILO.getValue()));
 			prefix = PrefixMultiplier.KILO;
 		}
 		else if (totalValue <= 0) {
@@ -99,5 +99,12 @@ public class Money {
 		
 		_value = value;
 		_prefixMultiplier = prefix;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Money))
+			return false;
+		return _value == ((Money)obj).getValue() && _prefixMultiplier == ((Money)obj).getPrefixMultiplier();
 	}
 }
