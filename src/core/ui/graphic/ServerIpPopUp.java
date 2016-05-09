@@ -9,12 +9,12 @@ import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
 import core.net.ServerConnection;
 import core.ui.graphic.basics.PopUp;
+import core.ui.graphic.screen.MainScreen;
 
 public class ServerIpPopUp extends JDialog {
 	
@@ -27,8 +27,8 @@ public class ServerIpPopUp extends JDialog {
 	private JFormattedTextField _textBox;
 	private JPanel _panel;
 	
-	public ServerIpPopUp(JFrame owner) {
-		super(owner, "Enter with server IP", false);
+	public ServerIpPopUp(MainScreen owner) {
+		super(owner.getFrame(), "Enter with server IP", false);
 		
 		_confirmButton = new JButton("Yes");
 		
@@ -46,7 +46,7 @@ public class ServerIpPopUp extends JDialog {
 		
 		add(_panel);
 		pack();
-		setLocationRelativeTo(owner);
+		setLocationRelativeTo(owner.getFrame());
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setModalityType(ModalityType.APPLICATION_MODAL);
@@ -63,8 +63,10 @@ public class ServerIpPopUp extends JDialog {
 					ServerConnection.Instance().connect(serverIp);
 					ServerConnection.Instance().start();
 					
+					ServerConnection.Instance().getMessageHandler().setMainScreen(owner);
+					
 				} catch (SocketTimeoutException e1) {
-					PopUp popUp = new MessagePopUp(owner, "Server Ip invalid!", "Enter with server Ip valid!");
+					PopUp popUp = new MessagePopUp(owner.getFrame(), "Server Ip invalid!", "Enter with server Ip valid!");
 					popUp.setVisible(true);
 				} catch (IOException e2) {
 					e2.printStackTrace();

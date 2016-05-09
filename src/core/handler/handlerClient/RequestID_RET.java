@@ -12,15 +12,17 @@ public class RequestID_RET extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		long id = (long) content.get(2);
+		double id = (double) content.get(2);
 		MainScreen mainScreen = (MainScreen) content.get(0);
 		
-		PlayerInfo.Create(id);
+		PlayerInfo.Create((long)id);
 		
 		List<Object> contents = new ArrayList<Object>();
 		contents.add(PlayerInfo.Instance());
 		new Message("CREATE_PLAYER_INFO", contents);
 		
+		if (mainScreen == null)
+			System.out.println("NULL");
 		mainScreen.getServerIpPop().setVisible(false);
 	}
 }

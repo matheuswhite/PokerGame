@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 
 import core.domain.action.EchoAction;
 import core.domain.game.PlayerStats;
-import core.net.ServerConnection;
 import core.ui.graphic.CreateRoomPopUp;
 import core.ui.graphic.ServerIpPopUp;
 import core.ui.graphic.basics.Image;
@@ -36,15 +35,6 @@ public class MainScreen extends Window {
 	
 	public MainScreen() {
 		super(450, 700, "PokerGame - v1.0");
-		
-		_serverIpPopUp = new ServerIpPopUp(this.getFrame());
-		_serverIpPopUp.setVisible(true);
-		
-		ServerConnection.Instance().getMessageHandler().setMainScreen(this);
-		
-		//test
-		new EchoAction().actionPerformed(null);
-		//end test
 		
 		setBackgroundColor(new Color(0, 58, 98, 255));
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,6 +99,15 @@ public class MainScreen extends Window {
 			}
 			
 		});
+	}
+	
+	public void initialize() {
+		_serverIpPopUp = new ServerIpPopUp(this);
+		_serverIpPopUp.setVisible(true);
+		
+		//test
+		new EchoAction().actionPerformed(null);
+		//end test
 	}
 
 	private void addCreateRoomButton() {

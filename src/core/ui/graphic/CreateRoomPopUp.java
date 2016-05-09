@@ -11,9 +11,12 @@ import core.domain.action.CreateRoomAction;
 import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
+import core.domain.game.Room;
+import core.net.ServerConnection;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.TextStyle;
+import core.ui.graphic.screen.MatchScreen;
 import core.ui.input.MoneyInput;
 
 public class CreateRoomPopUp extends PopUp {
@@ -73,8 +76,6 @@ public class CreateRoomPopUp extends PopUp {
 					PlayerStats.Instance().getMoney().removeMoney(minBuyIn);
 					PlayerStats.Instance().getMoney().toString();
 					PlayerInfo.Instance().setMoneyPlayer(minBuyIn);
-					
-					_createRoomAction.actionPerformed(null);
 				}
 			}
 			
