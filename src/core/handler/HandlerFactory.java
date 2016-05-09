@@ -3,10 +3,10 @@ package core.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import core.handler.ret.CreateRoomRET;
-import core.handler.ret.EchoRET;
-import core.handler.ret.GetRoomsRET;
-import core.handler.ret.RequestID_RET;
+import core.handler.handlerClient.RequestID_RET;
+import core.handler.handlerClient.CreateRoomRET;
+import core.handler.handlerClient.EchoRET;
+import core.handler.handlerClient.GetRoomsRET;
 
 public class HandlerFactory {
 
