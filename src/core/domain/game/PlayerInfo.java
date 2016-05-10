@@ -49,8 +49,11 @@ public class PlayerInfo {
 	public Money getMoneyPlayer() {
 		return _moneyPlayer;
 	}
-	public void setMoneyPlayer(Money money) {
-		_moneyPlayer = money;
+	public void removeMoney(Money money) {
+		_moneyPlayer.removeMoney(money);
+	}
+	public void addMoney(Money money) {
+		_moneyPlayer.addMoney(money);
 	}
 	
 	public String getName() {
