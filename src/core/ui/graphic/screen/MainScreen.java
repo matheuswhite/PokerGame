@@ -81,7 +81,15 @@ public class MainScreen extends Window {
 				
 			}
 		});
+	}
+	
+	public void initialize() {
+		_serverIpPopUp = new ServerIpPopUp(this);
+		_serverIpPopUp.setVisible(true);
 		
+		//test
+		new EchoAction().actionPerformed(null);
+		//end test
 		
 		_logo = new Image(new Rectangle(8, 15, 16, 16), "src/imgs/blueQuad");
 		_logo.resize(new Dimension(240, 128), false);
@@ -99,15 +107,6 @@ public class MainScreen extends Window {
 			}
 			
 		});
-	}
-	
-	public void initialize() {
-		_serverIpPopUp = new ServerIpPopUp(this);
-		_serverIpPopUp.setVisible(true);
-		
-		//test
-		new EchoAction().actionPerformed(null);
-		//end test
 	}
 
 	private void addCreateRoomButton() {

@@ -7,6 +7,33 @@ public class Money {
 	private double _value;
 	private PrefixMultiplier _prefixMultiplier;
 	
+	public Money(long money) {
+		PrefixMultiplier prefix = PrefixMultiplier.NONE;
+		double value = (double)money;
+		
+		if ((long)(value / Math.pow(10, PrefixMultiplier.TERA.getValue())) > 0) {
+			value = (double) (value / Math.pow(10, PrefixMultiplier.TERA.getValue()));
+			prefix = PrefixMultiplier.TERA;
+			if (value >= 1000)
+				value = 1000;
+		}
+		else if ((long)(value / Math.pow(10, PrefixMultiplier.GIGA.getValue())) > 0) {
+			value = (double) (value / Math.pow(10, PrefixMultiplier.GIGA.getValue()));
+			prefix = PrefixMultiplier.GIGA;
+		}
+		else if ((long)(value / Math.pow(10, PrefixMultiplier.MEGA.getValue())) > 0) {
+			value = (double) (value / Math.pow(10, PrefixMultiplier.MEGA.getValue()));
+			prefix = PrefixMultiplier.MEGA;
+		}
+		else if ((long)(value / Math.pow(10, PrefixMultiplier.KILO.getValue())) > 0) {
+			value = (double) (value / Math.pow(10, PrefixMultiplier.KILO.getValue()));
+			prefix = PrefixMultiplier.KILO;
+		}
+		
+		_value = value;
+		_prefixMultiplier = prefix;
+	}
+	
 	public Money() {
 		_value = 0;
 		_prefixMultiplier = PrefixMultiplier.NONE;

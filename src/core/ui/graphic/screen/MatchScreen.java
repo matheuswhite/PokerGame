@@ -265,6 +265,7 @@ public class MatchScreen extends Window {
 			}
 		});
 		
+		disableBuyIn();
 		addComponent(_buyInButton);
 	}
 }
