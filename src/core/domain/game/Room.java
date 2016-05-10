@@ -36,6 +36,9 @@ public class Room {
 		return _listOfPlayers;
 	}
 	
+	public void setMatchInfo(MatchInfo matchInfo) {
+		_matchInfo = matchInfo;
+	}
 	public MatchInfo getMatchInfo() {
 		return _matchInfo;
 	}

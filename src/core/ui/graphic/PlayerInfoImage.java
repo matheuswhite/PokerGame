@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
+import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.ui.graphic.basics.Image;
 import core.ui.graphic.basics.Label;
@@ -45,5 +46,8 @@ public class PlayerInfoImage {
 	public void setInfos(PlayerInfo player) {
 		_playerName.setText(player.getName());
 		_playerMoney.setText("$" + player.getMoneyPlayer().toString());
+	}
+	public void setMoney(Money money) {
+		_playerMoney.setText("$" + money.toString());
 	}
 }

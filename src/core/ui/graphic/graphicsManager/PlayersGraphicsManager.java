@@ -92,7 +92,23 @@ public class PlayersGraphicsManager {
 		_infoImages[seat].hide();
 	}
 
-
+	
+	public void addPlayerMoney(int seat, Money money) throws Exception {
+		if (_playerInfos.get(seat) == null)
+			throw new Exception("Without player in this seat");
+		
+		_playerInfos.get(seat).getMoneyPlayer().addMoney(money);
+		_infoImages[seat].setMoney(_playerInfos.get(seat).getMoneyPlayer());
+	}
+	public void removePlayerMoney(int seat, Money money) throws Exception {
+		if (_playerInfos.get(seat) == null)
+			throw new Exception("Without player in this seat");
+		
+		_playerInfos.get(seat).getMoneyPlayer().removeMoney(money);
+		_infoImages[seat].setMoney(_playerInfos.get(seat).getMoneyPlayer());
+	}
+	
+	
 	public void giveCards(int seat, Card card1, Card card2) throws Exception {
 		if (_playerInfos.get(seat) == null)
 			throw new Exception("Without player in this seat");
@@ -117,6 +133,8 @@ public class PlayersGraphicsManager {
 	public void bet(int seat, Money money) throws Exception {
 		if (_playerInfos.get(seat) == null)
 			throw new Exception("Without player in this seat");
+		
+		removePlayerMoney(seat, money);
 		
 		_betTokenImages[seat].addMoney(money);
 		_betTokenImages[seat].show();
