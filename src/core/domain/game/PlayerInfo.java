@@ -55,6 +55,9 @@ public class PlayerInfo {
 	public void addMoney(Money money) {
 		_moneyPlayer.addMoney(money);
 	}
+	public void setMoneyPlayer(Money money) {
+		_moneyPlayer = money;
+	}
 	
 	public String getName() {
 		return _name;
