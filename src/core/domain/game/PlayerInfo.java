@@ -77,7 +77,7 @@ public class PlayerInfo {
 		return _inGame;
 	}
 	
-	public void setInGame(boolean inGame) {
-		_inGame = inGame;
+	public void setInGame() {
+		_inGame =!_inGame;
 	}
 }
