@@ -5,6 +5,7 @@ import java.util.Map;
 
 import core.handler.handlerClient.RequestID_RET;
 import core.handler.handlerClient.StartGameHandler;
+import core.handler.handlerClient.WinnerHandler;
 import core.handler.handlerClient.BuyInHandler;
 import core.handler.handlerClient.CallHandler;
 import core.handler.handlerClient.ChangePhase;
@@ -34,6 +35,7 @@ public class HandlerFactory {
 		_tableOfHandler.put("JOIN", new JoinHandler());
 		_tableOfHandler.put("LEAVE", new LeaveHandler());
 		_tableOfHandler.put("CHANGE_PHASE", new ChangePhase());
+		_tableOfHandler.put("WINNER", new WinnerHandler());
 		
 		_tableOfHandler.put("ECHO_RET", new EchoRET());
 		_tableOfHandler.put("CREATE_ROOM_RET", new CreateRoomRET());

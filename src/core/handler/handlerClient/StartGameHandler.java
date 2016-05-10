@@ -3,8 +3,8 @@ package core.handler.handlerClient;
 import java.util.List;
 
 import core.domain.game.MatchInfo;
+import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
-import core.domain.game.Room;
 import core.handler.Handler;
 import core.ui.graphic.screen.MatchScreen;
 
@@ -12,27 +12,39 @@ public class StartGameHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		PlayerInfo playerInfo = (PlayerInfo) content.get(2);
+		@SuppressWarnings("unchecked")
+		List<PlayerInfo> playerInfos = (List<PlayerInfo>) content.get(2);
 		MatchInfo matchInfo = (MatchInfo) content.get(3);
+		
 		MatchScreen matchScreen = (MatchScreen) content.get(1);
-		Room room = matchScreen.getRoom();
 		
 		try {
-			matchScreen.getPlayerGraphicsManager().addPlayer(playerInfo);
-			room.setMatchInfo(matchInfo);
+			matchScreen.getRoom().setMatchInfo(matchInfo);
+			matchScreen.getRoom().getPlayers().clear();
+			matchScreen.getRoom().getPlayers().addAll(playerInfos);
 
-			List<PlayerInfo> players = matchScreen.getRoom().getPlayers();
-			for (int i = 0; i < players.size(); i++) {
-				long id = players.get(i).getId();
+			matchScreen.getTableGraphicsManager().clearCards();
+			matchScreen.getTableGraphicsManager().clearPot();
+			
+			for (PlayerInfo playerInfo : playerInfos) {
+				Money bet = playerInfo.getMoneyBetting();
+
+				if (!bet.equals(new Money())) {
+					matchScreen.getPlayerGraphicsManager().bet(playerInfo.getSeat(), bet);
+				}
+				if (playerInfo.getId() == matchInfo.getDealerPlayerId()) {
+					matchScreen.getPlayerGraphicsManager().setDealer(playerInfo.getSeat());
+				}
 				
-				if (id == matchInfo.getBigBlindPlayerId()) {
+				matchScreen.getPlayerGraphicsManager().giveCards(playerInfo.getSeat(), 
+						playerInfo.getHand()[0], playerInfo.getHand()[1]);
+				
+				if (PlayerInfo.Instance().getId() == playerInfo.getId()) {
+					matchScreen.getPlayerGraphicsManager().showCards(playerInfo.getSeat());
+					matchScreen.disableBuyIn();
 					
-				}
-				if (id == matchInfo.getDealerPlayerId()) {
-					
-				}
-				if (id == matchInfo.getSmallBlindPlayerId()) {
-					
+					if (playerInfo.getId() == matchInfo.getCurrentTurnPlayerId())
+						matchScreen.myTurn();
 				}
 			}
 			

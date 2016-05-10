@@ -15,7 +15,7 @@ public class FoldHandler extends Handler {
 		
 		try {
 			matchScreen.getPlayerGraphicsManager().takeCards(playerInfo.getSeat());
-
+			
 			List<PlayerInfo> players = matchScreen.getRoom().getPlayers();
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i).getId() == playerInfo.getId()) {

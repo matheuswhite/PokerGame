@@ -159,6 +159,12 @@ public class MatchScreen extends Window {
 			
 			@Override
 			public void run() {
+				try {
+					_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				_foldAction.actionPerformed(null);
 				_endTurnAction.actionPerformed(null);
 			}
 		});
@@ -232,6 +238,7 @@ public class MatchScreen extends Window {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
+					enableBuyIn();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
