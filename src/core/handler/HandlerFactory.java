@@ -29,7 +29,7 @@ public class HandlerFactory {
 		_tableOfHandler.put("END_TURN", new EndTurnHandler());
 		_tableOfHandler.put("CALL", new CallHandler());
 		_tableOfHandler.put("FOLD", new FoldHandler());
-		_tableOfHandler.put("RAISE", new RaiseHandler());
+		_tableOfHandler.put("BET", new RaiseHandler());
 		_tableOfHandler.put("BUY_IN", new BuyInHandler());
 		_tableOfHandler.put("START_GAME", new StartGameHandler());
 		_tableOfHandler.put("JOIN", new JoinHandler());
@@ -39,7 +39,7 @@ public class HandlerFactory {
 		
 		_tableOfHandler.put("ECHO_RET", new EchoRET());
 		_tableOfHandler.put("CREATE_ROOM_RET", new CreateRoomRET());
-		_tableOfHandler.put("GET_ROOMS_RET", new GetRoomsRET());
+		_tableOfHandler.put("GET_ROOM_RET", new GetRoomsRET());
 		_tableOfHandler.put("REQUEST_ID_RET", new RequestID_RET());
 	}
 	

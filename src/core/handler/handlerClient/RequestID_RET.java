@@ -12,10 +12,10 @@ public class RequestID_RET extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		double id = _gson.fromJson((String)content.get(2), Double.class);
+		long id = _gson.fromJson((String)content.get(2), Long.class);
 		MainScreen mainScreen = (MainScreen) content.get(0);
 		
-		PlayerInfo.Create((long)id);
+		PlayerInfo.Create(id);
 		
 		List<Object> contents = new ArrayList<Object>();
 		contents.add(PlayerInfo.Instance());
