@@ -11,7 +11,7 @@ public class EndTurnHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		MatchInfo matchInfo = (MatchInfo) content.get(2);
+		MatchInfo matchInfo = _gson.fromJson((String)content.get(2), MatchInfo.class);
 		MatchScreen matchScreen = (MatchScreen) content.get(1);
 		
 		try {

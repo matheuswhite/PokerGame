@@ -9,10 +9,9 @@ import core.ui.graphic.screen.MainScreen;
 import core.ui.graphic.screen.MatchScreen;
 
 public class CreateRoomRET extends Handler {
-
 	@Override
 	public void handle(List<Object> content) {
-		Room room = (Room) content.get(2);
+		Room room = _gson.fromJson((String)content.get(2), Room.class);
 		MainScreen mainScreen = (MainScreen) content.get(0);
 		
 		ServerConnection.Instance().getMessageHandler().setMatchScreen(new MatchScreen(mainScreen.getFrame(), room));

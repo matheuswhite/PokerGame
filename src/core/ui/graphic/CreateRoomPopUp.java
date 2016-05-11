@@ -11,7 +11,6 @@ import core.domain.action.CreateRoomAction;
 import core.domain.game.Money;
 import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
-import core.domain.game.Room;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.basics.TextStyle;
@@ -75,7 +74,8 @@ public class CreateRoomPopUp extends PopUp {
 					PlayerStats.Instance().getMoney().toString();
 					PlayerInfo.Instance().setMoneyPlayer(minBuyIn);
 					
-					_createRoomAction.setRoom(new Room(0000, smallBlind, minBuyIn));
+					_createRoomAction.setSmallBlindValue(smallBlind);
+					_createRoomAction.setMinimunBuyIn(minBuyIn);
 					_createRoomAction.actionPerformed(null);
 				}
 			}

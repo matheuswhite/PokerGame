@@ -10,7 +10,7 @@ public class LeaveHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		PlayerInfo playerInfo = (PlayerInfo) content.get(2);
+		PlayerInfo playerInfo = _gson.fromJson((String)content.get(2), PlayerInfo.class);
 		MatchScreen matchScreen = (MatchScreen) content.get(1);
 		
 		try {

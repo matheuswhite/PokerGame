@@ -13,8 +13,8 @@ public class StartGameHandler extends Handler {
 	@Override
 	public void handle(List<Object> content) {
 		@SuppressWarnings("unchecked")
-		List<PlayerInfo> playerInfos = (List<PlayerInfo>) content.get(2);
-		MatchInfo matchInfo = (MatchInfo) content.get(3);
+		List<PlayerInfo> playerInfos = _gson.fromJson((String)content.get(2), List.class);
+		MatchInfo matchInfo = _gson.fromJson((String)content.get(3), MatchInfo.class);
 		
 		MatchScreen matchScreen = (MatchScreen) content.get(1);
 		

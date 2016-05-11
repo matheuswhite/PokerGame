@@ -12,7 +12,7 @@ public class RequestID_RET extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		double id = (double) content.get(2);
+		double id = _gson.fromJson((String)content.get(2), Double.class);
 		MainScreen mainScreen = (MainScreen) content.get(0);
 		
 		PlayerInfo.Create((long)id);

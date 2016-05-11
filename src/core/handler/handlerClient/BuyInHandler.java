@@ -11,8 +11,8 @@ public class BuyInHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		PlayerInfo playerInfo = (PlayerInfo) content.get(2);
-		Money money = (Money) content.get(3);
+		PlayerInfo playerInfo = _gson.fromJson((String)content.get(2), PlayerInfo.class);
+		Money money = _gson.fromJson((String)content.get(3), Money.class);
 		MatchScreen matchScreen = (MatchScreen) content.get(1);
 		
 		try {
