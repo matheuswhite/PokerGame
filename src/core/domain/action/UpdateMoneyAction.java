@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import core.domain.game.Money;
+import core.domain.game.PlayerInfo;
 import core.net.Message;
 import core.net.ServerConnection;
 
@@ -24,7 +25,10 @@ public class UpdateMoneyAction extends Action {
 	public void actionPerformed(ActionEvent e) {
 		_content.clear();
 		_content.add(_type);
-		_content.add(_moneyBet);
+		if (_type != ActionType.FOLD) {
+			_content.add(_moneyBet);
+			PlayerInfo.Instance().setMoneyBetting(_moneyBet);
+		}
 		
 		_msg = new Message("UPDATE_MONEY", _content);
 		

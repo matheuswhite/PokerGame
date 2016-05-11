@@ -68,7 +68,12 @@ public class EnterRoomPopUp extends PopUp {
 					PlayerStats.Instance().getMoney().removeMoney(buyIn);
 					PlayerInfo.Instance().setMoneyPlayer(buyIn);
 					
-					 _enterRoomAction.actionPerformed(null);
+					_enterRoomAction.actionPerformed(null);
+					try {
+						_room.addPlayer(PlayerInfo.Instance());
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
 					ServerConnection.Instance().getMessageHandler().setMatchScreen(new MatchScreen(owner, _room));
 				}
 			}
