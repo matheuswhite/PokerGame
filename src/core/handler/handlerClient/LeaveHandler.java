@@ -20,7 +20,7 @@ public class LeaveHandler extends Handler {
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i).getId() == playerInfo.getId()) {
 					players.remove(i);
-					i = players.size() + 1;
+					i = players.size() + 1;//break
 				}
 			}
 		} catch (Exception e) {

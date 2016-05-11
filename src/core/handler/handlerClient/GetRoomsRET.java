@@ -15,7 +15,7 @@ public class GetRoomsRET extends Handler {
 		List<Room> rooms = new ArrayList<Room>();
 		
 		for (int i = 1; i <= size; i++) {
-			_gson.fromJson((String)content.get(2+i), List.class);
+			rooms.add(_gson.fromJson((String)content.get(2+i), Room.class));
 		}
 		MainScreen mainScreen = (MainScreen) content.get(0);
 		

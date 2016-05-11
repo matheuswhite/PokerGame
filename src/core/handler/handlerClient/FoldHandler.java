@@ -19,9 +19,8 @@ public class FoldHandler extends Handler {
 			List<PlayerInfo> players = matchScreen.getRoom().getPlayers();
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i).getId() == playerInfo.getId()) {
-					players.remove(i);
-					players.add(i, playerInfo);
-					i = players.size() + 1;
+					players.set(i, playerInfo);
+					i = players.size() + 1;//break
 				}
 			}
 			

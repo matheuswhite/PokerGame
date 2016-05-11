@@ -22,9 +22,8 @@ public class WinnerHandler extends Handler {
 					
 					money.removeMoney(players.get(i).getMoneyPlayer());
 					
-					players.remove(i);
-					players.add(i, playerInfo);
-					i = players.size() + 1;
+					players.set(i, playerInfo);
+					i = players.size() + 1; //break
 				}
 			}
 			
