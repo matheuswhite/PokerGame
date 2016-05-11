@@ -82,6 +82,8 @@ public class MatchInfo{
 	}
 	public void increasePotValue(Money value) {
 		_potValue.addMoney(value);
+		if(value.getValue() > _higherCurrentBet.getValue())
+			_higherCurrentBet = value;
 	}
 	public void clearPot() {
 		_potValue = new Money();
