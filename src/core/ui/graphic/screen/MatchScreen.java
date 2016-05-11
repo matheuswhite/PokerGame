@@ -160,7 +160,7 @@ public class MatchScreen extends Window {
 			@Override
 			public void run() {
 				try {
-					_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
+					//_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -183,7 +183,7 @@ public class MatchScreen extends Window {
 					PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
 					
 					try {
-						_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
+						//_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -217,7 +217,7 @@ public class MatchScreen extends Window {
 					PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
 					
 					try {
-						_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
+						//_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -237,7 +237,7 @@ public class MatchScreen extends Window {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
+					//_playersGraphicsManager.takeCards(PlayerInfo.Instance().getSeat());
 					enableBuyIn();
 				} catch (Exception e1) {
 					e1.printStackTrace();
