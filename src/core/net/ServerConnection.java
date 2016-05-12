@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.ArrayList;
 
+import core.domain.game.PlayerInfo;
+
 public class ServerConnection extends Thread {
 	
 	private static ServerConnection _instance = null;
@@ -19,17 +21,20 @@ public class ServerConnection extends Thread {
 	
 	public final static int SERVER_PORT = 1095;
 	
-	private ServerConnection() {
-		_messageHandler = new MessageHandler();
+	private ServerConnection(PlayerInfo playerInfo) {
+		_messageHandler = new MessageHandler(playerInfo);
 	}
 	
 	public MessageHandler getMessageHandler() {
 		return _messageHandler;
 	}
 	
-	public static synchronized ServerConnection Instance() {
+	public static synchronized void Create(PlayerInfo playerInfo) {
 		if (_instance == null)
-			_instance = new ServerConnection();
+			_instance = new ServerConnection(playerInfo);
+	}
+	
+	public static synchronized ServerConnection Instance() {
 		return _instance;
 	}
 	

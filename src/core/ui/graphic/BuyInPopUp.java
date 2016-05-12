@@ -31,7 +31,7 @@ public class BuyInPopUp extends PopUp {
 	
 	private UpdateMoneyAction _buyInAction;
 	
-	public BuyInPopUp(JFrame owner, String title) {
+	public BuyInPopUp(JFrame owner, String title, PlayerInfo playerInfo) {
 		super(owner, title);
 		
 		_minBuyInLabel = new Label(new Point(0, 0), "Mininum BuyIn ", new TextStyle(Color.BLACK, "Arial", 12, false, false));
@@ -54,10 +54,10 @@ public class BuyInPopUp extends PopUp {
 					_messagePopUp = new MessagePopUp(owner, "BuyIn wrong!", "The most money that you have is " + PlayerStats.Instance().getMoney().toString());
 					_messagePopUp.setVisible(true);
 				}
-				else if (!PlayerInfo.Instance().isInGame()) {
+				else if (!playerInfo.isInGame()) {
 					setVisible(false);
 					PlayerStats.Instance().getMoney().removeMoney(buyIn);
-					PlayerInfo.Instance().getMoneyPlayer().addMoney(buyIn);
+					playerInfo.getMoneyPlayer().addMoney(buyIn);
 					
 					_buyInAction.setMoneyBet(buyIn);
 					_buyInAction.actionPerformed(e);

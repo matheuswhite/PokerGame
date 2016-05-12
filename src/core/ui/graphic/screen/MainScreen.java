@@ -13,6 +13,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import core.domain.action.EchoAction;
+import core.domain.game.PlayerInfo;
 import core.domain.game.PlayerStats;
 import core.ui.graphic.CreateRoomPopUp;
 import core.ui.graphic.ServerIpPopUp;
@@ -33,8 +34,12 @@ public class MainScreen extends Window {
 	private Button _createRoomButton;
 	private ServerIpPopUp _serverIpPopUp;
 	
+	private PlayerInfo _playerInfo;
+	
 	public MainScreen() {
 		super(450, 700, "PokerGame - v1.0");
+		
+		_playerInfo = new PlayerInfo();
 		
 		setBackgroundColor(new Color(0, 58, 98, 255));
 		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,7 +89,7 @@ public class MainScreen extends Window {
 	}
 	
 	public void initialize() {
-		_serverIpPopUp = new ServerIpPopUp(this);
+		_serverIpPopUp = new ServerIpPopUp(this, _playerInfo);
 		_serverIpPopUp.setVisible(true);
 		
 		//test
@@ -98,7 +103,7 @@ public class MainScreen extends Window {
 		addCreateRoomButton();
 		
 		_playerStatsManager = new PlayerStatsManager(this);
-		_roomListManager = new RoomListManager(this);
+		_roomListManager = new RoomListManager(this, _playerInfo);
 		
 		getFrame().addComponentListener(new ComponentAdapter() {
 			
@@ -114,7 +119,7 @@ public class MainScreen extends Window {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CreateRoomPopUp popUp = new CreateRoomPopUp(_windowInstance.getFrame(), "Enter with the BuyIn and the SmallBlind value");
+				CreateRoomPopUp popUp = new CreateRoomPopUp(_windowInstance.getFrame(), "Enter with the BuyIn and the SmallBlind value", _playerInfo);
 				popUp.setVisible(true);
 			}
 		});

@@ -33,6 +33,7 @@ public class MatchScreen extends Window {
 	
 	private JFrame _matchWindow;
 	private Room _room;
+	private PlayerInfo _playerInfo;
 	
 	private PlayersGraphicsManager _playersGraphicsManager;
 	private TableGraphicsManager _tableGraphicsManager;
@@ -52,11 +53,12 @@ public class MatchScreen extends Window {
 	private UpdateMoneyAction _foldAction;
 	private UpdateMoneyAction _betAction;
 	
-	public MatchScreen(JFrame mainWindow, Room room) {
+	public MatchScreen(JFrame mainWindow, Room room, PlayerInfo playerInfo) {
 		super(850, 590, "PokerGame - Room" + room.getId());
 		
 		_matchWindow = this.getFrame();
 		_room = room;
+		_playerInfo = playerInfo;
 		
 		_leaveRoomAction = new LeaveRoomAction();
 		_endTurnAction = new EndTurnAction(this);
@@ -70,7 +72,7 @@ public class MatchScreen extends Window {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				PlayerStats.Instance().getMoney().addMoney(PlayerInfo.Instance().getMoneyPlayer());
+				PlayerStats.Instance().getMoney().addMoney(playerInfo.getMoneyPlayer());
 				mainWindow.setVisible(true);
 				_leaveRoomAction.actionPerformed(null);
 			}
@@ -180,7 +182,7 @@ public class MatchScreen extends Window {
 				if (bet.parseToLong() * 2 <= _room.getMatchInfo().getHigherCurrentBet().parseToLong()) {
 					_betAction.setMoneyBet(bet);
 					
-					PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
+					_playerInfo.getMoneyPlayer().removeMoney(bet);
 					
 					try {
 						//_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
@@ -214,7 +216,7 @@ public class MatchScreen extends Window {
 				if (bet != new Money()) {
 					_callAction.setMoneyBet(bet);
 					
-					PlayerInfo.Instance().getMoneyPlayer().removeMoney(bet);
+					_playerInfo.getMoneyPlayer().removeMoney(bet);
 					
 					try {
 						//_playersGraphicsManager.bet(PlayerInfo.Instance().getSeat(), bet);
@@ -267,7 +269,7 @@ public class MatchScreen extends Window {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BuyInPopUp popUp = new BuyInPopUp(_matchWindow, "How much money you want?");
+				BuyInPopUp popUp = new BuyInPopUp(_matchWindow, "How much money you want?", _playerInfo);
 				popUp.setVisible(true);
 			}
 		});

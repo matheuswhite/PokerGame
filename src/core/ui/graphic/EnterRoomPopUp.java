@@ -32,7 +32,7 @@ public class EnterRoomPopUp extends PopUp {
 	private MessagePopUp _messagePopUp;
 	private EnterRoomAction _enterRoomAction;
 	
-	public EnterRoomPopUp(JFrame owner, String title) {
+	public EnterRoomPopUp(JFrame owner, String title, PlayerInfo playerInfo) {
 		super(owner, title);
 		
 		_message = new Label(new Point(0, 0), "Enter with the BuyIn value", new TextStyle(Color.BLACK, "Arial", 12, false, false));
@@ -66,15 +66,15 @@ public class EnterRoomPopUp extends PopUp {
 					owner.setVisible(false);
 					
 					PlayerStats.Instance().getMoney().removeMoney(buyIn);
-					PlayerInfo.Instance().setMoneyPlayer(buyIn);
+					playerInfo.setMoneyPlayer(buyIn);
 					
 					_enterRoomAction.actionPerformed(null);
 					try {
-						_room.addPlayer(PlayerInfo.Instance());
+						_room.addPlayer(playerInfo);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-					ServerConnection.Instance().getMessageHandler().setMatchScreen(new MatchScreen(owner, _room));
+					ServerConnection.Instance().getMessageHandler().setMatchScreen(new MatchScreen(owner, _room, playerInfo));
 				}
 			}
 			

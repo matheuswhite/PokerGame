@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.domain.game.Money;
+import core.domain.game.PlayerInfo;
 import core.domain.game.Room;
 import core.ui.graphic.basics.Window;
 import core.ui.input.Button;
@@ -15,11 +16,11 @@ public class RoomListIten extends Button {
 	private Room _room;
 	private EnterRoomPopUp _enterRoomPopUp;
 	
-	public RoomListIten(Window window, int posY) {
+	public RoomListIten(Window window, int posY, PlayerInfo playerInfo) {
 		super(new Rectangle(10, posY, 430, 30), "", new Color(93, 22, 255, 255), Color.WHITE, null);
 	
 		_room = new Room(404, new Money(), new Money());
-		_enterRoomPopUp = new EnterRoomPopUp(window.getFrame(), "Do you enter in the Room00000000 ?");
+		_enterRoomPopUp = new EnterRoomPopUp(window.getFrame(), "Do you enter in the Room00000000 ?", playerInfo);
 		
 		addActionListener(new ActionListener() {
 			
