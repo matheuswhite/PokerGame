@@ -32,7 +32,7 @@ public class CreateRoomPopUp extends PopUp {
 	private MessagePopUp _messagePopUp;
 	private CreateRoomAction _createRoomAction;
 	
-	public CreateRoomPopUp(JFrame owner, String title) {
+	public CreateRoomPopUp(JFrame owner, String title, PlayerInfo playerInfo) {
 		super(owner, title);
 		
 		_minBuyInLabel = new Label(new Point(0, 0), "Mininum BuyIn ", new TextStyle(Color.BLACK, "Arial", 12, false, false));
@@ -72,7 +72,7 @@ public class CreateRoomPopUp extends PopUp {
 					
 					PlayerStats.Instance().getMoney().removeMoney(minBuyIn);
 					PlayerStats.Instance().getMoney().toString();
-					PlayerInfo.Instance().setMoneyPlayer(minBuyIn);
+					playerInfo.setMoneyPlayer(minBuyIn);
 					
 					_createRoomAction.setSmallBlindValue(smallBlind);
 					_createRoomAction.setMinimunBuyIn(minBuyIn);

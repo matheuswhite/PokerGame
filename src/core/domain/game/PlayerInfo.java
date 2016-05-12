@@ -3,10 +3,7 @@ package core.domain.game;
 import core.service.PrefixMultiplier;
 
 public class PlayerInfo {
-	
-	private static PlayerInfo _instance = null;
-	
-	private long _id;
+	private Long _id;
 	private Card[] _hand;
 	private Money _moneyPlayer;
 	private Money _moneyBetting;
@@ -14,22 +11,18 @@ public class PlayerInfo {
 	private int _seat;
 	private boolean _inGame;
 	
-	private PlayerInfo(long id) {
-		_id = id;
+	public PlayerInfo() {
+		_id = null;
 		_hand = new Card[2];
 		_moneyPlayer = new Money(0, PrefixMultiplier.NONE);
-		_name = "Player" + id;
+		_name = "Player";
 		_moneyBetting = new Money();
 		_inGame = false;
 	}
 	
-	public synchronized static void Create(long id) {
-		if (_instance == null)
-			_instance = new PlayerInfo(id);
-	}
-	
-	public synchronized static PlayerInfo Instance() {
-		return _instance;
+	public void setId(long id) {
+		_id = id;
+		setName(_name + id);
 	}
 	
 	public Card[] getHand() {

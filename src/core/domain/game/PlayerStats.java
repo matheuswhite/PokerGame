@@ -13,8 +13,8 @@ public class PlayerStats {
 	private int _wins;
 	private int _losses;
 	
-	private PlayerStats(long id) {
-		_name = "player" + id;
+	private PlayerStats() {
+		_name = "player";
 		_money = new Money(10, PrefixMultiplier.KILO);
 		_wins = 0;
 		_losses = 0;
@@ -34,7 +34,7 @@ public class PlayerStats {
 			_instance = storage.load(file, PlayerStats.class);
 		}
 		else {
-			_instance = new PlayerStats(PlayerInfo.Instance().getId());
+			_instance = new PlayerStats();
 			storage.save(file, _instance);
 		}
 	}

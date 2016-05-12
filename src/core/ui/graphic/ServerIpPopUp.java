@@ -12,6 +12,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.text.MaskFormatter;
 
+import core.domain.game.PlayerInfo;
 import core.net.ServerConnection;
 import core.ui.graphic.basics.PopUp;
 import core.ui.graphic.screen.MainScreen;
@@ -27,7 +28,7 @@ public class ServerIpPopUp extends JDialog {
 	private JFormattedTextField _textBox;
 	private JPanel _panel;
 	
-	public ServerIpPopUp(MainScreen owner) {
+	public ServerIpPopUp(MainScreen owner, PlayerInfo playerInfo) {
 		super(owner.getFrame(), "Enter with server IP", false);
 		
 		_confirmButton = new JButton("Yes");
@@ -60,6 +61,7 @@ public class ServerIpPopUp extends JDialog {
 				String serverIp = _textBox.getText();
 				
 				try {
+					ServerConnection.Create(playerInfo);
 					ServerConnection.Instance().connect(serverIp);
 					ServerConnection.Instance().start();
 					

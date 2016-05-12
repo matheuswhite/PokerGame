@@ -8,6 +8,7 @@ import java.util.List;
 
 import core.domain.action.GetRoomsAction;
 import core.domain.game.Money;
+import core.domain.game.PlayerInfo;
 import core.domain.game.Room;
 import core.service.PrefixMultiplier;
 import core.service.Range;
@@ -30,14 +31,14 @@ public class RoomListManager {
 	private Image _background2;
 	private List<RoomListIten> _roomsListItens;
 	
-	public RoomListManager(Window window) {
+	public RoomListManager(Window window, PlayerInfo playerInfo) {
 		_background1 = new Image(new Rectangle(5, 150, 16, 16), "src/imgs/blueQuad");
 		_background1.resize(new Dimension(245, 515), false);
 		
 		_background2 = new Image(new Rectangle(245, 190, 16, 16), "src/imgs/blueQuad");
 		_background2.resize(new Dimension(200, 475), false);
 		
-		initRoomListItens(window);
+		initRoomListItens(window, playerInfo);
 		
 		_currentRange = new Range(1, 13);
 		
@@ -61,7 +62,7 @@ public class RoomListManager {
 		window.addComponent(_background2);
 	}
 	
-	private void initRoomListItens(Window window) {
+	private void initRoomListItens(Window window, PlayerInfo playerInfo) {
 		_roomsListItens = new ArrayList<RoomListIten>();
 		
 		/*
@@ -70,7 +71,7 @@ public class RoomListManager {
 		window.addComponent(_roomsListItens.get(0));*/
 		
 		for (int i = 0; i < 13; i++) {
-			_roomsListItens.add(new RoomListIten(window, 195 + (i * 35)));
+			_roomsListItens.add(new RoomListIten(window, 195 + (i * 35), playerInfo));
 			_roomsListItens.get(i).disable();
 			window.addComponent(_roomsListItens.get(i));
 		}

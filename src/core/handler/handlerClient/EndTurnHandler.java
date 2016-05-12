@@ -9,6 +9,12 @@ import core.ui.graphic.screen.MatchScreen;
 
 public class EndTurnHandler extends Handler {
 
+	private PlayerInfo _playerInfo;
+	
+	public EndTurnHandler(PlayerInfo playerInfo) {
+		_playerInfo = playerInfo;
+	}
+	
 	@Override
 	public void handle(List<Object> content) {
 		MatchInfo matchInfo = _gson.fromJson((String)content.get(2), MatchInfo.class);
@@ -17,7 +23,7 @@ public class EndTurnHandler extends Handler {
 		try {
 			matchScreen.getRoom().setMatchInfo(matchInfo);
 			
-			if (PlayerInfo.Instance().getId() == matchInfo.getCurrentTurnPlayerId()) {
+			if (_playerInfo.getId() == matchInfo.getCurrentTurnPlayerId()) {
 				matchScreen.myTurn();
 			}
 		} catch (Exception e) {

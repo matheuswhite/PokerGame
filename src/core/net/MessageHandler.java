@@ -3,6 +3,7 @@ package core.net;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.domain.game.PlayerInfo;
 import core.handler.Handler;
 import core.handler.HandlerFactory;
 import core.ui.graphic.screen.MainScreen;
@@ -17,9 +18,9 @@ public class MessageHandler {
 	private MainScreen _mainScreen;
 	private MatchScreen _matchScreen;
 	
-	public MessageHandler() {
+	public MessageHandler(PlayerInfo playerInfo) {
 		_objects = new ArrayList<Object>();
-		_factory = new HandlerFactory();
+		_factory = new HandlerFactory(playerInfo);
 	}
 	
 	public void setMainScreen(MainScreen mainScreen) {

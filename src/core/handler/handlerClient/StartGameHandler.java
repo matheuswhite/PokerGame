@@ -11,6 +11,12 @@ import core.ui.graphic.screen.MatchScreen;
 
 public class StartGameHandler extends Handler {
 
+	private PlayerInfo _playerInfo;
+	
+	public StartGameHandler(PlayerInfo playerInfo) {
+		_playerInfo = playerInfo;
+	}
+	
 	@Override
 	public void handle(List<Object> content) {
 		int size = _gson.fromJson((String)content.get(2), Integer.class);
@@ -43,7 +49,7 @@ public class StartGameHandler extends Handler {
 				matchScreen.getPlayerGraphicsManager().giveCards(playerInfo.getSeat(), 
 						playerInfo.getHand()[0], playerInfo.getHand()[1]);
 				
-				if (PlayerInfo.Instance().getId() == playerInfo.getId()) {
+				if (_playerInfo.getId() == playerInfo.getId()) {
 					matchScreen.getPlayerGraphicsManager().showCards(playerInfo.getSeat());
 					matchScreen.disableBuyIn();
 					
