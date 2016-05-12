@@ -61,7 +61,7 @@ public class ChangePhase extends Handler {
 	}
 
 	private void handlerRiver(MatchScreen matchScreen, MatchInfo matchInfo) {
-		matchScreen.getTableGraphicsManager().addFourthCard(matchInfo.getCardsInTable()[4]);
+		matchScreen.getTableGraphicsManager().addFifthCard(matchInfo.getCardsInTable()[4]);
 	}
 
 	private void handlerTurn(MatchScreen matchScreen, MatchInfo matchInfo) {

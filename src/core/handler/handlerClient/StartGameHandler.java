@@ -1,5 +1,6 @@
 package core.handler.handlerClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import core.domain.game.MatchInfo;
@@ -12,9 +13,12 @@ public class StartGameHandler extends Handler {
 
 	@Override
 	public void handle(List<Object> content) {
-		@SuppressWarnings("unchecked")
-		List<PlayerInfo> playerInfos = _gson.fromJson((String)content.get(2), List.class);
-		MatchInfo matchInfo = _gson.fromJson((String)content.get(3), MatchInfo.class);
+		int size = _gson.fromJson((String)content.get(2), Integer.class);
+		List<PlayerInfo> playerInfos = new ArrayList<PlayerInfo>();
+		for (int i = 0; i < size; i++) {
+			playerInfos.add(_gson.fromJson((String)content.get(2), PlayerInfo.class));
+		}
+		MatchInfo matchInfo = _gson.fromJson((String)content.get(3 + size), MatchInfo.class);
 		
 		MatchScreen matchScreen = (MatchScreen) content.get(1);
 		
