@@ -1,11 +1,13 @@
 package core.handler.handlerClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import core.domain.game.PlayerInfo;
 import core.handler.Handler;
 import core.net.Message;
+import core.net.ServerConnection;
 import core.ui.graphic.screen.MainScreen;
 
 public class RequestID_RET extends Handler {
@@ -25,7 +27,12 @@ public class RequestID_RET extends Handler {
 		
 		List<Object> contents = new ArrayList<Object>();
 		contents.add(_playerInfo);
-		new Message("CREATE_PLAYER_INFO", contents);
+		
+		try {
+			ServerConnection.Instance().write(new Message("CREATE_PLAYER_INFO", contents));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		if (mainScreen == null)
 			System.out.println("NULL");

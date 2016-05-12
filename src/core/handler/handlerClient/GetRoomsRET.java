@@ -14,8 +14,6 @@ public class GetRoomsRET extends Handler {
 		int size = _gson.fromJson((String)content.get(2), Integer.class);
 		List<Room> rooms = new ArrayList<Room>();
 		
-		System.out.println(content.get(2));
-		
 		for (int i = 1; i <= size; i++) {
 			rooms.add(_gson.fromJson((String)content.get(2+i), Room.class));
 		}
