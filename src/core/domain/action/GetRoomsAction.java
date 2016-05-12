@@ -11,17 +11,13 @@ public class GetRoomsAction extends Action {
 
 	private Range _range;
 	
-	public GetRoomsAction() {
+	public GetRoomsAction(Range range) {
 		super();
-		_range = new Range(1,1);
+		_range = range;
 	}
 	
 	public Range getRange() {
 		return _range;
-	}
-	
-	public void setRange(Range range) {
-		_range = range;
 	}
 	
 	@Override

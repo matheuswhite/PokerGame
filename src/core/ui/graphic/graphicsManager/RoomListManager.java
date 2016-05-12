@@ -42,18 +42,15 @@ public class RoomListManager {
 		
 		_currentRange = new Range(1, 13);
 		
-		_prevButtonAction = new GetRoomsAction();
-		_prevButtonAction.setRange(new Range(_currentRange.getInitialIndex() - 20, _currentRange.getFinalIndex() - 20));
+		_prevButtonAction = new GetRoomsAction(new Range(_currentRange.getInitialIndex() - 13, _currentRange.getFinalIndex() - 13));
 		
-		_nextButtonAction = new GetRoomsAction();
-		_nextButtonAction.setRange(new Range(_currentRange.getInitialIndex() + 20, _currentRange.getFinalIndex() + 20));
+		_nextButtonAction = new GetRoomsAction(new Range(_currentRange.getInitialIndex() + 13, _currentRange.getFinalIndex() + 13));
 		
-		_refreshButtonAction = new GetRoomsAction();
-		_refreshButtonAction.setRange(_currentRange);
+		_refreshButtonAction = new GetRoomsAction(_currentRange);
 		
-		_prevButton = new Button(new Rectangle(10, 155, 50, 30), "<", new Color(93, 22, 255, 255), Color.WHITE, new GetRoomsAction());
-		_nextButton = new Button(new Rectangle(195, 155, 50, 30), ">", new Color(93, 22, 255, 255), Color.WHITE, new GetRoomsAction());
-		_refreshButton = new Button(new Rectangle(65, 155, 125, 30), "Rooms", new Color(93, 22, 255, 255), Color.WHITE, new GetRoomsAction());
+		_prevButton = new Button(new Rectangle(10, 155, 50, 30), "<", new Color(93, 22, 255, 255), Color.WHITE, _prevButtonAction);
+		_nextButton = new Button(new Rectangle(195, 155, 50, 30), ">", new Color(93, 22, 255, 255), Color.WHITE, _nextButtonAction);
+		_refreshButton = new Button(new Rectangle(65, 155, 125, 30), "Rooms", new Color(93, 22, 255, 255), Color.WHITE, _refreshButtonAction);
 		
 		window.addComponent(_prevButton);
 		window.addComponent(_nextButton);

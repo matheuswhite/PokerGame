@@ -8,6 +8,7 @@ import java.util.Map;
 
 import core.domain.action.EchoAction;
 import core.domain.action.GetRoomsAction;
+import core.service.Range;
 import core.ui.graphic.basics.Label;
 import core.ui.graphic.basics.TextStyle;
 import core.ui.graphic.basics.Window;
@@ -28,7 +29,7 @@ public class ConnectionTestScreen extends Window {
 	private void initializeButtons() {
 		_buttons = new HashMap<String, Button>();
 		_buttons.put("echo", new Button(new Rectangle(20, 310, 70, 30), "Echo", Color.YELLOW, Color.WHITE, new EchoAction()));
-		_buttons.put("get_rooms", new Button(new Rectangle(100, 310, 110, 30), "Get Rooms", Color.YELLOW, Color.WHITE, new GetRoomsAction()));
+		_buttons.put("get_rooms", new Button(new Rectangle(100, 310, 110, 30), "Get Rooms", Color.YELLOW, Color.WHITE, new GetRoomsAction(new Range())));
 		
 		for (String button : _buttons.keySet()) {
 			addComponent(_buttons.get(button));
